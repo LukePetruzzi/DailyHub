@@ -16,3 +16,6 @@ nytimes_apiKey = 'bdadd7e2ecaf469a8c2403509eed601b'
 # Imgur
 imgur_clientId = '61c0e09e11937b2'
 imgur_clientSecret = 'a8d719e123be7310c5cfe96747ded14966d7e82f'
+
+#Spotify
+spotify_apiKey = 'Bearer BQCGNWcW5qMdFNyJI6yf6wdv-tf8rTC3Sj3BOJQlaPhqGuhyD1-P8t4sFoyW57bYw31E0XCX8sz_39GleFFdUTQxa_nJg4U9mKY9XOr8D4oVLVpGM0MgHqLIMUQGEbZZlF2xULijXOY64cecb1gy3l5YlOrOOJk'
