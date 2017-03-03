@@ -2,6 +2,9 @@ from getFromImgur import *
 from getFromNYTimes import *
 from getFromSoundcloud import *
 from getFromYouTube import *
+from getFromESPN_NA import *
+from getFromIGN_NA import *
+from getFromBuzzfeed import *
 
 
 def createMasterDict():
@@ -12,6 +15,10 @@ def createMasterDict():
     finalList.append(runFunction(getFromSoundcloud))
     finalList.append(runFunction(getFromNYTimes))
     finalList.append(runFunction(getFromImgur))
+    finalList.append(runFunction(getFromESPN))
+    finalList.append(runFunction(getFromIGN))
+    finalList.append(runFunction(getFromBuzzFeed))
+
     #finalList.append(runFunction(getFromReddit))
 
 
@@ -23,12 +30,13 @@ def createMasterDict():
 
 def runFunction(func):
     # run the function until it works (when the response code is 200)
+    # THIS IS REALLY SLOPPY AND SHOULD BE DONE BETTER PROBABLY
     answer = None
     while answer is None:
         answer = func()
     return answer
 
-
+print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
 
 # THIS THING RUNS FOREVER!!
 # sched = BlockingScheduler()

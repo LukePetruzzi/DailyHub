@@ -8,7 +8,8 @@ import my_config as mc
 
 def getFromSoundcloud():
     # to get from a specific genre, make
-    parameters = {'kind': 'trending', 'genre': 'soundcloud:genres:all-music', 'limit': '10', 'client_id': mc.soundcloud_clientId}
+    # limit is 11 because I think they are off by 1... always get 1 result. 
+    parameters = {'kind': 'trending', 'genre': 'soundcloud:genres:all-music', 'limit': '11', 'client_id': mc.soundcloud_clientId}
     headers = {'Content-Type': 'application/json'}
 
     r = requests.get('https://api-v2.soundcloud.com/charts', params=parameters, headers=headers)
@@ -48,6 +49,9 @@ def getFromSoundcloud():
     outerDict = {}
     outerDict['Soundcloud'] = resultList
     return outerDict
+
+# print(json.dumps(getFromSoundcloud(), indent=4, sort_keys=True))
+
 
 #interesting old bs4 attempt
 # r = requests.get('https://soundcloud.com/charts/new?genre=all-music.json')

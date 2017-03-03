@@ -2,6 +2,9 @@
 # Make sure this in the .gitignore file so it stays local and nobody can steal my keys
 # keep all my keys up in this piece.
 
+# Newsapi.org key. Here it is if we want to use it! let's try it out for now 
+# unless we are unhappy with the results
+newsapi_key = 'c5074a82b44b49a1aa3650383e6b7f10'
 
 # YouTube
 youtube_apiKey = 'AIzaSyCpsZiycFfXihQyjASGdDI9x5LLVtQZ1oI'

@@ -19,7 +19,7 @@ def getFromImgur():
 
     # create a list for each item that is a dict of data
     resultList = list()
-
+    i = 0
     for result in results:
         # create a dictionary for the current result
         singleDict = {}
@@ -39,7 +39,17 @@ def getFromImgur():
         # add the result to the list of all results
         resultList.append(singleDict)
 
+        # only get top 10 results (can change)
+        i += 1
+        if i is 10:
+            break
+
     # add the full dictionary with title of the website pulling from
     outerDict = {}
     outerDict['Imgur'] = resultList
     return outerDict
+
+
+# print(json.dumps(getFromImgur(), indent=4, sort_keys=True))
+
+
