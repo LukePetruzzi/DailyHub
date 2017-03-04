@@ -5,38 +5,42 @@ from getFromYouTube import *
 from getFromESPN_NA import *
 from getFromIGN_NA import *
 from getFromBuzzfeed import *
-
+from getFromNatGeo_NA import *
+from getFromTechcrunch_NA import *
 
 def createMasterDict():
-    # create a list of all the answers
-    finalList = list()
+	# create a list of all the answers
+	finalList = list()
 
-    finalList.append(runFunction(getFromYouTube))
-    finalList.append(runFunction(getFromSoundcloud))
-    finalList.append(runFunction(getFromNYTimes))
-    finalList.append(runFunction(getFromImgur))
-    finalList.append(runFunction(getFromESPN))
-    finalList.append(runFunction(getFromIGN))
-    finalList.append(runFunction(getFromBuzzFeed))
+	finalList.append(runFunction(getFromYouTube))
+	finalList.append(runFunction(getFromSoundcloud))
+	finalList.append(runFunction(getFromNYTimes))
+	finalList.append(runFunction(getFromImgur))
+	finalList.append(runFunction(getFromESPN))
+	finalList.append(runFunction(getFromIGN))
+	finalList.append(runFunction(getFromBuzzFeed))
+	finalList.append(runFunction(getFromNatGeo))
+	finalList.append(runFunction(getFromTechcrunch))
 
-    #finalList.append(runFunction(getFromReddit))
+	#finalList.append(runFunction(getFromReddit))
 
-
-    # add all the lists to the master dictionary
-    newDict = {}
-    newDict['data'] = finalList
-    return newDict
+	# add all the lists to the master dictionary
+	newDict = {}
+	newDict['data'] = finalList
+	return newDict
 
 
 def runFunction(func):
-    # run the function until it works (when the response code is 200)
-    # THIS IS REALLY SLOPPY AND SHOULD BE DONE BETTER PROBABLY
-    answer = None
-    while answer is None:
-        answer = func()
-    return answer
+	# run the function until it works (when the response code is 200)
+	# THIS IS REALLY SLOPPY AND SHOULD BE DONE BETTER PROBABLY
+	answer = None
+	while answer is None:
+		answer = func()
+	return answer
 
-print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
+
+
+# print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
 
 # THIS THING RUNS FOREVER!!
 # sched = BlockingScheduler()
