@@ -1,4 +1,6 @@
-# Compiled source #
-###################
+# Things we don't need in the Repo #
 
 *.pyc
+__pycache__
+.idea
+awsScriptsDirectory
