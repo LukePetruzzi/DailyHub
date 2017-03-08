@@ -5,3 +5,9 @@ __pycache__
 .idea
 awsScriptsDirectory
 dynamodb_local_2016-05-17
+
+# no zips on github
+*.zip
+
+# ignore directories of installed packages
+requests*
