@@ -20,5 +20,10 @@ nytimes_apiKey = 'bdadd7e2ecaf469a8c2403509eed601b'
 imgur_clientId = '61c0e09e11937b2'
 imgur_clientSecret = 'a8d719e123be7310c5cfe96747ded14966d7e82f'
 
-#Spotify
+# Spotify
 spotify_apiKey = 'Bearer BQCGNWcW5qMdFNyJI6yf6wdv-tf8rTC3Sj3BOJQlaPhqGuhyD1-P8t4sFoyW57bYw31E0XCX8sz_39GleFFdUTQxa_nJg4U9mKY9XOr8D4oVLVpGM0MgHqLIMUQGEbZZlF2xULijXOY64cecb1gy3l5YlOrOOJk'
+
+# Vimeo
+vimeo_id = '88f9ec85fcfe20d979b3face35cba720d5755a6f'
+vimeo_secret = 'dUZTi+FrduS5xhgoJaiRJfebqE0DbdCm/hOY89ONx3CG2IRd6R53dHQeXWkGcbRrjAIRkXh5/NP0F6Eo9i4PEyCFrtabm71NEal2VrZmLXMLBHWgxnaYZgt/rpqxVvVP'
+

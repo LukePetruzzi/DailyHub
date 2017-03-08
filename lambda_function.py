@@ -1,3 +1,6 @@
+#!/usr/bin/env python2
+
+
 from __future__ import print_function
 from botocore.exceptions import ClientError
 import masterDictMaker
