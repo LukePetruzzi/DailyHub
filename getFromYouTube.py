@@ -19,7 +19,6 @@ def getFromYouTube():
     results = r.json()['items']
     #print(json.dumps(results, indent=4, sort_keys=True))
 
-
     # create a list for each item that is a dict of data
     resultList = list()
 

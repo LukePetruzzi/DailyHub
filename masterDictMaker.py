@@ -7,6 +7,9 @@ from getFromIGN_NA import *
 from getFromBuzzfeed import *
 from getFromNatGeo_NA import *
 from getFromTechcrunch_NA import *
+from getFromVimeo import *
+
+# maybe do Medium next??
 
 def createMasterDict():
 	# create a list of all the answers
@@ -21,6 +24,8 @@ def createMasterDict():
 	finalList.append(runFunction(getFromBuzzFeed))
 	finalList.append(runFunction(getFromNatGeo))
 	finalList.append(runFunction(getFromTechcrunch))
+	finalList.append(runFunction(getFromVimeo))
+
 
 	#finalList.append(runFunction(getFromReddit))
 
