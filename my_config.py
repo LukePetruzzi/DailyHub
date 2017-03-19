@@ -30,3 +30,6 @@ vimeo_secret = 'dUZTi+FrduS5xhgoJaiRJfebqE0DbdCm/hOY89ONx3CG2IRd6R53dHQeXWkGcbRr
 # Deviant
 deviant_id = '5969'
 deviant_secret = '643e18f11b8c92db4f856d44b6026a59'
+
+# Etsy
+etsy_apiKey = 'vr85gtl2wc0ezp2uo2dlev6i'
