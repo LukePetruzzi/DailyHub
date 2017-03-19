@@ -27,3 +27,6 @@ spotify_apiKey = 'Bearer BQCGNWcW5qMdFNyJI6yf6wdv-tf8rTC3Sj3BOJQlaPhqGuhyD1-P8t4
 vimeo_id = '88f9ec85fcfe20d979b3face35cba720d5755a6f'
 vimeo_secret = 'dUZTi+FrduS5xhgoJaiRJfebqE0DbdCm/hOY89ONx3CG2IRd6R53dHQeXWkGcbRrjAIRkXh5/NP0F6Eo9i4PEyCFrtabm71NEal2VrZmLXMLBHWgxnaYZgt/rpqxVvVP'
 
+# Deviant
+deviant_id = '5969'
+deviant_secret = '643e18f11b8c92db4f856d44b6026a59'
