@@ -19,7 +19,6 @@ def getFromSpotify():
                'Authorization' : 'Bearer ' + access}    
     r = requests.get('https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI', headers=headers)
     if r.status_code != 200:
-        print r.status_code
         return None
 
     results = r.json()['tracks']['items']
