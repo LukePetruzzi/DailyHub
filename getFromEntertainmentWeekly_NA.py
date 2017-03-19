@@ -2,7 +2,7 @@ import requests
 import json
 import my_config as mc
 
-def getFromAP():
+def getFromEntertainmentWeekly_NA():
     parameters = {'source': 'entertainment-weekly', 'sortBy': 'top', 'apiKey': mc.newsapi_key}
     headers = {'Content-Type': 'application/json'}
     r = requests.get("https://newsapi.org/v1/articles", params = parameters, headers = headers)
