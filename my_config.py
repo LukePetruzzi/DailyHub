@@ -33,3 +33,7 @@ deviant_secret = '643e18f11b8c92db4f856d44b6026a59'
 
 # Etsy
 etsy_apiKey = 'vr85gtl2wc0ezp2uo2dlev6i'
+
+# Spotify
+spotify_id = '4fd85613c6d448e7a1b4d3036908f2ba'
+spotify_secret = '3707129424c447cc97a1842983c0e145'
