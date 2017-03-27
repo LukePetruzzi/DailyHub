@@ -15,7 +15,7 @@ def getFromDeviant():
 
     parameters = {'access_token': access}
     headers = {'Content-Type': 'application/json'}
-    r = requests.get('https://www.deviantart.com/api/v1/oauth2/browse/hot', params = parameters, headers = headers)
+    r = requests.get('https://www.deviantart.com/api/v1/oauth2/browse/popular', params = parameters, headers = headers)
 
     if r.status_code != 200:
 	return None
@@ -55,3 +55,6 @@ def getFromDeviant():
     outerDict = {}
     outerDict['Deviant'] = resultList
     return outerDict
+
+# print(json.dumps(getFromDeviant(), indent=4, sort_keys=True))
+

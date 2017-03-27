@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # install required packages in this directory
 pip install --upgrade requests -t ./
