@@ -41,12 +41,13 @@ def lambda_handler(json_input, context):
     update = 12
 
     # update the dynamoDb table
+    # just tried adding the actual dictionary instead of the string
     try:
         response = table.put_item(
             Item=
             {
                 'UpdateId': "12",
-                'dictionary': masterJsonString
+                'dictionary': masterDictionary
             }
         )
         print("PutItem succeeded:")

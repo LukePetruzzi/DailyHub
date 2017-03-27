@@ -47,16 +47,23 @@ def runFunction(func):
 
 # print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
 
-# THIS THING RUNS FOREVER!!
-# sched = BlockingScheduler()
-# @sched.scheduled_job('interval', seconds=10)
-# def updateMasterDict():
-#     masterDictionary = createMasterDict()
-#
-#     #sys.stdout.write("It's on!!!!!!" + str(masterDictionary))
-#
-#     print(json.dumps(masterDictionary, indent=4, sort_keys=True))
-#     print("MASTER DICTIONARY WAS UPDATED AT: " + str(datetime.datetime.now()))
-#     sys.stdout.flush()
-
-# sched.start()
+ # create mode 100644 getFrom500px.py
+ # create mode 100644 getFromAP_NA.py
+ # create mode 100644 getFromBBCNews_NA.py
+ # create mode 100644 getFromBBCSport_NA.py
+ # create mode 100644 getFromBloomberg_NA.py
+ # create mode 100644 getFromBusinessInsider_NA.py
+ # create mode 100644 getFromCNN_NA.py
+ # create mode 100644 getFromDeviant.py
+ # create mode 100644 getFromEntertainmentWeekly_NA.py
+ # create mode 100644 getFromEtsy.py
+ # create mode 100644 getFromHackerNews_NA.py
+ # create mode 100644 getFromMTV_NA.py
+ # create mode 100644 getFromNYMag_NA.py
+ # create mode 100644 getFromNewsweek_NA.py
+ # create mode 100644 getFromReuters_NA.py
+ # create mode 100644 getFromSpotify.py
+ # create mode 100644 getFromTime_NA.py
+ # create mode 100644 getFromUSAToday_NA.py
+ # create mode 100644 getFromWSJ_NA.py
+ # create mode 100644 getFromWashPost_NA.py
