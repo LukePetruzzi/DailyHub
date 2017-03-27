@@ -4,47 +4,47 @@ import json
 import my_config as mc
 
 def getFromYouTube():
-    # get the top trending vids
-    parameters = {'part': 'snippet', 'chart': 'mostPopular', 'regionCode': 'US', 'videoCategoryId': '0',
-                  'maxResults': '10', 'key': mc.youtube_apiKey}
-    headers = {'Content-Type': 'application/json'}
-    r = requests.get('https://www.googleapis.com/youtube/v3/videos', params=parameters, headers=headers)
+	# get the top trending vids
+	parameters = {'part': 'snippet', 'chart': 'mostPopular', 'regionCode': 'US', 'videoCategoryId': '0',
+				  'maxResults': '10', 'key': mc.youtube_apiKey}
+	headers = {'Content-Type': 'application/json'}
+	r = requests.get('https://www.googleapis.com/youtube/v3/videos', params=parameters, headers=headers)
 
-    #print("youtubeRESPONSE_CODE:", r.status_code)
+	#print("youtubeRESPONSE_CODE:", r.status_code)
 
-    # only continue if got the stuff successfully
-    if r.status_code != 200:
-        return None
+	# only continue if got the stuff successfully
+	if r.status_code != 200:
+		return None
 
-    results = r.json()['items']
-    #print(json.dumps(results, indent=4, sort_keys=True))
+	results = r.json()['items']
+	#print(json.dumps(results, indent=4, sort_keys=True))
 
-    # create a list for each item that is a dict of data
-    resultList = list()
+	# create a list for each item that is a dict of data
+	resultList = list()
 
-    for result in results:
-        # create a dictionary for the current result
-        singleDict = {}
+	for result in results:
+		# create a dictionary for the current result
+		singleDict = {}
 
-        # get the title of the video
-        singleDict['title'] = result['snippet']['title']
+		# get the title of the video
+		singleDict['title'] = result['snippet']['title']
 
-        # get the poster's channel name
-        singleDict['channelName'] = result['snippet']['channelTitle']
+		# get the poster's channel name
+		singleDict['channelName'] = result['snippet']['channelTitle']
 
-        # get the thumbnail image of the video (this is the lowest res)
-        singleDict['thumbnail'] = result['snippet']['thumbnails']['default']['url']
+		# get the thumbnail image of the video (this is the lowest res)
+		singleDict['thumbnail'] = result['snippet']['thumbnails']['default']['url']
 
-        # get the youtube url
-        singleDict['url'] = 'https://www.youtube.com/watch?v=' + result['id']
+		# get the youtube url
+		singleDict['url'] = 'https://www.youtube.com/watch?v=' + result['id']
 
-        # add the result to the list of all results
-        resultList.append(singleDict)
+		# add the result to the list of all results
+		resultList.append(singleDict)
 
-    # add the full dictionary with title of the website pulling from
-    outerDict = {}
-    outerDict['YouTube'] = resultList
-    return outerDict
+	# add the full dictionary with title of the website pulling from
+	outerDict = {}
+	outerDict['YouTube'] = resultList
+	return outerDict
 
 #print(json.dumps(getFromYouTube(), indent=4, sort_keys=True))
 
