@@ -14,10 +14,9 @@ def getFromSpotify():
         return None
     access = response.json()['access_token']
 
-
     headers = {'Content-Type': 'application/json',
                'Authorization' : 'Bearer ' + access}    
-    r = requests.get('https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI', headers=headers)
+    r = requests.get('https://api.spotify.com/v1/users/spotifycharts/playlists/37i9dQZEVXbKuaTI1Z1Afx', headers=headers)
     if r.status_code != 200:
         return None
 
@@ -52,5 +51,3 @@ def getFromSpotify():
     outerDict = {}
     outerDict['Spotify'] = resultList
     return outerDict
-
-
