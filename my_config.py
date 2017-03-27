@@ -37,3 +37,6 @@ etsy_apiKey = 'vr85gtl2wc0ezp2uo2dlev6i'
 # Spotify
 spotify_id = '4fd85613c6d448e7a1b4d3036908f2ba'
 spotify_secret = '3707129424c447cc97a1842983c0e145'
+
+# 500px
+fivepx_key = 'mH9g4vWMaJzM5GkgooQfXlWVlb2QmgAyBZXFJM8l'
