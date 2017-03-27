@@ -30,7 +30,7 @@ def lambda_handler(json_input, context):
 
     # json.dumps() converts a dictionary to str object, json.loads() converts the str back to a dictionary
 
-    print(masterJsonString)
+    # print(masterJsonString)
     print("MASTER DICTIONARY WAS UPDATED AT: " + str(datetime.datetime.now()))
     sys.stdout.flush()
 

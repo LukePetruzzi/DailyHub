@@ -66,7 +66,14 @@ def createMasterDict():
 	finalList.append(runFunction(getFromWSJ))
 	finalList.append(runFunction(getFromWashPost))
 
-	#finalList.append(runFunction(getFromReddit))
+	# If there are any empty strings in the output, change them to null.
+	# DynamoDB doesn't take empty strings
+	for v in finalList:
+		for k, array in v.items():
+			for dic in array:
+				for key, value in dic.items():
+					if value == "":
+						dic[key] = None
 
 	# add all the lists to the master dictionary
 	newDict = {}
@@ -82,7 +89,5 @@ def runFunction(func):
 		answer = func()
 	return answer
 
-
 # print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
-
 
