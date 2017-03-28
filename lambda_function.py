@@ -23,10 +23,11 @@ class DecimalEncoder(json.JSONEncoder):
 
 # required function for the lambda function to run
 def lambda_handler(json_input, context):
+
     masterDictionary = masterDictMaker.createMasterDict()
 
     # turn the json into a string object
-    masterJsonString = json.dumps(masterDictionary, indent=4, sort_keys=True)
+    masterJsonString = json.dumps(masterDictionary, sort_keys=True)
 
     # json.dumps() converts a dictionary to str object, json.loads() converts the str back to a dictionary
 
@@ -47,7 +48,7 @@ def lambda_handler(json_input, context):
             Item=
             {
                 'UpdateId': "12",
-                'dictionary': masterDictionary
+                'dictionary': masterJsonString
             }
         )
         print("PutItem succeeded:")
@@ -58,4 +59,4 @@ def lambda_handler(json_input, context):
         print("ERROR, MOTHABROTHAAAA!!!")
         print(e.response['Error']['Message'])
 
-lambda_handler(12,12)
+# lambda_handler(12,12)

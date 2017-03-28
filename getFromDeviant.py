@@ -20,7 +20,12 @@ def getFromDeviant():
 	if r.status_code != 200:
 		return None
 
+
+
 	results = r.json()['results']
+	
+	# print(json.dumps(results, indent=4, sort_keys=True))
+
 
 	resultList = list()
 	i = 0
@@ -35,7 +40,10 @@ def getFromDeviant():
 		singleDict['description'] = result['category']
 
 		# get the thumbnail image of the article
-		singleDict['thumbnail'] = result['content']['src']
+		if 'content' in result:
+			singleDict['thumbnail'] = result['content']['src']
+		else:
+			singleDict['thumbnail'] = None
 
 		# get the title of the article
 		singleDict['title'] = result['title']
@@ -56,5 +64,6 @@ def getFromDeviant():
 	outerDict['Deviant'] = resultList
 	return outerDict
 
+# getFromDeviant()
 # print(json.dumps(getFromDeviant(), indent=4, sort_keys=True))
 
