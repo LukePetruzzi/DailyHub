@@ -4,8 +4,6 @@ import my_config as mc
 
 #from bs4 import BeautifulSoup
 
-
-
 def getFromSoundcloud():
 	# to get from a specific genre, make
 	parameters = {'kind': 'trending', 'genre': 'soundcloud:genres:all-music', 'limit': '40', 'client_id': mc.soundcloud_clientId}
