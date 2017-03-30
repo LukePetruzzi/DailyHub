@@ -16,11 +16,15 @@ import UIKit
 
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var getFreshButton: UIButton!
 
+    var count = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getDatabaseInfo()
+        getFreshButton.addTarget(self, action: #selector(ViewController.getDatabaseInfo(_:)), for: .touchDown)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -30,23 +34,28 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func getDatabaseInfo()
+    @objc private func getDatabaseInfo(_ button: UIButton)
     {
+        
+        
         let dynamodb = AWSDynamoDB.default()
         let req = AWSDynamoDBGetItemInput()
-        req?.tableName = "MasterFeed"
+        req?.tableName = "MainStorageFeed"
         let value:AWSDynamoDBAttributeValue = AWSDynamoDBAttributeValue()
-        value.s = String(12)
-        req?.key = ["UpdateId":value]
+        // this needs to be the current date in ISO
+        value.s = String("")
+        req?.key = ["Date":value]
         
         dynamodb.getItem(req!).continueWith { (task) -> Any? in
             if let error = task.error {
                 print("Error occurred: \(error)")
                 return nil
             }
-            let output = task.result!.item!
-            print("VALUE: ",output.values.first?.s ?? "TABLE IS EMPTY")
+            let output = task.result!.item
+            print("VALUE: ",output?.values.first?.s ?? "TABLE VALUE DOES NOT EXIST OR TABLE IS EMPTY!!!")
             
+            self.count += 1
+            print("COUNT: ", self.count)
 //            for (k,v) in output{
 //                print("VALUE: ",v.s!)
 //            }
