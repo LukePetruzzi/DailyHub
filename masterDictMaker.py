@@ -30,6 +30,7 @@ from getFromWSJ_NA import *
 from getFromWashPost_NA import *
 
 # HERE
+# HERE AGAIN
 
 # maybe do Medium next??
 
