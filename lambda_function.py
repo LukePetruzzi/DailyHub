@@ -6,7 +6,8 @@ from botocore.exceptions import ClientError
 import masterDictMaker
 import json
 import sys
-import datetime
+from datetime import datetime
+from dateutil import tz
 import decimal
 import boto3
 
@@ -41,8 +42,8 @@ def lambda_handler(json_input, context):
     # first, query to get the latest dynamoDB object.
     # just save each database entry as the latest date. yymmdd format?
 
-    # the date in ISO 8601 format
-    dateFormatted = datetime.datetime.now().strftime("%Y-%m-%d")
+    # the Eastern Standard Time date in ISO 8601 format
+    dateFormatted = datetime.datetime.now(tz.gettz('EST')).strftime("%Y-%m-%d")
 
     # update the dynamoDb table
     # UpdateId is always 1 because single partition can hold 10GB of data, and 
