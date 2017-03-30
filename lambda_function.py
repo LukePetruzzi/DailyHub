@@ -36,24 +36,28 @@ def lambda_handler(json_input, context):
     sys.stdout.flush()
 
     dynamodb = boto3.resource('dynamodb', region_name='us-west-2', endpoint_url="https://dynamodb.us-west-2.amazonaws.com")
+    table = dynamodb.Table('MainStorageFeed')
 
-    table = dynamodb.Table('MasterFeed')
+    # first, query to get the latest dynamoDB object.
+    # just save each database entry as the latest date. yymmdd format?
 
-    update = 12
+    # the date in ISO 8601 format
+    dateFormatted = datetime.datetime.now().strftime("%Y-%m-%d")
 
     # update the dynamoDb table
-    # just tried adding the actual dictionary instead of the string
+    # UpdateId is always 1 because single partition can hold 10GB of data, and 
+    # we ain't storing that much data
     try:
         response = table.put_item(
             Item=
             {
-                'UpdateId': "12",
-                'dictionary': masterJsonString
+                'Date': dateFormatted,
+                'Dictionary': masterJsonString
             }
         )
         print("PutItem succeeded:")
         # print the response from dynamodb
-        print(json.dumps(response, indent=4, cls=DecimalEncoder))
+        # print(json.dumps(response, indent=4, cls=DecimalEncoder))
 
     except ClientError as e:
         print("ERROR, MOTHABROTHAAAA!!!")

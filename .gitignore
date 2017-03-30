@@ -1,4 +1,5 @@
 # Things we don't need in the Repo #
+test*
 
 *.pyc
 __pycache__
