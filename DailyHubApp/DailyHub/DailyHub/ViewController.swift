@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         req?.tableName = "MainStorageFeed"
         let value:AWSDynamoDBAttributeValue = AWSDynamoDBAttributeValue()
         // this needs to be the current date in ISO
-        value.s = String("")
+        value.s = getFormattedESTDate()
         req?.key = ["Date":value]
         
         dynamodb.getItem(req!).continueWith { (task) -> Any? in
