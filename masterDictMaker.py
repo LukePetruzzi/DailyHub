@@ -1,3 +1,4 @@
+import threading
 from getFromImgur import *
 from getFromNYTimes import *
 from getFromSoundcloud import *
@@ -33,40 +34,33 @@ from getFromStackOverflow import *
 # maybe do Medium next??
 
 def createMasterDict():
+	# create an array of all the function names
+	funcNames = [getFromYouTube, getFromSoundcloud, getFromNYTimes, getFromImgur, getFromESPN, getFromIGN, getFromBuzzFeed, getFromNatGeo, getFromTechcrunch, getFromVimeo, getFrom500px, getFromAP, getFromBBCNews, getFromBBCSport, getFromBloomberg, getFromBusinessInsider, getFromCNN, getFromDeviant, getFromEntertainmentWeekly, getFromEtsy, getFromHackerNews, getFromMTV, getFromNYMag, getFromNewsweek, getFromReuters, getFromSpotify, getFromTime, getFromUSAToday, getFromWSJ, getFromWashPost, getFromStackOverflow]
 	# create a list of all the answers
 	finalList = list()
+	# create a lock for adding threads to the list
+	myLock = threading.Lock()
+	# all the threads
+	threads = list()
 
-	finalList.append(runFunction(getFromYouTube))
-	finalList.append(runFunction(getFromSoundcloud))
-	finalList.append(runFunction(getFromNYTimes))
-	finalList.append(runFunction(getFromImgur))
-	finalList.append(runFunction(getFromESPN))
-	finalList.append(runFunction(getFromIGN))
-	finalList.append(runFunction(getFromBuzzFeed))
-	finalList.append(runFunction(getFromNatGeo))
-	finalList.append(runFunction(getFromTechcrunch))
-	finalList.append(runFunction(getFromVimeo))
-	finalList.append(runFunction(getFrom500px))
-	finalList.append(runFunction(getFromAP))
-	finalList.append(runFunction(getFromBBCNews))
-	finalList.append(runFunction(getFromBBCSport))
-	finalList.append(runFunction(getFromBloomberg))
-	finalList.append(runFunction(getFromBusinessInsider))
-	finalList.append(runFunction(getFromCNN))
-	finalList.append(runFunction(getFromDeviant))
-	finalList.append(runFunction(getFromEntertainmentWeekly))
-	finalList.append(runFunction(getFromEtsy))
-	finalList.append(runFunction(getFromHackerNews))
-	finalList.append(runFunction(getFromMTV))
-	finalList.append(runFunction(getFromNYMag))
-	finalList.append(runFunction(getFromNewsweek))
-	finalList.append(runFunction(getFromReuters))
-	finalList.append(runFunction(getFromSpotify))
-	finalList.append(runFunction(getFromTime))
-	finalList.append(runFunction(getFromUSAToday))
-	finalList.append(runFunction(getFromWSJ))
-	finalList.append(runFunction(getFromWashPost))
-	finalList.append(runFunction(getFromStackOverflow))
+	# to run the function in a thread
+	def getAndAppend(funcName):
+		currentDict = runFunction(funcName)
+		# append results to the list one at a time with the lock
+		with myLock:
+			# print(json.dumps(currentDict, indent=4, sort_keys=True))
+			finalList.append(currentDict)
+
+	# create a new thread for each function call
+	for funcName in funcNames:
+		# get response from the thread
+		threads.append(threading.Thread(target=getAndAppend, args=[funcName]))
+
+	# run and then join all the threads
+	for thread in threads:
+		thread.start()
+	for thread in threads:
+		thread.join()
 
 	# If there are any empty strings in the output, change them to null.
 	# DynamoDB doesn't take empty strings
