@@ -28,10 +28,7 @@ from getFromTime_NA import *
 from getFromUSAToday_NA import *
 from getFromWSJ_NA import *
 from getFromWashPost_NA import *
-
-# HERE
-# HERE AGAIN
-# Here a third ltime
+from getFromStackOverflow import *
 
 # maybe do Medium next??
 
@@ -69,6 +66,7 @@ def createMasterDict():
 	finalList.append(runFunction(getFromUSAToday))
 	finalList.append(runFunction(getFromWSJ))
 	finalList.append(runFunction(getFromWashPost))
+	finalList.append(runFunction(getFromStackOverflow))
 
 	# If there are any empty strings in the output, change them to null.
 	# DynamoDB doesn't take empty strings
