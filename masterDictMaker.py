@@ -30,7 +30,11 @@ from getFromWSJ_NA import *
 from getFromWashPost_NA import *
 
 # HERE
+<<<<<<< HEAD
 # Here a third ltime
+=======
+# HERE AGAIN
+>>>>>>> 173c76c310e38ba46ca4cb2d55ffff3d52cec5d2
 
 # maybe do Medium next??
 
