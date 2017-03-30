@@ -29,6 +29,8 @@ from getFromUSAToday_NA import *
 from getFromWSJ_NA import *
 from getFromWashPost_NA import *
 
+# HERE
+
 # maybe do Medium next??
 
 def createMasterDict():
