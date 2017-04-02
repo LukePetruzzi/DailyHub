@@ -56,9 +56,6 @@ class ViewController: UIViewController {
             
             self.count += 1
             print("COUNT: ", self.count)
-//            for (k,v) in output{
-//                print("VALUE: ",v.s!)
-//            }
             return nil
         }
         
