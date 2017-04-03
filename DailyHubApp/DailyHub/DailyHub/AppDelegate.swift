@@ -15,20 +15,33 @@ import AWSCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var feedViewController: FeedViewController?
+    var tabController: UITabBarController?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    {
+        // get AWS credentials
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb")
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
-        
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
+        // setup tab controller
+        tabController = UITabBarController()
+        // setup view
+        feedViewController = FeedViewController()
         
+        // array of our view controllers for the tab controller.
+        tabController?.viewControllers = [feedViewController!]
         
+        feedViewController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, tag: 0)
         
-        
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = self.tabController
+
         
         
         return true
