@@ -29,18 +29,18 @@ def getFromStackOverflow():
 		singleDict['title'] = result['title']
 
 		# print the questions's user
-		singleDict['user'] = result['owner']['display_name']
+		singleDict['author'] = result['owner']['display_name']
 
 		# print URL to thumbnail of user's image
 		singleDict['thumbnail'] = result['owner']['profile_image']
 
 		# print all the tags for the question comma separated
-		singleDict['tags'] = ''
+		singleDict['description'] = ''
 		for j in range(len(result['tags'])):
 			if j == len(result['tags']) - 1:
-				singleDict['tags'] += result['tags'][j]
+				singleDict['description'] += result['tags'][j]
 			else:
-				singleDict['tags'] += result['tags'][j] + ', '
+				singleDict['description'] += result['tags'][j] + ', '
 
 		# print the link to the question
 		singleDict['url'] = result['link']

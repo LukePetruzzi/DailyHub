@@ -12,7 +12,7 @@ def getFromNYTimes():
 
 	results = r.json()['results']
 
-	#print("nytimesRESPONSE_CODE", r.status_code)
+	# print(json.dumps(results, indent=4))
 
 	# only continue if got the stuff successfully
 	if r.status_code != 200:
@@ -27,6 +27,8 @@ def getFromNYTimes():
 
 		# get the title of the article
 		singleDict['title'] = result['title']
+
+		singleDict['author'] = result['byline'][3:]
 
 		# get the thumbnail photo for the article
 		singleDict['thumbnail'] = result['media'][0]['media-metadata'][0]['url']
@@ -50,6 +52,7 @@ def getFromNYTimes():
 	outerDict['NYTimes'] = resultList
 	return outerDict
 
+# getFromNYTimes()
 # print(json.dumps(getFromNYTimes(), indent=4, sort_keys=True))
 
 

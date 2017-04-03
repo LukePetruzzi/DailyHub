@@ -17,35 +17,35 @@ def getFromReddit():
 	results = r.json()
 	field_list = results['data']['children']
 
-	#print(json.dumps(field_list, indent=4, sort_keys=True))
+	# #print(json.dumps(field_list, indent=4, sort_keys=True))
 
-	# create a list for each item that is a dict of data
-	resultList = list()
+	# # create a list for each item that is a dict of data
+	# resultList = list()
 
-	for field in field_list:
-		# create a dictionary for the current result
-		singleDict = {}
+	# for field in field_list:
+	# 	# create a dictionary for the current result
+	# 	singleDict = {}
 
-		#get the title
-		singleDict['title'] = field['data']['title']
+	# 	#get the title
+	# 	singleDict['title'] = field['data']['title']
 
-		#get the thumbnail image
-		url = field['data']['preview']['images'][0]['resolutions'][0]['url']
-		singleDict['thumbnail'] = str(url.replace('amp;', ''))
+	# 	#get the thumbnail image
+	# 	url = field['data']['preview']['images'][0]['resolutions'][0]['url']
+	# 	singleDict['thumbnail'] = str(url.replace('amp;', ''))
 
-		#get and format the url of the thing the post points to
-		url = field['data']['url']
-		singleDict['postSourceUrl'] = str(url.replace('amp;', ''))
+	# 	#get and format the url of the thing the post points to
+	# 	url = field['data']['url']
+	# 	singleDict['postSourceUrl'] = str(url.replace('amp;', ''))
 
-		#get the full reddit post
-		redditLink = 'https://m.reddit.com' + field['data']['permalink']
-		singleDict['url'] = str(redditLink)
+	# 	#get the full reddit post
+	# 	redditLink = 'https://m.reddit.com' + field['data']['permalink']
+	# 	singleDict['url'] = str(redditLink)
 
-		resultList.append(singleDict)
+	# 	resultList.append(singleDict)
 
-	# add the full dictionary with title of the website pulling from
-	outerDict = {}
-	outerDict['Reddit'] = resultList
-	return outerDict
+	# # add the full dictionary with title of the website pulling from
+	# outerDict = {}
+	# outerDict['Reddit'] = resultList
+	# return outerDict
 
 
