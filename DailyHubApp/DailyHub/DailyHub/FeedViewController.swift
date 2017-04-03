@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FeedViewController
 //  DailyHub
 //
 //  Created by Luke Petruzzi on 3/24/17.
@@ -15,16 +15,16 @@ import AWSCognito
 import UIKit
 
 
-class ViewController: UIViewController {
+class FeedViewController: UIViewController {
     
-    @IBOutlet weak var getFreshButton: UIButton!
-
     var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getFreshButton.addTarget(self, action: #selector(ViewController.getDatabaseInfo(_:)), for: .touchDown)
+        self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
+
+        getDatabaseInfo()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc private func getDatabaseInfo(_ button: UIButton)
+    private func getDatabaseInfo()
     {
         
         

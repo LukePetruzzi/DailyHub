@@ -76,7 +76,6 @@ def createMasterDict():
 	newDict['data'] = finalList
 	return newDict
 
-
 def runFunction(func):
 	# run the function until it works (when the response code is 200)
 	# THIS IS REALLY SLOPPY AND SHOULD BE DONE BETTER PROBABLY
