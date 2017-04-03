@@ -42,6 +42,18 @@ PODS:
     - AWSCore (= 2.5.2)
   - AWSSQS (2.5.2):
     - AWSCore (= 2.5.2)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - FBSDKCoreKit (4.20.2):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.20.2):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.20.2):
+    - FBSDKCoreKit
 
 DEPENDENCIES:
   - AWSAutoScaling
@@ -65,6 +77,9 @@ DEPENDENCIES:
   - AWSSimpleDB
   - AWSSNS
   - AWSSQS
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
 
 SPEC CHECKSUMS:
   AWSAutoScaling: 7fe819fa52fb37d2b4b15535ad557a219213a6a8
@@ -89,7 +104,11 @@ SPEC CHECKSUMS:
   AWSSimpleDB: ba37cce420e00c9400bd62a54740dfc7083fc9d0
   AWSSNS: 3437c505bfb8d5eda6bfc497368462ae31423324
   AWSSQS: 558aac70d0c908fa5f3b043410243595e4100ff4
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
+  FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
+  FBSDKShareKit: ca9b22264ea49a896dafb2467c1a4f72aa41996f
 
-PODFILE CHECKSUM: 4e523c2092e5748a0e1efd737aab92603c22c4f1
+PODFILE CHECKSUM: 73fdf4667759885092a6073b781faeb5a41fcc0c
 
 COCOAPODS: 1.2.0
