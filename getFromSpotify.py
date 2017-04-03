@@ -21,6 +21,8 @@ def getFromSpotify():
 		return None
 
 	results = r.json()['tracks']['items']
+
+
 	resultList = list()
 
 	i = 0
@@ -33,7 +35,9 @@ def getFromSpotify():
 		singleDict['title'] = result['track']['name']
 		
 		# print the track's artist (could include multiple artists later?)
-		singleDict['artist'] = result['track']['album']['artists'][0]['name']
+		singleDict['author'] = result['track']['album']['artists'][0]['name']
+
+		singleDict['description'] = result['track']['album']['name']
 		
 		# print URL to thumbnail
 		singleDict['thumbnail'] = result['track']['album']['images'][0]['url']
@@ -51,3 +55,5 @@ def getFromSpotify():
 	outerDict = {}
 	outerDict['Spotify'] = resultList
 	return outerDict
+
+# print(json.dumps(getFromSpotify(), indent=4))

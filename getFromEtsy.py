@@ -13,6 +13,7 @@ def getFromEtsy():
 
 	results = r.json()['results']
 
+
 	resultList = list()
 	i = 0
 
@@ -22,13 +23,16 @@ def getFromEtsy():
 			
 
 		# get the author of the article
-		singleDict['author'] = ""
+		if len(result['category_path']) > 0:
+			singleDict['author'] = result['category_path'][0]
+		else:
+			singleDict['author'] = None
 
 		# get the description of the article
 		singleDict['description'] = result['description']
 
 		# get the thumbnail image of the article
-		singleDict['thumbnail'] = ""
+		singleDict['thumbnail'] = None
 
 		# get the title of the article
 		singleDict['title'] = result['title']
@@ -49,4 +53,4 @@ def getFromEtsy():
 	outerDict['Etsy'] = resultList
 	return outerDict
 
-getFromEtsy()
+# print(json.dumps(getFromEtsy(), indent=4))

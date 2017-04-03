@@ -17,7 +17,7 @@ def getFromYouTube():
 		return None
 
 	results = r.json()['items']
-	#print(json.dumps(results, indent=4, sort_keys=True))
+	# print(json.dumps(results, indent=4, sort_keys=True))
 
 	# create a list for each item that is a dict of data
 	resultList = list()
@@ -30,7 +30,9 @@ def getFromYouTube():
 		singleDict['title'] = result['snippet']['title']
 
 		# get the poster's channel name
-		singleDict['channelName'] = result['snippet']['channelTitle']
+		singleDict['author'] = result['snippet']['channelTitle']
+
+		singleDict['description'] = result['snippet']['description']
 
 		# get the thumbnail image of the video (this is the lowest res)
 		singleDict['thumbnail'] = result['snippet']['thumbnails']['default']['url']
@@ -46,7 +48,8 @@ def getFromYouTube():
 	outerDict['YouTube'] = resultList
 	return outerDict
 
-#print(json.dumps(getFromYouTube(), indent=4, sort_keys=True))
+# getFromYouTube()
+# print(json.dumps(getFromYouTube(), indent=4, sort_keys=True))
 
 #this stuff gets the highest viewCount vids
 # # get the rfc time of 24 hour ago

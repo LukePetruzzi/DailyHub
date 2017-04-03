@@ -17,7 +17,7 @@ def getFromSoundcloud():
 	if r.status_code != 200:
 		return None
 
-	#print(json.dumps(r.json(), indent=4, sort_keys=True))
+	# print(json.dumps(r.json(), indent=4, sort_keys=True))
 
 	results = r.json()['collection']
 
@@ -33,7 +33,9 @@ def getFromSoundcloud():
 		singleDict['title'] = result['track']['title']
 
 		# print the track's artist
-		singleDict['artist'] = result['track']['user']['username']
+		singleDict['author'] = result['track']['user']['username']
+
+		singleDict['description'] = result['track']['tag_list']
 
 		# print URL to thumbnail
 		singleDict['thumbnail'] = result['track']['artwork_url']
@@ -53,6 +55,7 @@ def getFromSoundcloud():
 	outerDict['Soundcloud'] = resultList
 	return outerDict
 
+# getFromSoundcloud()
 # print(json.dumps(getFromSoundcloud(), indent=4, sort_keys=True))
 
 
