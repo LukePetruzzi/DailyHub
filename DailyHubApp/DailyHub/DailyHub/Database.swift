@@ -34,7 +34,6 @@ class Database {
             let output = task.result!.item
             print("VALUE: ",output?.values.first?.s ?? "TABLE VALUE DOES NOT EXIST OR TABLE IS EMPTY!!!")
             
-
             return nil
         }
         
