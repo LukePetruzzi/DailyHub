@@ -25,7 +25,7 @@ class FeedTableContentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private override func prepareForReuse() {
+    internal override func prepareForReuse() {
         super.prepareForReuse()
     }
 }
