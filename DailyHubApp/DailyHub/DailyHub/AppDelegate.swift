@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // go to login screen if not logged in
         if (FBSDKAccessToken.current() != nil){
+            self.initializeAuthorizedCognito()
             self.switchToMainViewControllers()
         }
         else {
@@ -57,6 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    func initializeAuthorizedCognito()
+    {
+        // get authorized AWS credentials
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider())
+        let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
     }
     
     func switchToMainViewControllers()
