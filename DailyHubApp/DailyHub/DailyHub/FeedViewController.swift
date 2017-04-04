@@ -23,10 +23,6 @@ class FeedViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        getDatabaseInfo()
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
