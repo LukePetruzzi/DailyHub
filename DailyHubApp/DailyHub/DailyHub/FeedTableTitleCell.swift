@@ -11,5 +11,9 @@ import UIKit
 
 class FeedTableTitleCell: UITableViewCell
 {
-    
+    // has an image of the current site and a background color to match the site
+    func createTitleCell(siteDataIsFrom: String)
+    {
+        
+    }
 }
