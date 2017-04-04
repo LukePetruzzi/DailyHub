@@ -9,12 +9,16 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AWSCognito
 
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     var count = 0
-    var loginButton: FBSDKLoginButton?
+    var loginButton: FBSDKLoginButton = {
+        var lb = FBSDKLoginButton()
+        return lb
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,19 +26,20 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         
         // create the facebook login button
-        loginButton = FBSDKLoginButton()
-        loginButton?.center = self.view.center
-        self.view.addSubview(loginButton!)
+        loginButton.center = self.view.center
+        self.view.addSubview(loginButton)
         
         
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        <#code#>
+        let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
+        
+        delegate.switchToMainViewControllers()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        <#code#>
+        
     }
     
     override func didReceiveMemoryWarning() {
