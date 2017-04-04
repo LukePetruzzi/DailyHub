@@ -13,6 +13,7 @@ def getFrom500px():
 
 	results = r.json()['photos']
 
+
 	resultList = list()
 	i = 0
 	for result in results:
@@ -47,7 +48,7 @@ def getFrom500px():
 	outerDict['500px'] = resultList
 	return outerDict
 
-
+# print(json.dumps(getFrom500px(), indent=4))
 
 
 

@@ -25,13 +25,13 @@ def getFromGiphy():
 		singleDict['title'] = ''
 
 		# print the article's author
-		singleDict['author'] = results['username']
+		singleDict['author'] = result['username']
 	
 		# print URL to thumbnail (can change to more HQ)
 		singleDict['thumbnail'] = result['images']['downsized']['url']
 
 		# print the link to the article
-		singleDict['url'] = results['url']
+		singleDict['url'] = result['url']
 		
 		# print description
 		singleDict['description'] = ''
@@ -48,4 +48,4 @@ def getFromGiphy():
 	outerDict['Giphy'] = resultList
 	return outerDict
 
-print(json.dumps(getFromGiphy(), indent=4, sort_keys=True))
+# print(json.dumps(getFromGiphy(), indent=4, sort_keys=True))

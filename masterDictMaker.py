@@ -30,12 +30,13 @@ from getFromUSAToday_NA import *
 from getFromWSJ_NA import *
 from getFromWashPost_NA import *
 from getFromStackOverflow import *
+from getFromGiphy import *
 
 # maybe do Medium next??
 
 def createMasterDict():
 	# create an array of all the function names
-	funcNames = [getFromYouTube, getFromSoundcloud, getFromNYTimes, getFromImgur, getFromESPN, getFromIGN, getFromBuzzFeed, getFromNatGeo, getFromTechcrunch, getFromVimeo, getFrom500px, getFromAP, getFromBBCNews, getFromBBCSport, getFromBloomberg, getFromBusinessInsider, getFromCNN, getFromDeviant, getFromEntertainmentWeekly, getFromEtsy, getFromHackerNews, getFromMTV, getFromNYMag, getFromNewsweek, getFromReuters, getFromSpotify, getFromTime, getFromUSAToday, getFromWSJ, getFromWashPost, getFromStackOverflow]
+	funcNames = [getFromYouTube, getFromSoundcloud, getFromNYTimes, getFromImgur, getFromESPN, getFromIGN, getFromBuzzFeed, getFromNatGeo, getFromTechcrunch, getFromVimeo, getFrom500px, getFromAP, getFromBBCNews, getFromBBCSport, getFromBloomberg, getFromBusinessInsider, getFromCNN, getFromDeviant, getFromEntertainmentWeekly, getFromEtsy, getFromHackerNews, getFromMTV, getFromNYMag, getFromNewsweek, getFromReuters, getFromSpotify, getFromTime, getFromUSAToday, getFromWSJ, getFromWashPost, getFromStackOverflow, getFromGiphy]
 	# create a list of all the answers
 	finalList = list()
 	# create a lock for adding threads to the list
@@ -84,5 +85,5 @@ def runFunction(func):
 		answer = func()
 	return answer
 
-print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
+# print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
 
