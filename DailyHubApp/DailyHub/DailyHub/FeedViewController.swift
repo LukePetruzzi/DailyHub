@@ -25,7 +25,7 @@ class FeedViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getDatabaseInfo()
+        CognitoUserManager.sharedInstance.showAllDatasets()
     }
 
     override func didReceiveMemoryWarning() {

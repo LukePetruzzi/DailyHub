@@ -65,6 +65,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: FBSDKAccessToken.current().tokenString))
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        // Retrieve your Amazon Cognito ID
+        credentialsProvider.getIdentityId().continueWith(block: { (task) -> AnyObject? in
+            if (task.error != nil) {
+                print("ERROR GETTING ID: " + task.error!.localizedDescription)
+            }
+            else {
+                // the task result will contain the identity id
+                let cognitoId = task.result!
+                print("Cognito id: \(cognitoId)")
+            }
+            return task;
+        })
     }
     
     func switchToMainViewControllers()

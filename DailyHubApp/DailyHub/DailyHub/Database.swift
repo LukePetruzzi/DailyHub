@@ -41,7 +41,7 @@ class Database {
         
     }
     
-    func getFormattedESTDate() -> String{
+    class func getFormattedESTDate() -> String{
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         // Eastern Standard Time

@@ -25,8 +25,8 @@ class FeedTableContentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private override func prepareForReuse() {
-        super.prepareForReuse()
-        gifView!.image = nil
-    }
+//    private override func prepareForReuse() {
+//        super.prepareForReuse()
+//        gifView!.image = nil
+//    }
 }

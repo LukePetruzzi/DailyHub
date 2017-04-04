@@ -84,5 +84,5 @@ def runFunction(func):
 		answer = func()
 	return answer
 
-# print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
+print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
 
