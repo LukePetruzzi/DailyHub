@@ -34,14 +34,13 @@ class Database {
             let output = task.result!.item
             print("VALUE: ",output?.values.first?.s ?? "TABLE VALUE DOES NOT EXIST OR TABLE IS EMPTY!!!")
             
-
             return nil
         }
         
         
     }
     
-    func getFormattedESTDate() -> String{
+    class func getFormattedESTDate() -> String{
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         // Eastern Standard Time
