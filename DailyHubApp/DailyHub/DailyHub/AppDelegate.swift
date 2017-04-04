@@ -27,11 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // connect facebook sdk
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        // get AWS credentials
-//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb")
-//        let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
-//        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
         // setup tab controller
         tabController = UITabBarController()
         
@@ -50,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // go to login screen if not logged in
         if (FBSDKAccessToken.current() != nil){
+            // setup aws credentials
+            self.initializeAuthorizedCognito()
+            // go to the main view controller
             self.switchToMainViewControllers()
         }
         else {
@@ -82,9 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func switchToMainViewControllers()
     {
-        // setup aws credentials
-        self.initializeAuthorizedCognito()
-
         self.window?.rootViewController = self.tabController
     }
     
