@@ -12,10 +12,15 @@ import FBSDKLoginKit
 
 
 class FacebookCognitoIdentityProvider: NSObject, AWSIdentityProviderManager {
+    
+    var tokens: String?
+    
+    init(tokens:String)
+    {
+        self.tokens = tokens
+    }
+    
     func logins() -> AWSTask<NSDictionary> {
-        if let token = FBSDKAccessToken.current().tokenString {
-            return AWSTask(result: [AWSIdentityProviderFacebook:token])
-        }
-        return AWSTask(error:NSError(domain: "Facebook Login", code: -1 , userInfo: ["Facebook" : "NO CURRENT FACEBOOK ACCESS TOKEN"]))
+        return AWSTask(result: [AWSIdentityProviderFacebook:tokens!])
     }
 }
