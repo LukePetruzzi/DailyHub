@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import FBSDKCoreKit
 
 import AWSCore
 
@@ -16,12 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var loginViewController: LoginViewController?
     var feedViewController: FeedViewController?
     var tabController: UITabBarController?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
+        // connect facebook sdk
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         // get AWS credentials
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb")
         let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
@@ -29,8 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // setup tab controller
         tabController = UITabBarController()
-        // setup view
+        
+        // setup views
         feedViewController = FeedViewController()
+        loginViewController = LoginViewController()
         
         // array of our view controllers for the tab controller.
         tabController?.viewControllers = [feedViewController!]
@@ -40,11 +47,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = self.tabController
-
         
+        // go to login screen if not logged in
+        if (FBSDKAccessToken.current() != nil){
+            self.switchToMainViewControllers()
+        }
+        else {
+            self.switchToLoginViewController()
+        }
         
         return true
+    }
+    
+    func switchToMainViewControllers()
+    {
+        self.window?.rootViewController = self.tabController
+    }
+    
+    func switchToLoginViewController()
+    {
+        self.window?.rootViewController = self.loginViewController
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

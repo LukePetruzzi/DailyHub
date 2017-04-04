@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
+		400191B41E93191D008CC191 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B31E93191D008CC191 /* LoginViewController.swift */; };
 		4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16A1E85C1A200805E40 /* AppDelegate.swift */; };
 		4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16C1E85C1A200805E40 /* FeedViewController.swift */; };
 		4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */; };
@@ -20,6 +21,7 @@
 		0BE660099678C16B47D0125C /* Pods_DailyHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailyHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE3060466B86C894033614B /* Pods-DailyHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailyHub/Pods-DailyHub.release.xcconfig"; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
+		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4052A1671E85C1A200805E40 /* DailyHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4052A16A1E85C1A200805E40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4052A16C1E85C1A200805E40 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				4052A1761E85C1A200805E40 /* LaunchScreen.storyboard */,
 				4052A1791E85C1A200805E40 /* Info.plist */,
 				4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */,
+				400191B31E93191D008CC191 /* LoginViewController.swift */,
 			);
 			path = DailyHub;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */,
 				400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */,
 				4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */,
+				400191B41E93191D008CC191 /* LoginViewController.swift in Sources */,
 				4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
