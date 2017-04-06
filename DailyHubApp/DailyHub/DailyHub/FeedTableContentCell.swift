@@ -19,6 +19,9 @@ class FeedTableContentCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        title = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        self.contentView.addSubview(title!)
     }
     
     required init?(coder aDecoder: NSCoder) {
