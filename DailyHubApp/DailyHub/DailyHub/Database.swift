@@ -15,7 +15,7 @@ import AWSCognito
 
 class Database {
     
-    class func getDatabaseInfo()
+    class func getDatabaseInfo(completionHandler:@escaping (String?) -> ())
     {
     
         let dynamodb = AWSDynamoDB.default()
@@ -27,16 +27,13 @@ class Database {
         req?.key = ["Date":value]
         
         dynamodb.getItem(req!).continueWith { (task) -> Any? in
-            if let error = task.error {
-                print("Error occurred: \(error)")
-                return nil
+            if task.error != nil {
+                completionHandler(nil)
             }
             let output = task.result!.item
-            print("VALUE: ",output?.values.first?.s ?? "TABLE VALUE DOES NOT EXIST OR TABLE IS EMPTY!!!")
-            
+            completionHandler(output?.values.first?.s)
             return nil
         }
-        
         
     }
     
