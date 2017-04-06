@@ -18,6 +18,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var refreshControl: UIRefreshControl!
 
+    var sites = ["500px", "AssociatedPress", "BBCNews", "BBCSport", "Bloomberg", "BusinessInsider", "CNN", "DeviantArt", "EntertainmentWeekly", "Etsy", "Giphy", "HackerNews", "MTV", "NatGeo", "Newsweek", "NYMag", "Reuters", "Spotify", "StackOverflow", "Techcrunch", "Time", "USAToday", "Vimeo", "WashingtonPost", "WSJ"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,11 +50,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         Database.getDatabaseInfo(completionHandler: {(data, error) in
             if let d = data {
                 self.masterData = JSON.init(parseJSON: d)
+                self.tableView?.reloadData()
             }
         })
     }
@@ -68,19 +71,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 25
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell", for: indexPath) as! FeedTableTitleCell
-        let site = masterData?["data"].array
-        print(site)
-        cell.logoImageView.image = UIImage(named: "Youtube.png")
+        _ = masterData?["data"].array
+        let image = sites[indexPath.row] + ".png"
+        cell.logoImageView.image = UIImage(named: image)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
     }
+    
 }
 

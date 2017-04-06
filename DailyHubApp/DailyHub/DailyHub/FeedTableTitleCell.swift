@@ -12,19 +12,14 @@ import UIKit
 // has an image of the current site and a background color to match the site
 class FeedTableTitleCell: UITableViewCell
 {
-
-    var siteDataIsFrom:String
-    var siteImage:UIImage
     var logoImageView:UIImageView
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String?, siteDataIsFrom:String) {
-        self.siteDataIsFrom = siteDataIsFrom
-        self.siteImage = UIImage(named: siteDataIsFrom + ".png")!
-        self.logoImageView = UIImageView(image: self.siteImage)
-        
-        // conform to tableviewcell stuff
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        self.logoImageView = UIImageView()
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
+        self.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         self.arrangeUI()
     }
     
@@ -37,9 +32,12 @@ class FeedTableTitleCell: UITableViewCell
         super.prepareForReuse()
     }
     
+    // arrange the UI elements
     internal func arrangeUI(){
         
-        logoImageView.frame = CGRect(x: 0, y: 0, width: 200, height: 75)
+        logoImageView.frame = CGRect(x: 5, y: 5, width: 100, height: 20)
         self.contentView.addSubview(logoImageView)
+        logoImageView.contentMode = .scaleAspectFit
+        
     }
 }
