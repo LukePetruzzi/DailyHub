@@ -14,31 +14,38 @@
 		400191B41E93191D008CC191 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B31E93191D008CC191 /* LoginViewController.swift */; };
 		400191B61E932662008CC191 /* FacebookCognitoIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */; };
 		400191B81E9337E2008CC191 /* CognitoUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B71E9337E2008CC191 /* CognitoUserManager.swift */; };
-		400191EC1E95DEFF008CC191 /* 500px.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D31E95DEFF008CC191 /* 500px.png */; };
-		400191ED1E95DEFF008CC191 /* AssociatedPress.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D41E95DEFF008CC191 /* AssociatedPress.png */; };
-		400191EE1E95DEFF008CC191 /* BBCNews.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D51E95DEFF008CC191 /* BBCNews.png */; };
-		400191EF1E95DEFF008CC191 /* BBCSport.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D61E95DEFF008CC191 /* BBCSport.png */; };
-		400191F01E95DEFF008CC191 /* Bloomberg.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D71E95DEFF008CC191 /* Bloomberg.png */; };
-		400191F11E95DEFF008CC191 /* BusinessInsider.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D81E95DEFF008CC191 /* BusinessInsider.png */; };
-		400191F21E95DEFF008CC191 /* CNN.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191D91E95DEFF008CC191 /* CNN.png */; };
-		400191F31E95DEFF008CC191 /* DeviantArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191DA1E95DEFF008CC191 /* DeviantArt.png */; };
-		400191F41E95DEFF008CC191 /* EntertainmentWeekly.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191DB1E95DEFF008CC191 /* EntertainmentWeekly.png */; };
-		400191F51E95DEFF008CC191 /* Etsy.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191DC1E95DEFF008CC191 /* Etsy.png */; };
-		400191F61E95DEFF008CC191 /* Giphy.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191DD1E95DEFF008CC191 /* Giphy.png */; };
-		400191F71E95DEFF008CC191 /* HackerNews.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191DE1E95DEFF008CC191 /* HackerNews.png */; };
-		400191F81E95DEFF008CC191 /* MTV.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191DF1E95DEFF008CC191 /* MTV.png */; };
-		400191F91E95DEFF008CC191 /* NatGeo.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E01E95DEFF008CC191 /* NatGeo.png */; };
-		400191FA1E95DEFF008CC191 /* Newsweek.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E11E95DEFF008CC191 /* Newsweek.png */; };
-		400191FB1E95DEFF008CC191 /* NYMag.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E21E95DEFF008CC191 /* NYMag.png */; };
-		400191FC1E95DEFF008CC191 /* Reuters.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E31E95DEFF008CC191 /* Reuters.png */; };
-		400191FD1E95DEFF008CC191 /* Spotify.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E41E95DEFF008CC191 /* Spotify.png */; };
-		400191FE1E95DEFF008CC191 /* StackOverflow.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E51E95DEFF008CC191 /* StackOverflow.png */; };
-		400191FF1E95DEFF008CC191 /* Techcrunch.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E61E95DEFF008CC191 /* Techcrunch.png */; };
-		400192001E95DEFF008CC191 /* Time.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E71E95DEFF008CC191 /* Time.png */; };
-		400192011E95DEFF008CC191 /* USAToday.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E81E95DEFF008CC191 /* USAToday.png */; };
-		400192021E95DEFF008CC191 /* Vimeo.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191E91E95DEFF008CC191 /* Vimeo.png */; };
-		400192031E95DEFF008CC191 /* WashingtonPost.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191EA1E95DEFF008CC191 /* WashingtonPost.png */; };
-		400192041E95DEFF008CC191 /* WSJ.png in Resources */ = {isa = PBXBuildFile; fileRef = 400191EB1E95DEFF008CC191 /* WSJ.png */; };
+		400192251E95EFEA008CC191 /* 500px.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192051E95EFEA008CC191 /* 500px.png */; };
+		400192261E95EFEA008CC191 /* AssociatedPress.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192061E95EFEA008CC191 /* AssociatedPress.png */; };
+		400192271E95EFEA008CC191 /* BBCNews.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192071E95EFEA008CC191 /* BBCNews.png */; };
+		400192281E95EFEA008CC191 /* BBCSport.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192081E95EFEA008CC191 /* BBCSport.png */; };
+		400192291E95EFEA008CC191 /* Bloomberg.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192091E95EFEA008CC191 /* Bloomberg.png */; };
+		4001922A1E95EFEA008CC191 /* BusinessInsider.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920A1E95EFEA008CC191 /* BusinessInsider.png */; };
+		4001922B1E95EFEA008CC191 /* Buzzfeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920B1E95EFEA008CC191 /* Buzzfeed.png */; };
+		4001922C1E95EFEA008CC191 /* CNN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920C1E95EFEA008CC191 /* CNN.png */; };
+		4001922D1E95EFEA008CC191 /* DeviantArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920D1E95EFEA008CC191 /* DeviantArt.png */; };
+		4001922E1E95EFEA008CC191 /* EntertainmentWeekly.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920E1E95EFEA008CC191 /* EntertainmentWeekly.png */; };
+		4001922F1E95EFEA008CC191 /* ESPN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920F1E95EFEA008CC191 /* ESPN.png */; };
+		400192301E95EFEA008CC191 /* Etsy.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192101E95EFEA008CC191 /* Etsy.png */; };
+		400192311E95EFEA008CC191 /* Giphy.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192111E95EFEA008CC191 /* Giphy.png */; };
+		400192321E95EFEA008CC191 /* HackerNews.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192121E95EFEA008CC191 /* HackerNews.png */; };
+		400192331E95EFEA008CC191 /* IGN.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192131E95EFEA008CC191 /* IGN.png */; };
+		400192341E95EFEA008CC191 /* Imgur.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192141E95EFEA008CC191 /* Imgur.png */; };
+		400192351E95EFEA008CC191 /* MTV.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192151E95EFEA008CC191 /* MTV.png */; };
+		400192361E95EFEA008CC191 /* NatGeo.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192161E95EFEA008CC191 /* NatGeo.png */; };
+		400192371E95EFEA008CC191 /* Newsweek.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192171E95EFEA008CC191 /* Newsweek.png */; };
+		400192381E95EFEA008CC191 /* NYMag.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192181E95EFEA008CC191 /* NYMag.png */; };
+		400192391E95EFEA008CC191 /* NYTimes.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192191E95EFEA008CC191 /* NYTimes.png */; };
+		4001923A1E95EFEA008CC191 /* Reuters.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921A1E95EFEA008CC191 /* Reuters.png */; };
+		4001923B1E95EFEA008CC191 /* Soundcloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921B1E95EFEA008CC191 /* Soundcloud.png */; };
+		4001923C1E95EFEA008CC191 /* Spotify.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921C1E95EFEA008CC191 /* Spotify.png */; };
+		4001923D1E95EFEA008CC191 /* StackOverflow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921D1E95EFEA008CC191 /* StackOverflow.png */; };
+		4001923E1E95EFEA008CC191 /* Techcrunch.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921E1E95EFEA008CC191 /* Techcrunch.png */; };
+		4001923F1E95EFEA008CC191 /* Time.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921F1E95EFEA008CC191 /* Time.png */; };
+		400192401E95EFEA008CC191 /* USAToday.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192201E95EFEA008CC191 /* USAToday.png */; };
+		400192411E95EFEA008CC191 /* Vimeo.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192211E95EFEA008CC191 /* Vimeo.png */; };
+		400192421E95EFEA008CC191 /* WashingtonPost.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192221E95EFEA008CC191 /* WashingtonPost.png */; };
+		400192431E95EFEA008CC191 /* WSJ.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192231E95EFEA008CC191 /* WSJ.png */; };
+		400192441E95EFEA008CC191 /* YouTube.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192241E95EFEA008CC191 /* YouTube.png */; };
 		4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16A1E85C1A200805E40 /* AppDelegate.swift */; };
 		4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16C1E85C1A200805E40 /* FeedViewController.swift */; };
 		4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */; };
@@ -55,31 +62,38 @@
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCognitoIdentityProvider.swift; sourceTree = "<group>"; };
 		400191B71E9337E2008CC191 /* CognitoUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CognitoUserManager.swift; sourceTree = "<group>"; };
-		400191D31E95DEFF008CC191 /* 500px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500px.png; path = ImageStorage/500px.png; sourceTree = SOURCE_ROOT; };
-		400191D41E95DEFF008CC191 /* AssociatedPress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AssociatedPress.png; path = ImageStorage/AssociatedPress.png; sourceTree = SOURCE_ROOT; };
-		400191D51E95DEFF008CC191 /* BBCNews.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BBCNews.png; path = ImageStorage/BBCNews.png; sourceTree = SOURCE_ROOT; };
-		400191D61E95DEFF008CC191 /* BBCSport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BBCSport.png; path = ImageStorage/BBCSport.png; sourceTree = SOURCE_ROOT; };
-		400191D71E95DEFF008CC191 /* Bloomberg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bloomberg.png; path = ImageStorage/Bloomberg.png; sourceTree = SOURCE_ROOT; };
-		400191D81E95DEFF008CC191 /* BusinessInsider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BusinessInsider.png; path = ImageStorage/BusinessInsider.png; sourceTree = SOURCE_ROOT; };
-		400191D91E95DEFF008CC191 /* CNN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CNN.png; path = ImageStorage/CNN.png; sourceTree = SOURCE_ROOT; };
-		400191DA1E95DEFF008CC191 /* DeviantArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DeviantArt.png; path = ImageStorage/DeviantArt.png; sourceTree = SOURCE_ROOT; };
-		400191DB1E95DEFF008CC191 /* EntertainmentWeekly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EntertainmentWeekly.png; path = ImageStorage/EntertainmentWeekly.png; sourceTree = SOURCE_ROOT; };
-		400191DC1E95DEFF008CC191 /* Etsy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Etsy.png; path = ImageStorage/Etsy.png; sourceTree = SOURCE_ROOT; };
-		400191DD1E95DEFF008CC191 /* Giphy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Giphy.png; path = ImageStorage/Giphy.png; sourceTree = SOURCE_ROOT; };
-		400191DE1E95DEFF008CC191 /* HackerNews.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HackerNews.png; path = ImageStorage/HackerNews.png; sourceTree = SOURCE_ROOT; };
-		400191DF1E95DEFF008CC191 /* MTV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MTV.png; path = ImageStorage/MTV.png; sourceTree = SOURCE_ROOT; };
-		400191E01E95DEFF008CC191 /* NatGeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NatGeo.png; path = ImageStorage/NatGeo.png; sourceTree = SOURCE_ROOT; };
-		400191E11E95DEFF008CC191 /* Newsweek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Newsweek.png; path = ImageStorage/Newsweek.png; sourceTree = SOURCE_ROOT; };
-		400191E21E95DEFF008CC191 /* NYMag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NYMag.png; path = ImageStorage/NYMag.png; sourceTree = SOURCE_ROOT; };
-		400191E31E95DEFF008CC191 /* Reuters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Reuters.png; path = ImageStorage/Reuters.png; sourceTree = SOURCE_ROOT; };
-		400191E41E95DEFF008CC191 /* Spotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Spotify.png; path = ImageStorage/Spotify.png; sourceTree = SOURCE_ROOT; };
-		400191E51E95DEFF008CC191 /* StackOverflow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StackOverflow.png; path = ImageStorage/StackOverflow.png; sourceTree = SOURCE_ROOT; };
-		400191E61E95DEFF008CC191 /* Techcrunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Techcrunch.png; path = ImageStorage/Techcrunch.png; sourceTree = SOURCE_ROOT; };
-		400191E71E95DEFF008CC191 /* Time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Time.png; path = ImageStorage/Time.png; sourceTree = SOURCE_ROOT; };
-		400191E81E95DEFF008CC191 /* USAToday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = USAToday.png; path = ImageStorage/USAToday.png; sourceTree = SOURCE_ROOT; };
-		400191E91E95DEFF008CC191 /* Vimeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Vimeo.png; path = ImageStorage/Vimeo.png; sourceTree = SOURCE_ROOT; };
-		400191EA1E95DEFF008CC191 /* WashingtonPost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WashingtonPost.png; path = ImageStorage/WashingtonPost.png; sourceTree = SOURCE_ROOT; };
-		400191EB1E95DEFF008CC191 /* WSJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WSJ.png; path = ImageStorage/WSJ.png; sourceTree = SOURCE_ROOT; };
+		400192051E95EFEA008CC191 /* 500px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500px.png; path = ImageStorage/500px.png; sourceTree = SOURCE_ROOT; };
+		400192061E95EFEA008CC191 /* AssociatedPress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AssociatedPress.png; path = ImageStorage/AssociatedPress.png; sourceTree = SOURCE_ROOT; };
+		400192071E95EFEA008CC191 /* BBCNews.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BBCNews.png; path = ImageStorage/BBCNews.png; sourceTree = SOURCE_ROOT; };
+		400192081E95EFEA008CC191 /* BBCSport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BBCSport.png; path = ImageStorage/BBCSport.png; sourceTree = SOURCE_ROOT; };
+		400192091E95EFEA008CC191 /* Bloomberg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bloomberg.png; path = ImageStorage/Bloomberg.png; sourceTree = SOURCE_ROOT; };
+		4001920A1E95EFEA008CC191 /* BusinessInsider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BusinessInsider.png; path = ImageStorage/BusinessInsider.png; sourceTree = SOURCE_ROOT; };
+		4001920B1E95EFEA008CC191 /* Buzzfeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Buzzfeed.png; path = ImageStorage/Buzzfeed.png; sourceTree = SOURCE_ROOT; };
+		4001920C1E95EFEA008CC191 /* CNN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CNN.png; path = ImageStorage/CNN.png; sourceTree = SOURCE_ROOT; };
+		4001920D1E95EFEA008CC191 /* DeviantArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DeviantArt.png; path = ImageStorage/DeviantArt.png; sourceTree = SOURCE_ROOT; };
+		4001920E1E95EFEA008CC191 /* EntertainmentWeekly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EntertainmentWeekly.png; path = ImageStorage/EntertainmentWeekly.png; sourceTree = SOURCE_ROOT; };
+		4001920F1E95EFEA008CC191 /* ESPN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ESPN.png; path = ImageStorage/ESPN.png; sourceTree = SOURCE_ROOT; };
+		400192101E95EFEA008CC191 /* Etsy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Etsy.png; path = ImageStorage/Etsy.png; sourceTree = SOURCE_ROOT; };
+		400192111E95EFEA008CC191 /* Giphy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Giphy.png; path = ImageStorage/Giphy.png; sourceTree = SOURCE_ROOT; };
+		400192121E95EFEA008CC191 /* HackerNews.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HackerNews.png; path = ImageStorage/HackerNews.png; sourceTree = SOURCE_ROOT; };
+		400192131E95EFEA008CC191 /* IGN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IGN.png; path = ImageStorage/IGN.png; sourceTree = SOURCE_ROOT; };
+		400192141E95EFEA008CC191 /* Imgur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Imgur.png; path = ImageStorage/Imgur.png; sourceTree = SOURCE_ROOT; };
+		400192151E95EFEA008CC191 /* MTV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MTV.png; path = ImageStorage/MTV.png; sourceTree = SOURCE_ROOT; };
+		400192161E95EFEA008CC191 /* NatGeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NatGeo.png; path = ImageStorage/NatGeo.png; sourceTree = SOURCE_ROOT; };
+		400192171E95EFEA008CC191 /* Newsweek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Newsweek.png; path = ImageStorage/Newsweek.png; sourceTree = SOURCE_ROOT; };
+		400192181E95EFEA008CC191 /* NYMag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NYMag.png; path = ImageStorage/NYMag.png; sourceTree = SOURCE_ROOT; };
+		400192191E95EFEA008CC191 /* NYTimes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NYTimes.png; path = ImageStorage/NYTimes.png; sourceTree = SOURCE_ROOT; };
+		4001921A1E95EFEA008CC191 /* Reuters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Reuters.png; path = ImageStorage/Reuters.png; sourceTree = SOURCE_ROOT; };
+		4001921B1E95EFEA008CC191 /* Soundcloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Soundcloud.png; path = ImageStorage/Soundcloud.png; sourceTree = SOURCE_ROOT; };
+		4001921C1E95EFEA008CC191 /* Spotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Spotify.png; path = ImageStorage/Spotify.png; sourceTree = SOURCE_ROOT; };
+		4001921D1E95EFEA008CC191 /* StackOverflow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StackOverflow.png; path = ImageStorage/StackOverflow.png; sourceTree = SOURCE_ROOT; };
+		4001921E1E95EFEA008CC191 /* Techcrunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Techcrunch.png; path = ImageStorage/Techcrunch.png; sourceTree = SOURCE_ROOT; };
+		4001921F1E95EFEA008CC191 /* Time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Time.png; path = ImageStorage/Time.png; sourceTree = SOURCE_ROOT; };
+		400192201E95EFEA008CC191 /* USAToday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = USAToday.png; path = ImageStorage/USAToday.png; sourceTree = SOURCE_ROOT; };
+		400192211E95EFEA008CC191 /* Vimeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Vimeo.png; path = ImageStorage/Vimeo.png; sourceTree = SOURCE_ROOT; };
+		400192221E95EFEA008CC191 /* WashingtonPost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WashingtonPost.png; path = ImageStorage/WashingtonPost.png; sourceTree = SOURCE_ROOT; };
+		400192231E95EFEA008CC191 /* WSJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WSJ.png; path = ImageStorage/WSJ.png; sourceTree = SOURCE_ROOT; };
+		400192241E95EFEA008CC191 /* YouTube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YouTube.png; path = ImageStorage/YouTube.png; sourceTree = SOURCE_ROOT; };
 		4052A1671E85C1A200805E40 /* DailyHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4052A16A1E85C1A200805E40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4052A16C1E85C1A200805E40 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -113,31 +127,38 @@
 		400191B21E92E5CE008CC191 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				400191D31E95DEFF008CC191 /* 500px.png */,
-				400191D41E95DEFF008CC191 /* AssociatedPress.png */,
-				400191D51E95DEFF008CC191 /* BBCNews.png */,
-				400191D61E95DEFF008CC191 /* BBCSport.png */,
-				400191D71E95DEFF008CC191 /* Bloomberg.png */,
-				400191D81E95DEFF008CC191 /* BusinessInsider.png */,
-				400191D91E95DEFF008CC191 /* CNN.png */,
-				400191DA1E95DEFF008CC191 /* DeviantArt.png */,
-				400191DB1E95DEFF008CC191 /* EntertainmentWeekly.png */,
-				400191DC1E95DEFF008CC191 /* Etsy.png */,
-				400191DD1E95DEFF008CC191 /* Giphy.png */,
-				400191DE1E95DEFF008CC191 /* HackerNews.png */,
-				400191DF1E95DEFF008CC191 /* MTV.png */,
-				400191E01E95DEFF008CC191 /* NatGeo.png */,
-				400191E11E95DEFF008CC191 /* Newsweek.png */,
-				400191E21E95DEFF008CC191 /* NYMag.png */,
-				400191E31E95DEFF008CC191 /* Reuters.png */,
-				400191E41E95DEFF008CC191 /* Spotify.png */,
-				400191E51E95DEFF008CC191 /* StackOverflow.png */,
-				400191E61E95DEFF008CC191 /* Techcrunch.png */,
-				400191E71E95DEFF008CC191 /* Time.png */,
-				400191E81E95DEFF008CC191 /* USAToday.png */,
-				400191E91E95DEFF008CC191 /* Vimeo.png */,
-				400191EA1E95DEFF008CC191 /* WashingtonPost.png */,
-				400191EB1E95DEFF008CC191 /* WSJ.png */,
+				400192051E95EFEA008CC191 /* 500px.png */,
+				400192061E95EFEA008CC191 /* AssociatedPress.png */,
+				400192071E95EFEA008CC191 /* BBCNews.png */,
+				400192081E95EFEA008CC191 /* BBCSport.png */,
+				400192091E95EFEA008CC191 /* Bloomberg.png */,
+				4001920A1E95EFEA008CC191 /* BusinessInsider.png */,
+				4001920B1E95EFEA008CC191 /* Buzzfeed.png */,
+				4001920C1E95EFEA008CC191 /* CNN.png */,
+				4001920D1E95EFEA008CC191 /* DeviantArt.png */,
+				4001920E1E95EFEA008CC191 /* EntertainmentWeekly.png */,
+				4001920F1E95EFEA008CC191 /* ESPN.png */,
+				400192101E95EFEA008CC191 /* Etsy.png */,
+				400192111E95EFEA008CC191 /* Giphy.png */,
+				400192121E95EFEA008CC191 /* HackerNews.png */,
+				400192131E95EFEA008CC191 /* IGN.png */,
+				400192141E95EFEA008CC191 /* Imgur.png */,
+				400192151E95EFEA008CC191 /* MTV.png */,
+				400192161E95EFEA008CC191 /* NatGeo.png */,
+				400192171E95EFEA008CC191 /* Newsweek.png */,
+				400192181E95EFEA008CC191 /* NYMag.png */,
+				400192191E95EFEA008CC191 /* NYTimes.png */,
+				4001921A1E95EFEA008CC191 /* Reuters.png */,
+				4001921B1E95EFEA008CC191 /* Soundcloud.png */,
+				4001921C1E95EFEA008CC191 /* Spotify.png */,
+				4001921D1E95EFEA008CC191 /* StackOverflow.png */,
+				4001921E1E95EFEA008CC191 /* Techcrunch.png */,
+				4001921F1E95EFEA008CC191 /* Time.png */,
+				400192201E95EFEA008CC191 /* USAToday.png */,
+				400192211E95EFEA008CC191 /* Vimeo.png */,
+				400192221E95EFEA008CC191 /* WashingtonPost.png */,
+				400192231E95EFEA008CC191 /* WSJ.png */,
+				400192241E95EFEA008CC191 /* YouTube.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -251,33 +272,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				400191F71E95DEFF008CC191 /* HackerNews.png in Resources */,
-				400192011E95DEFF008CC191 /* USAToday.png in Resources */,
-				400191F51E95DEFF008CC191 /* Etsy.png in Resources */,
-				400191FC1E95DEFF008CC191 /* Reuters.png in Resources */,
-				400191F21E95DEFF008CC191 /* CNN.png in Resources */,
-				400191FD1E95DEFF008CC191 /* Spotify.png in Resources */,
-				400191F11E95DEFF008CC191 /* BusinessInsider.png in Resources */,
-				400191EE1E95DEFF008CC191 /* BBCNews.png in Resources */,
-				400191F61E95DEFF008CC191 /* Giphy.png in Resources */,
-				400191F01E95DEFF008CC191 /* Bloomberg.png in Resources */,
-				400192021E95DEFF008CC191 /* Vimeo.png in Resources */,
+				400192371E95EFEA008CC191 /* Newsweek.png in Resources */,
+				400192441E95EFEA008CC191 /* YouTube.png in Resources */,
+				4001922A1E95EFEA008CC191 /* BusinessInsider.png in Resources */,
+				4001922E1E95EFEA008CC191 /* EntertainmentWeekly.png in Resources */,
+				4001922F1E95EFEA008CC191 /* ESPN.png in Resources */,
+				400192271E95EFEA008CC191 /* BBCNews.png in Resources */,
+				400192301E95EFEA008CC191 /* Etsy.png in Resources */,
+				400192291E95EFEA008CC191 /* Bloomberg.png in Resources */,
+				400192391E95EFEA008CC191 /* NYTimes.png in Resources */,
+				400192341E95EFEA008CC191 /* Imgur.png in Resources */,
 				4052A1781E85C1A200805E40 /* LaunchScreen.storyboard in Resources */,
-				400191F41E95DEFF008CC191 /* EntertainmentWeekly.png in Resources */,
-				400192031E95DEFF008CC191 /* WashingtonPost.png in Resources */,
-				400191F81E95DEFF008CC191 /* MTV.png in Resources */,
-				400191F31E95DEFF008CC191 /* DeviantArt.png in Resources */,
-				400191F91E95DEFF008CC191 /* NatGeo.png in Resources */,
-				400191FF1E95DEFF008CC191 /* Techcrunch.png in Resources */,
-				400191EF1E95DEFF008CC191 /* BBCSport.png in Resources */,
-				400191EC1E95DEFF008CC191 /* 500px.png in Resources */,
-				400191FB1E95DEFF008CC191 /* NYMag.png in Resources */,
-				400191FA1E95DEFF008CC191 /* Newsweek.png in Resources */,
-				400192001E95DEFF008CC191 /* Time.png in Resources */,
+				4001922B1E95EFEA008CC191 /* Buzzfeed.png in Resources */,
+				4001923D1E95EFEA008CC191 /* StackOverflow.png in Resources */,
+				400192311E95EFEA008CC191 /* Giphy.png in Resources */,
+				400192421E95EFEA008CC191 /* WashingtonPost.png in Resources */,
+				400192401E95EFEA008CC191 /* USAToday.png in Resources */,
+				400192431E95EFEA008CC191 /* WSJ.png in Resources */,
+				4001923C1E95EFEA008CC191 /* Spotify.png in Resources */,
+				4001923B1E95EFEA008CC191 /* Soundcloud.png in Resources */,
+				400192281E95EFEA008CC191 /* BBCSport.png in Resources */,
+				400192251E95EFEA008CC191 /* 500px.png in Resources */,
+				400192351E95EFEA008CC191 /* MTV.png in Resources */,
 				4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */,
-				400192041E95DEFF008CC191 /* WSJ.png in Resources */,
-				400191ED1E95DEFF008CC191 /* AssociatedPress.png in Resources */,
-				400191FE1E95DEFF008CC191 /* StackOverflow.png in Resources */,
+				4001923A1E95EFEA008CC191 /* Reuters.png in Resources */,
+				400192321E95EFEA008CC191 /* HackerNews.png in Resources */,
+				4001922D1E95EFEA008CC191 /* DeviantArt.png in Resources */,
+				400192261E95EFEA008CC191 /* AssociatedPress.png in Resources */,
+				4001922C1E95EFEA008CC191 /* CNN.png in Resources */,
+				4001923E1E95EFEA008CC191 /* Techcrunch.png in Resources */,
+				400192331E95EFEA008CC191 /* IGN.png in Resources */,
+				400192381E95EFEA008CC191 /* NYMag.png in Resources */,
+				4001923F1E95EFEA008CC191 /* Time.png in Resources */,
+				400192361E95EFEA008CC191 /* NatGeo.png in Resources */,
+				400192411E95EFEA008CC191 /* Vimeo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
