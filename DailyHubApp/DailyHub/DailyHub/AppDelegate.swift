@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var loginViewController: LoginViewController?
     var feedViewController: FeedViewController?
+    
     var tabController: UITabBarController?
 
 
