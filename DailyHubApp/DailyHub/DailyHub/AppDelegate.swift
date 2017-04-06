@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // array of our view controllers for the tab controller.
         tabController?.viewControllers = [feedViewController!]
-        
         feedViewController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, tag: 0)
         
 

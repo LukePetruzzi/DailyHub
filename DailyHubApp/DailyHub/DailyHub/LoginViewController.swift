@@ -14,7 +14,6 @@ import AWSCognito
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
-    var count = 0
     var loginButton: FBSDKLoginButton = {
         var lb = FBSDKLoginButton()
         return lb
@@ -34,6 +33,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
             let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
+        
+            // authorize the user and open the app's feed view
+            delegate.initializeAuthorizedCognito()
             delegate.switchToMainViewControllers()
     }
     
