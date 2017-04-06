@@ -27,6 +27,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView?.delegate = self
         tableView?.dataSource = self
+        tableView?.register(FeedTableTitleCell.self, forCellReuseIdentifier: "FeedTableTitleCell")
+        tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
+        
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
@@ -69,7 +72,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell", for: indexPath) as! FeedTableTitleCell
+        let site = masterData?["data"].array
+        print(site)
+        cell.logoImageView.image = UIImage(named: "Youtube.png")
         return cell
     }
     
