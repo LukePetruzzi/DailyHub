@@ -28,4 +28,5 @@ target :'DailyHub' do
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
+    pod 'SwifyJSON'
 end

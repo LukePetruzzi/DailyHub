@@ -19,6 +19,8 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Database.getDatabaseInfo()
+        
         self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         
         // Do any additional setup after loading the view, typically from a nib.
