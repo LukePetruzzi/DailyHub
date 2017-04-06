@@ -46,11 +46,11 @@
 		400192421E95EFEA008CC191 /* WashingtonPost.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192221E95EFEA008CC191 /* WashingtonPost.png */; };
 		400192431E95EFEA008CC191 /* WSJ.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192231E95EFEA008CC191 /* WSJ.png */; };
 		400192441E95EFEA008CC191 /* YouTube.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192241E95EFEA008CC191 /* YouTube.png */; };
+		400192461E96C234008CC191 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400192451E96C234008CC191 /* SettingsViewController.swift */; };
 		4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16A1E85C1A200805E40 /* AppDelegate.swift */; };
 		4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16C1E85C1A200805E40 /* FeedViewController.swift */; };
 		4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */; };
 		4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4052A1741E85C1A200805E40 /* Assets.xcassets */; };
-		4052A1781E85C1A200805E40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4052A1761E85C1A200805E40 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,12 +94,12 @@
 		400192221E95EFEA008CC191 /* WashingtonPost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WashingtonPost.png; path = ImageStorage/WashingtonPost.png; sourceTree = SOURCE_ROOT; };
 		400192231E95EFEA008CC191 /* WSJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WSJ.png; path = ImageStorage/WSJ.png; sourceTree = SOURCE_ROOT; };
 		400192241E95EFEA008CC191 /* YouTube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YouTube.png; path = ImageStorage/YouTube.png; sourceTree = SOURCE_ROOT; };
+		400192451E96C234008CC191 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4052A1671E85C1A200805E40 /* DailyHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4052A16A1E85C1A200805E40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4052A16C1E85C1A200805E40 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4052A1721E85C1A200805E40 /* DailyHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailyHub.xcdatamodel; sourceTree = "<group>"; };
 		4052A1741E85C1A200805E40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4052A1771E85C1A200805E40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4052A1791E85C1A200805E40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4470FDB20851D526B1AAE3C /* Pods-DailyHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DailyHub/Pods-DailyHub.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +163,35 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		400192471E96C242008CC191 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4052A16C1E85C1A200805E40 /* FeedViewController.swift */,
+				400191B31E93191D008CC191 /* LoginViewController.swift */,
+				400192451E96C234008CC191 /* SettingsViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		400192481E96C257008CC191 /* CustomUIElements */ = {
+			isa = PBXGroup;
+			children = (
+				325242FB1E93332600C280F3 /* FeedTableContentCell.swift */,
+				400191B01E92E588008CC191 /* FeedTableTitleCell.swift */,
+			);
+			name = CustomUIElements;
+			sourceTree = "<group>";
+		};
+		400192491E96C283008CC191 /* Managers and Providers */ = {
+			isa = PBXGroup;
+			children = (
+				325242FD1E93340700C280F3 /* Database.swift */,
+				400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */,
+				400191B71E9337E2008CC191 /* CognitoUserManager.swift */,
+			);
+			name = "Managers and Providers";
+			sourceTree = "<group>";
+		};
 		4052A15E1E85C1A200805E40 = {
 			isa = PBXGroup;
 			children = (
@@ -184,19 +213,14 @@
 		4052A1691E85C1A200805E40 /* DailyHub */ = {
 			isa = PBXGroup;
 			children = (
+				400192491E96C283008CC191 /* Managers and Providers */,
+				400192481E96C257008CC191 /* CustomUIElements */,
+				400192471E96C242008CC191 /* View Controllers */,
 				400191B21E92E5CE008CC191 /* Images */,
 				4052A16A1E85C1A200805E40 /* AppDelegate.swift */,
-				325242FD1E93340700C280F3 /* Database.swift */,
-				4052A16C1E85C1A200805E40 /* FeedViewController.swift */,
-				325242FB1E93332600C280F3 /* FeedTableContentCell.swift */,
-				400191B01E92E588008CC191 /* FeedTableTitleCell.swift */,
 				4052A1741E85C1A200805E40 /* Assets.xcassets */,
-				4052A1761E85C1A200805E40 /* LaunchScreen.storyboard */,
 				4052A1791E85C1A200805E40 /* Info.plist */,
 				4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */,
-				400191B31E93191D008CC191 /* LoginViewController.swift */,
-				400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */,
-				400191B71E9337E2008CC191 /* CognitoUserManager.swift */,
 			);
 			path = DailyHub;
 			sourceTree = "<group>";
@@ -282,7 +306,6 @@
 				400192291E95EFEA008CC191 /* Bloomberg.png in Resources */,
 				400192391E95EFEA008CC191 /* NYTimes.png in Resources */,
 				400192341E95EFEA008CC191 /* Imgur.png in Resources */,
-				4052A1781E85C1A200805E40 /* LaunchScreen.storyboard in Resources */,
 				4001922B1E95EFEA008CC191 /* Buzzfeed.png in Resources */,
 				4001923D1E95EFEA008CC191 /* StackOverflow.png in Resources */,
 				400192311E95EFEA008CC191 /* Giphy.png in Resources */,
@@ -367,6 +390,7 @@
 				4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */,
 				400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */,
 				400191B81E9337E2008CC191 /* CognitoUserManager.swift in Sources */,
+				400192461E96C234008CC191 /* SettingsViewController.swift in Sources */,
 				325242FC1E93332600C280F3 /* FeedTableContentCell.swift in Sources */,
 				400191B61E932662008CC191 /* FacebookCognitoIdentityProvider.swift in Sources */,
 				4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */,
@@ -377,17 +401,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4052A1761E85C1A200805E40 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4052A1771E85C1A200805E40 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4052A17A1E85C1A200805E40 /* Debug */ = {
