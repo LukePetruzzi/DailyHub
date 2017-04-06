@@ -15,9 +15,8 @@ import AWSCognito
 
 class Database {
     
-    class func getDatabaseInfo(completionHandler:@escaping (String?) -> ())
+    class func getDatabaseInfo(completionHandler:@escaping (String?, NSError?) -> ())
     {
-    
         let dynamodb = AWSDynamoDB.default()
         let req = AWSDynamoDBGetItemInput()
         req?.tableName = "MainStorageFeed"
@@ -28,10 +27,10 @@ class Database {
         
         dynamodb.getItem(req!).continueWith { (task) -> Any? in
             if task.error != nil {
-                completionHandler(nil)
+                completionHandler(nil, task.error as NSError?)
             }
             let output = task.result!.item
-            completionHandler(output?.values.first?.s)
+            completionHandler(output?.values.first?.s, nil)
             return nil
         }
         

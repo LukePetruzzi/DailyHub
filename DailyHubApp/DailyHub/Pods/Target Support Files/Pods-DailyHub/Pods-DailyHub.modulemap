@@ -1,0 +1,6 @@
+framework module Pods_DailyHub {
+  umbrella header "Pods-DailyHub-umbrella.h"
+
+  export *
+  module * { export * }
+}
