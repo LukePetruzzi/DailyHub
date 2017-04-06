@@ -28,6 +28,7 @@ class Database {
         dynamodb.getItem(req!).continueWith { (task) -> Any? in
             if task.error != nil {
                 completionHandler(nil, task.error as NSError?)
+                return nil
             }
             let output = task.result!.item
             completionHandler(output?.values.first?.s, nil)
