@@ -15,14 +15,14 @@
 		400191B61E932662008CC191 /* FacebookCognitoIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */; };
 		400191B81E9337E2008CC191 /* CognitoUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B71E9337E2008CC191 /* CognitoUserManager.swift */; };
 		400192251E95EFEA008CC191 /* 500px.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192051E95EFEA008CC191 /* 500px.png */; };
-		400192261E95EFEA008CC191 /* AssociatedPress.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192061E95EFEA008CC191 /* AssociatedPress.png */; };
+		400192261E95EFEA008CC191 /* AP.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192061E95EFEA008CC191 /* AP.png */; };
 		400192271E95EFEA008CC191 /* BBCNews.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192071E95EFEA008CC191 /* BBCNews.png */; };
 		400192281E95EFEA008CC191 /* BBCSport.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192081E95EFEA008CC191 /* BBCSport.png */; };
 		400192291E95EFEA008CC191 /* Bloomberg.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192091E95EFEA008CC191 /* Bloomberg.png */; };
 		4001922A1E95EFEA008CC191 /* BusinessInsider.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920A1E95EFEA008CC191 /* BusinessInsider.png */; };
 		4001922B1E95EFEA008CC191 /* Buzzfeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920B1E95EFEA008CC191 /* Buzzfeed.png */; };
 		4001922C1E95EFEA008CC191 /* CNN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920C1E95EFEA008CC191 /* CNN.png */; };
-		4001922D1E95EFEA008CC191 /* DeviantArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920D1E95EFEA008CC191 /* DeviantArt.png */; };
+		4001922D1E95EFEA008CC191 /* Deviant.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920D1E95EFEA008CC191 /* Deviant.png */; };
 		4001922E1E95EFEA008CC191 /* EntertainmentWeekly.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920E1E95EFEA008CC191 /* EntertainmentWeekly.png */; };
 		4001922F1E95EFEA008CC191 /* ESPN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001920F1E95EFEA008CC191 /* ESPN.png */; };
 		400192301E95EFEA008CC191 /* Etsy.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192101E95EFEA008CC191 /* Etsy.png */; };
@@ -31,7 +31,7 @@
 		400192331E95EFEA008CC191 /* IGN.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192131E95EFEA008CC191 /* IGN.png */; };
 		400192341E95EFEA008CC191 /* Imgur.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192141E95EFEA008CC191 /* Imgur.png */; };
 		400192351E95EFEA008CC191 /* MTV.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192151E95EFEA008CC191 /* MTV.png */; };
-		400192361E95EFEA008CC191 /* NatGeo.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192161E95EFEA008CC191 /* NatGeo.png */; };
+		400192361E95EFEA008CC191 /* NationalGeographic.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192161E95EFEA008CC191 /* NationalGeographic.png */; };
 		400192371E95EFEA008CC191 /* Newsweek.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192171E95EFEA008CC191 /* Newsweek.png */; };
 		400192381E95EFEA008CC191 /* NYMag.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192181E95EFEA008CC191 /* NYMag.png */; };
 		400192391E95EFEA008CC191 /* NYTimes.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192191E95EFEA008CC191 /* NYTimes.png */; };
@@ -43,7 +43,7 @@
 		4001923F1E95EFEA008CC191 /* Time.png in Resources */ = {isa = PBXBuildFile; fileRef = 4001921F1E95EFEA008CC191 /* Time.png */; };
 		400192401E95EFEA008CC191 /* USAToday.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192201E95EFEA008CC191 /* USAToday.png */; };
 		400192411E95EFEA008CC191 /* Vimeo.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192211E95EFEA008CC191 /* Vimeo.png */; };
-		400192421E95EFEA008CC191 /* WashingtonPost.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192221E95EFEA008CC191 /* WashingtonPost.png */; };
+		400192421E95EFEA008CC191 /* WashPost.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192221E95EFEA008CC191 /* WashPost.png */; };
 		400192431E95EFEA008CC191 /* WSJ.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192231E95EFEA008CC191 /* WSJ.png */; };
 		400192441E95EFEA008CC191 /* YouTube.png in Resources */ = {isa = PBXBuildFile; fileRef = 400192241E95EFEA008CC191 /* YouTube.png */; };
 		4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16A1E85C1A200805E40 /* AppDelegate.swift */; };
@@ -63,14 +63,14 @@
 		400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCognitoIdentityProvider.swift; sourceTree = "<group>"; };
 		400191B71E9337E2008CC191 /* CognitoUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CognitoUserManager.swift; sourceTree = "<group>"; };
 		400192051E95EFEA008CC191 /* 500px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 500px.png; path = ImageStorage/500px.png; sourceTree = SOURCE_ROOT; };
-		400192061E95EFEA008CC191 /* AssociatedPress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AssociatedPress.png; path = ImageStorage/AssociatedPress.png; sourceTree = SOURCE_ROOT; };
+		400192061E95EFEA008CC191 /* AP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AP.png; path = ImageStorage/AP.png; sourceTree = SOURCE_ROOT; };
 		400192071E95EFEA008CC191 /* BBCNews.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BBCNews.png; path = ImageStorage/BBCNews.png; sourceTree = SOURCE_ROOT; };
 		400192081E95EFEA008CC191 /* BBCSport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BBCSport.png; path = ImageStorage/BBCSport.png; sourceTree = SOURCE_ROOT; };
 		400192091E95EFEA008CC191 /* Bloomberg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bloomberg.png; path = ImageStorage/Bloomberg.png; sourceTree = SOURCE_ROOT; };
 		4001920A1E95EFEA008CC191 /* BusinessInsider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BusinessInsider.png; path = ImageStorage/BusinessInsider.png; sourceTree = SOURCE_ROOT; };
 		4001920B1E95EFEA008CC191 /* Buzzfeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Buzzfeed.png; path = ImageStorage/Buzzfeed.png; sourceTree = SOURCE_ROOT; };
 		4001920C1E95EFEA008CC191 /* CNN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CNN.png; path = ImageStorage/CNN.png; sourceTree = SOURCE_ROOT; };
-		4001920D1E95EFEA008CC191 /* DeviantArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DeviantArt.png; path = ImageStorage/DeviantArt.png; sourceTree = SOURCE_ROOT; };
+		4001920D1E95EFEA008CC191 /* Deviant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Deviant.png; path = ImageStorage/Deviant.png; sourceTree = SOURCE_ROOT; };
 		4001920E1E95EFEA008CC191 /* EntertainmentWeekly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = EntertainmentWeekly.png; path = ImageStorage/EntertainmentWeekly.png; sourceTree = SOURCE_ROOT; };
 		4001920F1E95EFEA008CC191 /* ESPN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ESPN.png; path = ImageStorage/ESPN.png; sourceTree = SOURCE_ROOT; };
 		400192101E95EFEA008CC191 /* Etsy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Etsy.png; path = ImageStorage/Etsy.png; sourceTree = SOURCE_ROOT; };
@@ -79,7 +79,7 @@
 		400192131E95EFEA008CC191 /* IGN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IGN.png; path = ImageStorage/IGN.png; sourceTree = SOURCE_ROOT; };
 		400192141E95EFEA008CC191 /* Imgur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Imgur.png; path = ImageStorage/Imgur.png; sourceTree = SOURCE_ROOT; };
 		400192151E95EFEA008CC191 /* MTV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MTV.png; path = ImageStorage/MTV.png; sourceTree = SOURCE_ROOT; };
-		400192161E95EFEA008CC191 /* NatGeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NatGeo.png; path = ImageStorage/NatGeo.png; sourceTree = SOURCE_ROOT; };
+		400192161E95EFEA008CC191 /* NationalGeographic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NationalGeographic.png; path = ImageStorage/NationalGeographic.png; sourceTree = SOURCE_ROOT; };
 		400192171E95EFEA008CC191 /* Newsweek.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Newsweek.png; path = ImageStorage/Newsweek.png; sourceTree = SOURCE_ROOT; };
 		400192181E95EFEA008CC191 /* NYMag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NYMag.png; path = ImageStorage/NYMag.png; sourceTree = SOURCE_ROOT; };
 		400192191E95EFEA008CC191 /* NYTimes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NYTimes.png; path = ImageStorage/NYTimes.png; sourceTree = SOURCE_ROOT; };
@@ -91,7 +91,7 @@
 		4001921F1E95EFEA008CC191 /* Time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Time.png; path = ImageStorage/Time.png; sourceTree = SOURCE_ROOT; };
 		400192201E95EFEA008CC191 /* USAToday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = USAToday.png; path = ImageStorage/USAToday.png; sourceTree = SOURCE_ROOT; };
 		400192211E95EFEA008CC191 /* Vimeo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Vimeo.png; path = ImageStorage/Vimeo.png; sourceTree = SOURCE_ROOT; };
-		400192221E95EFEA008CC191 /* WashingtonPost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WashingtonPost.png; path = ImageStorage/WashingtonPost.png; sourceTree = SOURCE_ROOT; };
+		400192221E95EFEA008CC191 /* WashPost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WashPost.png; path = ImageStorage/WashPost.png; sourceTree = SOURCE_ROOT; };
 		400192231E95EFEA008CC191 /* WSJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WSJ.png; path = ImageStorage/WSJ.png; sourceTree = SOURCE_ROOT; };
 		400192241E95EFEA008CC191 /* YouTube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YouTube.png; path = ImageStorage/YouTube.png; sourceTree = SOURCE_ROOT; };
 		4052A1671E85C1A200805E40 /* DailyHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,14 +128,14 @@
 			isa = PBXGroup;
 			children = (
 				400192051E95EFEA008CC191 /* 500px.png */,
-				400192061E95EFEA008CC191 /* AssociatedPress.png */,
+				400192061E95EFEA008CC191 /* AP.png */,
 				400192071E95EFEA008CC191 /* BBCNews.png */,
 				400192081E95EFEA008CC191 /* BBCSport.png */,
 				400192091E95EFEA008CC191 /* Bloomberg.png */,
 				4001920A1E95EFEA008CC191 /* BusinessInsider.png */,
 				4001920B1E95EFEA008CC191 /* Buzzfeed.png */,
 				4001920C1E95EFEA008CC191 /* CNN.png */,
-				4001920D1E95EFEA008CC191 /* DeviantArt.png */,
+				4001920D1E95EFEA008CC191 /* Deviant.png */,
 				4001920E1E95EFEA008CC191 /* EntertainmentWeekly.png */,
 				4001920F1E95EFEA008CC191 /* ESPN.png */,
 				400192101E95EFEA008CC191 /* Etsy.png */,
@@ -144,7 +144,7 @@
 				400192131E95EFEA008CC191 /* IGN.png */,
 				400192141E95EFEA008CC191 /* Imgur.png */,
 				400192151E95EFEA008CC191 /* MTV.png */,
-				400192161E95EFEA008CC191 /* NatGeo.png */,
+				400192161E95EFEA008CC191 /* NationalGeographic.png */,
 				400192171E95EFEA008CC191 /* Newsweek.png */,
 				400192181E95EFEA008CC191 /* NYMag.png */,
 				400192191E95EFEA008CC191 /* NYTimes.png */,
@@ -156,7 +156,7 @@
 				4001921F1E95EFEA008CC191 /* Time.png */,
 				400192201E95EFEA008CC191 /* USAToday.png */,
 				400192211E95EFEA008CC191 /* Vimeo.png */,
-				400192221E95EFEA008CC191 /* WashingtonPost.png */,
+				400192221E95EFEA008CC191 /* WashPost.png */,
 				400192231E95EFEA008CC191 /* WSJ.png */,
 				400192241E95EFEA008CC191 /* YouTube.png */,
 			);
@@ -286,7 +286,7 @@
 				4001922B1E95EFEA008CC191 /* Buzzfeed.png in Resources */,
 				4001923D1E95EFEA008CC191 /* StackOverflow.png in Resources */,
 				400192311E95EFEA008CC191 /* Giphy.png in Resources */,
-				400192421E95EFEA008CC191 /* WashingtonPost.png in Resources */,
+				400192421E95EFEA008CC191 /* WashPost.png in Resources */,
 				400192401E95EFEA008CC191 /* USAToday.png in Resources */,
 				400192431E95EFEA008CC191 /* WSJ.png in Resources */,
 				4001923C1E95EFEA008CC191 /* Spotify.png in Resources */,
@@ -297,14 +297,14 @@
 				4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */,
 				4001923A1E95EFEA008CC191 /* Reuters.png in Resources */,
 				400192321E95EFEA008CC191 /* HackerNews.png in Resources */,
-				4001922D1E95EFEA008CC191 /* DeviantArt.png in Resources */,
-				400192261E95EFEA008CC191 /* AssociatedPress.png in Resources */,
+				4001922D1E95EFEA008CC191 /* Deviant.png in Resources */,
+				400192261E95EFEA008CC191 /* AP.png in Resources */,
 				4001922C1E95EFEA008CC191 /* CNN.png in Resources */,
 				4001923E1E95EFEA008CC191 /* Techcrunch.png in Resources */,
 				400192331E95EFEA008CC191 /* IGN.png in Resources */,
 				400192381E95EFEA008CC191 /* NYMag.png in Resources */,
 				4001923F1E95EFEA008CC191 /* Time.png in Resources */,
-				400192361E95EFEA008CC191 /* NatGeo.png in Resources */,
+				400192361E95EFEA008CC191 /* NationalGeographic.png in Resources */,
 				400192411E95EFEA008CC191 /* Vimeo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
