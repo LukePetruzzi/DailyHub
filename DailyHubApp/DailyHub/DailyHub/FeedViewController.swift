@@ -10,6 +10,12 @@ import UIKit
 import Foundation
 import SwiftyJSON
 
+struct SitePref {
+    var siteName:String
+    var numPosts:Int
+}
+
+
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var masterData: JSON?
@@ -18,7 +24,37 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var refreshControl: UIRefreshControl!
 
-    var sites = ["500px", "AssociatedPress", "BBCNews", "BBCSport", "Bloomberg", "BusinessInsider", "CNN", "DeviantArt", "EntertainmentWeekly", "Etsy", "Giphy", "HackerNews", "MTV", "NatGeo", "Newsweek", "NYMag", "Reuters", "Spotify", "StackOverflow", "Techcrunch", "Time", "USAToday", "Vimeo", "WashingtonPost", "WSJ"]
+    var userSitePrefs = [SitePref(siteName: "500px", numPosts: 1),
+                         SitePref(siteName: "AssociatedPress", numPosts: 1),
+                        SitePref(siteName: "BBCNews", numPosts: 1),
+                        SitePref(siteName: "BBCSport", numPosts: 1),
+                        SitePref(siteName: "Bloomberg", numPosts: 1),
+                        SitePref(siteName: "BusinessInsider", numPosts: 1),
+                        SitePref(siteName: "Buzzfeed", numPosts: 1),
+                        SitePref(siteName: "CNN", numPosts: 1),
+                        SitePref(siteName: "DeviantArt", numPosts: 1),
+                        SitePref(siteName: "EntertainmentWeekly", numPosts: 1),
+                        SitePref(siteName: "ESPN", numPosts: 1),
+                        SitePref(siteName: "Etsy", numPosts: 1),
+                        SitePref(siteName: "Giphy", numPosts: 1),
+                        SitePref(siteName: "HackerNews", numPosts: 1),
+                        SitePref(siteName: "IGN", numPosts: 1),
+                        SitePref(siteName: "Imgur", numPosts: 1),
+                        SitePref(siteName: "MTV", numPosts: 1),
+                        SitePref(siteName: "NatGeo", numPosts: 1),
+                        SitePref(siteName: "Newsweek", numPosts: 1),
+                        SitePref(siteName: "NYMag", numPosts: 1),
+                        SitePref(siteName: "Reuters", numPosts: 1),
+                        SitePref(siteName: "Soundcloud", numPosts: 1),
+                        SitePref(siteName: "Spotify", numPosts: 1),
+                        SitePref(siteName: "StackOverflow", numPosts: 1),
+                        SitePref(siteName: "Techcrunch", numPosts: 1),
+                        SitePref(siteName: "Time", numPosts: 1),
+                        SitePref(siteName: "USAToday", numPosts: 1),
+                        SitePref(siteName: "Vimeo", numPosts: 1),
+                        SitePref(siteName: "WashingtonPost", numPosts: 1),
+                        SitePref(siteName: "WSJ", numPosts: 1),
+                        SitePref(siteName: "Youtube", numPosts: 1)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,20 +107,29 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
+        return userSitePrefs[section].numPosts
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell", for: indexPath) as! FeedTableTitleCell
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return userSitePrefs.count;
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell") as! FeedTableTitleCell
         _ = masterData?["data"].array
-        let image = sites[indexPath.row] + ".png"
+        let image = userSitePrefs[section].siteName + ".png"
         cell.logoImageView.image = UIImage(named: image)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
     
 }
 

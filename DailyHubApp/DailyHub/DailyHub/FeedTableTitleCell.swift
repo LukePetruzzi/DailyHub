@@ -19,7 +19,7 @@ class FeedTableTitleCell: UITableViewCell
 
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
+        self.backgroundColor = UIColor(red:0.78, green: 0.78, blue:0.78, alpha: 1.0)
         self.arrangeUI()
     }
     
