@@ -38,6 +38,5 @@ class FeedTableTitleCell: UITableViewCell
         logoImageView.frame = CGRect(x: 5, y: 5, width: 100, height: 20)
         self.contentView.addSubview(logoImageView)
         logoImageView.contentMode = .scaleAspectFit
-        
     }
 }

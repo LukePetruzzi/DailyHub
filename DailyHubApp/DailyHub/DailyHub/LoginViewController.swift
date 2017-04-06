@@ -27,15 +27,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         // create the facebook login button
         loginButton.center = self.view.center
+        loginButton.delegate = self
         self.view.addSubview(loginButton)
-        
         
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
-        
-        delegate.switchToMainViewControllers()
+            let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
+            delegate.switchToMainViewControllers()
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
