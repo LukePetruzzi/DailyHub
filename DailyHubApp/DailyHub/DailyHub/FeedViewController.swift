@@ -32,7 +32,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var refreshControl: UIRefreshControl!
     
-    var masterContent:[ContentInfo] = []
+    var masterContent = [String:[ContentInfo]]()
 
     var userSitePrefs = [SitePref(siteName: "500px", numPosts: 1),
                          SitePref(siteName: "AP", numPosts: 1),
@@ -127,7 +127,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                    thumbnail: currentSiteContentDict["thumbnail"] as? String,
                                                    description: currentSiteContentDict["description"] as? String)
                         // add the site info to the array of content
-                        self.masterContent.append(siteInfo)
+                        self.masterContent[item.siteName] = [siteInfo]
                     }
                 }
                 catch {
@@ -165,13 +165,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableContentCell", for: indexPath) as! FeedTableContentCell
         let sect = userSitePrefs[indexPath.section].siteName
-        cell.title?.text = sect
+        
+
+        
+        cell.titleLabel?.text = masterContent[sect]?[0].title
+        cell.authorLabel?.text = masterContent[sect]?[0].author
+        cell.descLabel?.text = masterContent[sect]?[0].description
+//        cell.authorLabel?.text = masterContent[sect]?[0].author
+
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 300
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 }
