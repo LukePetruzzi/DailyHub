@@ -31,6 +31,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var tableView: UITableView?
     
     var refreshControl: UIRefreshControl!
+    
+    var masterContent:[ContentInfo] = []
 
     var userSitePrefs = [SitePref(siteName: "500px", numPosts: 1),
                          SitePref(siteName: "AP", numPosts: 1),
@@ -114,8 +116,29 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func refreshTable() {
         Database.getDatabaseInfo(completionHandler: {(data, error) in
             if let d = data {
-                self.masterData = d
+                
+                let json = d.data(using: .utf8)
+                
+                do {
+                    let content = try JSONSerialization.jsonObject(with: json!, options: []) as! [String: NSArray]
+                    for item in self.userSitePrefs {
+                        let currentSiteContentDict = content[item.siteName]?[0]
+                        let siteInfo = ContentInfo(title: currentSiteContentDict["title"],
+                                                   author: currentSiteContentDict["author"],
+                                                   url: currentSiteContentDict["url"],
+                                                   thumbnail: currentSiteContentDict["thumbnail"],
+                                                   description: currentSiteContentDict["description"])
+                        print("SITE INFO: \(siteInfo)")
+                    }
+                }
+                    
+                catch {
+                    print("Error deserializing JSON: \(error)")
+                }
+
+                
                 self.tableView?.reloadData()
+                
             }
         })
         refreshControl.endRefreshing()
@@ -146,17 +169,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let sect = userSitePrefs[indexPath.section].siteName
         cell.title?.text = sect
 
-        if let data = masterData.data(using: .utf8) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let content = json["data"] as! NSArray
-                let inner = content[indexPath.section] as! NSDictionary
-                print("INNER for section \(sect): ", inner)
-            }
-            catch {
-                print("Error deserializing JSON: \(error)")
-            }
-        }
         return cell
     }
     
