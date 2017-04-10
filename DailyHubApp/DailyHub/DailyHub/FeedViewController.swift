@@ -100,12 +100,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        Database.getDatabaseInfo(completionHandler: {(data, error) in
-            if let d = data {
-                self.masterData = d
-                self.tableView?.reloadData()
-            }
-        })
+        
+        // refresh the table with new things
+        self.refreshTable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,27 +119,28 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 do {
                     let content = try JSONSerialization.jsonObject(with: json!, options: []) as! [String: NSArray]
                     for item in self.userSitePrefs {
-                        let currentSiteContentDict = content[item.siteName]?[0]
-                        let siteInfo = ContentInfo(title: currentSiteContentDict["title"],
-                                                   author: currentSiteContentDict["author"],
-                                                   url: currentSiteContentDict["url"],
-                                                   thumbnail: currentSiteContentDict["thumbnail"],
-                                                   description: currentSiteContentDict["description"])
-                        print("SITE INFO: \(siteInfo)")
+                        // gets the content for the number rank needed
+                        let currentSiteContentDict = content[item.siteName]?[0] as AnyObject
+                        let siteInfo = ContentInfo(title: currentSiteContentDict["title"] as? String,
+                                                   author: currentSiteContentDict["author"] as? String,
+                                                   url: currentSiteContentDict["url"] as? String,
+                                                   thumbnail: currentSiteContentDict["thumbnail"] as? String,
+                                                   description: currentSiteContentDict["description"] as? String)
+                        // add the site info to the array of content
+                        self.masterContent.append(siteInfo)
                     }
                 }
-                    
                 catch {
                     print("Error deserializing JSON: \(error)")
                 }
 
                 
                 self.tableView?.reloadData()
-                
             }
         })
         refreshControl.endRefreshing()
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return userSitePrefs.count;
