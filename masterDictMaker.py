@@ -1,4 +1,5 @@
 import threading
+import random
 from getFromImgur import *
 from getFromNYTimes import *
 from getFromSoundcloud import *
@@ -38,7 +39,7 @@ def createMasterDict():
 	# create an array of all the function names
 	funcNames = [getFromYouTube, getFromSoundcloud, getFromNYTimes, getFromImgur, getFromESPN, getFromIGN, getFromBuzzFeed, getFromNatGeo, getFromTechcrunch, getFromVimeo, getFrom500px, getFromAP, getFromBBCNews, getFromBBCSport, getFromBloomberg, getFromBusinessInsider, getFromCNN, getFromDeviant, getFromEntertainmentWeekly, getFromEtsy, getFromHackerNews, getFromMTV, getFromNYMag, getFromNewsweek, getFromReuters, getFromSpotify, getFromTime, getFromUSAToday, getFromWSJ, getFromWashPost, getFromStackOverflow, getFromGiphy]
 	# create a list of all the answers
-	finalList = list()
+	finalDict = {}
 	# create a lock for adding threads to the list
 	myLock = threading.Lock()
 	# all the threads
@@ -50,7 +51,7 @@ def createMasterDict():
 		# append results to the list one at a time with the lock
 		with myLock:
 			# print(json.dumps(currentDict, indent=4, sort_keys=True))
-			finalList.append(currentDict)
+			finalDict[next(iter(currentDict))] = currentDict[random.choice(currentDict.keys())]
 
 	# create a new thread for each function call
 	for funcName in funcNames:
@@ -65,17 +66,14 @@ def createMasterDict():
 
 	# If there are any empty strings in the output, change them to null.
 	# DynamoDB doesn't take empty strings
-	for v in finalList:
-		for k, array in v.items():
-			for dic in array:
-				for key, value in dic.items():
-					if value == "":
-						dic[key] = None
+	keys = finalDict.keys()
+	for k in keys:
+		for dic in finalDict[k]:
+			for key, value in dic.items():
+				if value == "":
+					dic[key] = None
 
-	# add all the lists to the master dictionary
-	newDict = {}
-	newDict['data'] = finalList
-	return newDict
+	return finalDict
 
 def runFunction(func):
 	# run the function until it works (when the response code is 200)
@@ -85,5 +83,6 @@ def runFunction(func):
 		answer = func()
 	return answer
 
+# createMasterDict()
 # print(json.dumps(createMasterDict(), indent=4, sort_keys=True))
 

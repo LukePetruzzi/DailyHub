@@ -17,8 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var credentialsProvider: AWSCognitoCredentialsProvider?
+    var configuration: AWSServiceConfiguration?
+    
     var loginViewController: LoginViewController?
     var feedViewController: FeedViewController?
+    var settingsViewController: SettingsViewController?
     
     var tabController: UITabBarController?
 
@@ -34,10 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup views
         feedViewController = FeedViewController()
         loginViewController = LoginViewController()
+        settingsViewController = SettingsViewController()
         
         // array of our view controllers for the tab controller.
-        tabController?.viewControllers = [feedViewController!]
+        tabController?.viewControllers = [feedViewController!, settingsViewController!]
         feedViewController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, tag: 0)
+        feedViewController?.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
+        
         
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -60,12 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initializeAuthorizedCognito()
     {
         // get authorized AWS credentials
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: FBSDKAccessToken.current().tokenString))
-        let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
+        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: FBSDKAccessToken.current().tokenString))
+        self.configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         // Retrieve your Amazon Cognito ID
-        credentialsProvider.getIdentityId().continueWith(block: { (task) -> AnyObject? in
+        credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
             if (task.error != nil) {
                 print("ERROR GETTING ID: " + task.error!.localizedDescription)
             }
@@ -76,6 +83,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             return task;
         })
+    }
+    
+    func logoutCurrentUser()
+    {
+        // clear the credentials
+        self.credentialsProvider?.clearCredentials()
+        FBSDKAccessToken.setCurrent(nil)
     }
     
     func switchToMainViewControllers()
