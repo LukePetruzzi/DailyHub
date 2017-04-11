@@ -16,14 +16,21 @@ class FeedTableContentCell: UITableViewCell {
     var descLabel:UILabel?
     var imgView:UIImageView?
     
+    var textHeight:CGFloat = 0
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        titleLabel = UILabel(frame: CGRect(x: 5, y: 5, width: UIScreen.main.bounds.width - 10, height: 25))
-        authorLabel = UILabel(frame: CGRect(x: 5, y: 30, width: UIScreen.main.bounds.width - 10, height: 15))
-        descLabel = UILabel(frame: CGRect(x: 5, y: 40, width: UIScreen.main.bounds.width - 10, height: 100))
-//        imgView = UIImageView()
-        
+        authorLabel = UILabel()
+        titleLabel = UILabel()
+        descLabel = UILabel()
+        imgView = UIImageView()
+        imgView?.contentMode = .scaleAspectFit
+
+//        titleLabel = UILabel(frame: CGRect(x: 5, y: 5, width: UIScreen.main.bounds.width - 10, height: 25))
+//        authorLabel = UILabel(frame: CGRect(x: 5, y: 30, width: UIScreen.main.bounds.width - 10, height: 15))
+//        descLabel = UILabel(frame: CGRect(x: 5, y: 40, width: UIScreen.main.bounds.width - 10, height: 100))
+                
         titleLabel?.font = UIFont(name: "Avenir-Black", size: 16)
 //        titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         
@@ -32,7 +39,6 @@ class FeedTableContentCell: UITableViewCell {
         
         descLabel?.lineBreakMode = .byWordWrapping
         descLabel?.numberOfLines = 0
-        descLabel?.sizeToFit()
 //
 //        titleLabel?.backgroundColor = UIColor(red:0.1, green: 0.78, blue:0.78, alpha: 1.0)
 //        authorLabel?.backgroundColor = UIColor(red:0.4, green: 0.78, blue:0.78, alpha: 1.0)
@@ -42,22 +48,23 @@ class FeedTableContentCell: UITableViewCell {
         self.addSubview(titleLabel!)
         self.addSubview(authorLabel!)
         self.addSubview(descLabel!)
-//        self.addSubview(imgView!)
+        self.addSubview(imgView!)
         
-        
+//        let verticalConstraint1 = NSLayoutConstraint(item: authorLabel!, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: titleLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+//        let verticalConstraint2 = NSLayoutConstraint(item: descLabel!, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+//        let verticalConstraint3 = NSLayoutConstraint(item: imgView!, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: descLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+//
+//        self.contentView.addConstraints([verticalConstraint1, verticalConstraint2, verticalConstraint3])
         
 //        let views: [String: UIView] = ["t": titleLabel!, "a": authorLabel!, "d": descLabel!, "i": imgView!]
 //        var constraints: [NSLayoutConstraint] = []
 //        
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t(50)]|", options: [], metrics: nil, views: views)
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[a(50)]|", options: [], metrics: nil, views: views)
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[d(50)]|", options: [], metrics: nil, views: views)
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t][a][d][i]|", options: [], metrics: nil, views: views)
+//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]-10-[a]-10-[d]-10-[i]|", options: [], metrics: nil, views: views)
 //        
 //        NSLayoutConstraint.activate(constraints)
-
+//
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

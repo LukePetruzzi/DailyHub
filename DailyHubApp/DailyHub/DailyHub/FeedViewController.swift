@@ -23,6 +23,11 @@ struct ContentInfo {
     var description:String?
 }
 
+private struct Metrics {
+    static let maxImageHeight:CGFloat = 300
+    static let maxDescHeight:CGFloat = 100
+}
+
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -78,12 +83,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView?.dataSource = self
         tableView?.register(FeedTableTitleCell.self, forCellReuseIdentifier: "FeedTableTitleCell")
         tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
-        
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 500
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
         refreshControl.addTarget(self, action: #selector(self.refreshTable), for: UIControlEvents.valueChanged)
         tableView?.addSubview(refreshControl)
+        
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 500
         
         self.view.addSubview(tableView!)
         
@@ -165,20 +174,101 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableContentCell", for: indexPath) as! FeedTableContentCell
         let sect = userSitePrefs[indexPath.section].siteName
+        var currHeight = 0
         
+        if let title = masterContent[sect]?[0].title {
+            cell.titleLabel?.frame = CGRect(x: 5, y: 5, width: Int(UIScreen.main.bounds.width - 10), height: 25)
+            cell.titleLabel?.text = title
+            currHeight += 25
+        }
+        
+        if let author = masterContent[sect]?[0].author {
+            cell.authorLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: Int(UIScreen.main.bounds.width - 10), height: 15)
+            cell.authorLabel?.text = author
+            currHeight += 15
+        }
+        
+        if let desc = masterContent[sect]?[0].description {
+            cell.descLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: Int(UIScreen.main.bounds.width - 10), height: 0)
+            cell.descLabel?.numberOfLines = 0
+            cell.descLabel?.text = desc
+            cell.descLabel?.sizeToFit()
+            if (cell.descLabel?.frame.size.height)! > Metrics.maxDescHeight {
+                currHeight += Int(Metrics.maxDescHeight)
+                cell.descLabel?.frame.size.height = Metrics.maxDescHeight
+            }
+            else {
+                currHeight += Int((cell.descLabel?.frame.size.height)!)
+            }
+        }
+        
+        if let thumbnail = masterContent[sect]?[0].thumbnail {
+            
+            DispatchQueue.main.async {
 
+                let url = NSURL(string: thumbnail)
+                let data = NSData(contentsOf: url as! URL)
+                if data != nil {
+                    let thumbnailImage = UIImage(data: data as! Data)
+                    var height:CGFloat = Metrics.maxImageHeight
+                    
+                    
+                    if let thumbimage = thumbnailImage {
+                        if thumbimage.size.height < Metrics.maxImageHeight {
+                            height = thumbimage.size.height
+                        }
+                    
+//                        DispatchQueue.main.sync {
+                            cell.imgView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5+currHeight), width: thumbimage.size.width, height: height)
+                            cell.imgView?.image = thumbimage
+//                        }
+                        
+                    }
+                }
+            }
+        }
         
-        cell.titleLabel?.text = masterContent[sect]?[0].title
-        cell.authorLabel?.text = masterContent[sect]?[0].author
-        cell.descLabel?.text = masterContent[sect]?[0].description
 //        cell.authorLabel?.text = masterContent[sect]?[0].author
 
-
+        cell.layoutIfNeeded()
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+
+        var currHeight:CGFloat = 0
+        let sect = userSitePrefs[indexPath.section].siteName
+
+        
+        if let _ = masterContent[sect]?[0].title {
+            currHeight += 25
+        }
+        
+        if let _ = masterContent[sect]?[0].author {
+            currHeight += 15
+        }
+        
+        if let descText = masterContent[sect]?[0].description {
+            let descLabel = UILabel(frame: CGRect(x: 5, y: 0, width: Int(UIScreen.main.bounds.width - 10), height: 0))
+            descLabel.numberOfLines = 0
+            descLabel.text = descText
+            descLabel.sizeToFit()
+            if (descLabel.frame.size.height) > Metrics.maxDescHeight {
+                currHeight += Metrics.maxDescHeight
+            }
+            else {
+                currHeight += descLabel.frame.size.height
+            }
+        }
+        
+        if let _ = masterContent[sect]?[0].thumbnail {
+            currHeight += Metrics.maxImageHeight
+        }
+        
+        // For padding and the boys
+        currHeight += 10
+        return currHeight
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
