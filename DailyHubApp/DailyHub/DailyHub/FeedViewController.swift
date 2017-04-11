@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import SwiftyJSON
+import SDWebImage
 
 struct SitePref {
     var siteName:String
@@ -99,6 +99,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let views: [String: UIView] = ["t": tableView!]
         var constraints: [NSLayoutConstraint] = []
         
+//        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]|", options: [], metrics: nil, views: views)
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
         
@@ -177,9 +178,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         var currHeight = 0
         
         if let title = masterContent[sect]?[0].title {
-            cell.titleLabel?.frame = CGRect(x: 5, y: 5, width: Int(UIScreen.main.bounds.width - 10), height: 25)
+            cell.titleLabel?.frame = CGRect(x: 5, y: 5, width: Int(UIScreen.main.bounds.width - 10), height: 0)
+            cell.titleLabel?.numberOfLines = 0
             cell.titleLabel?.text = title
-            currHeight += 25
+            cell.titleLabel?.sizeToFit()
+            if (cell.titleLabel?.frame.size.height)! < 25 {
+                currHeight += 25
+            }
+            else {
+                currHeight += Int((cell.descLabel?.frame.size.height)!)
+                cell.titleLabel?.frame.size.height = (cell.descLabel?.frame.size.height)!
+            }
         }
         
         if let author = masterContent[sect]?[0].author {
@@ -204,28 +213,29 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if let thumbnail = masterContent[sect]?[0].thumbnail {
             
-            DispatchQueue.main.async {
-
-                let url = NSURL(string: thumbnail)
-                let data = NSData(contentsOf: url as! URL)
-                if data != nil {
-                    let thumbnailImage = UIImage(data: data as! Data)
-                    var height:CGFloat = Metrics.maxImageHeight
-                    
-                    
-                    if let thumbimage = thumbnailImage {
-                        if thumbimage.size.height < Metrics.maxImageHeight {
-                            height = thumbimage.size.height
-                        }
-                    
-//                        DispatchQueue.main.sync {
-                            cell.imgView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5+currHeight), width: thumbimage.size.width, height: height)
-                            cell.imgView?.image = thumbimage
-//                        }
-                        
-                    }
-                }
-            }
+            let url = URL(string: thumbnail)
+            cell.imgView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5+currHeight), width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
+            cell.imgView?.sd_setImage(with: url, placeholderImage: UIImage(named: "dogpound.jpg"))
+            
+            
+//            let url = NSURL(string: thumbnail)
+//            let data = NSData(contentsOf: url as! URL)
+//            if data != nil {
+//                let thumbnailImage = UIImage(data: data as! Data)
+//                var height:CGFloat = Metrics.maxImageHeight
+//                
+//                
+//                if let thumbimage = thumbnailImage {
+//                    if thumbimage.size.height < Metrics.maxImageHeight {
+//                        height = thumbimage.size.height
+//                    }
+//                
+//                    
+//                    
+//                    cell.imgView?.sd_setImage(with: url)
+//                
+//                }
+//            }
         }
         
 //        cell.authorLabel?.text = masterContent[sect]?[0].author
