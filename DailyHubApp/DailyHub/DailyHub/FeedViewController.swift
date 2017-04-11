@@ -182,13 +182,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.titleLabel?.numberOfLines = 0
             cell.titleLabel?.text = title
             cell.titleLabel?.sizeToFit()
-            if (cell.titleLabel?.frame.size.height)! < 25 {
-                currHeight += 25
-            }
-            else {
-                currHeight += Int((cell.descLabel?.frame.size.height)!)
-                cell.titleLabel?.frame.size.height = (cell.descLabel?.frame.size.height)!
-            }
+            currHeight += Int((cell.titleLabel?.frame.size.height)!)
         }
         
         if let author = masterContent[sect]?[0].author {
@@ -252,7 +246,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         
         if let _ = masterContent[sect]?[0].title {
-            currHeight += 25
+            let titleLabel = UILabel(frame: CGRect(x: 5, y: 5, width: Int(UIScreen.main.bounds.width - 10), height: 0))
+            titleLabel.numberOfLines = 0
+            titleLabel.text = title
+            titleLabel.sizeToFit()
+            currHeight += titleLabel.frame.size.height
         }
         
         if let _ = masterContent[sect]?[0].author {
