@@ -20,7 +20,7 @@ class FeedTableContentCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         titleLabel = UILabel(frame: CGRect(x: 5, y: 5, width: UIScreen.main.bounds.width - 10, height: 25))
-        authorLabel = UILabel(frame: CGRect(x: 5, y: 30, width: UIScreen.main.bounds.width - 10, height: 10))
+        authorLabel = UILabel(frame: CGRect(x: 5, y: 30, width: UIScreen.main.bounds.width - 10, height: 15))
         descLabel = UILabel(frame: CGRect(x: 5, y: 40, width: UIScreen.main.bounds.width - 10, height: 100))
 //        imgView = UIImageView()
         
@@ -32,6 +32,7 @@ class FeedTableContentCell: UITableViewCell {
         
         descLabel?.lineBreakMode = .byWordWrapping
         descLabel?.numberOfLines = 0
+        descLabel?.sizeToFit()
 //
 //        titleLabel?.backgroundColor = UIColor(red:0.1, green: 0.78, blue:0.78, alpha: 1.0)
 //        authorLabel?.backgroundColor = UIColor(red:0.4, green: 0.78, blue:0.78, alpha: 1.0)
