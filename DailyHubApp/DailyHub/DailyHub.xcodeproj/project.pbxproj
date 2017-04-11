@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		325242FC1E93332600C280F3 /* FeedTableContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FB1E93332600C280F3 /* FeedTableContentCell.swift */; };
 		325242FE1E93340700C280F3 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FD1E93340700C280F3 /* Database.swift */; };
+		32CDB2681E9C8AF10099FF5D /* dogpound.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32CDB2671E9C8AF00099FF5D /* dogpound.jpg */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
 		400191B41E93191D008CC191 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B31E93191D008CC191 /* LoginViewController.swift */; };
@@ -58,6 +59,7 @@
 		2BE3060466B86C894033614B /* Pods-DailyHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailyHub/Pods-DailyHub.release.xcconfig"; sourceTree = "<group>"; };
 		325242FB1E93332600C280F3 /* FeedTableContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableContentCell.swift; sourceTree = "<group>"; };
 		325242FD1E93340700C280F3 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		32CDB2671E9C8AF00099FF5D /* dogpound.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dogpound.jpg; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCognitoIdentityProvider.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		400191B21E92E5CE008CC191 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				32CDB2671E9C8AF00099FF5D /* dogpound.jpg */,
 				400192051E95EFEA008CC191 /* 500px.png */,
 				400192061E95EFEA008CC191 /* AP.png */,
 				400192071E95EFEA008CC191 /* BBCNews.png */,
@@ -299,6 +302,7 @@
 				400192371E95EFEA008CC191 /* Newsweek.png in Resources */,
 				400192441E95EFEA008CC191 /* YouTube.png in Resources */,
 				4001922A1E95EFEA008CC191 /* BusinessInsider.png in Resources */,
+				32CDB2681E9C8AF10099FF5D /* dogpound.jpg in Resources */,
 				4001922E1E95EFEA008CC191 /* EntertainmentWeekly.png in Resources */,
 				4001922F1E95EFEA008CC191 /* ESPN.png in Resources */,
 				400192271E95EFEA008CC191 /* BBCNews.png in Resources */,

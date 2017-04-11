@@ -54,7 +54,9 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.21.0):
     - FBSDKCoreKit
-  - SwiftyJSON (3.1.4)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
   - AWSAutoScaling
@@ -81,7 +83,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - SwiftyJSON
+  - SDWebImage
 
 SPEC CHECKSUMS:
   AWSAutoScaling: 0b437901b2e63a66003ba388d4cc3eb31c22fddc
@@ -110,8 +112,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
   FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
   FBSDKShareKit: 649a7acfd01a3e056a33994c1bfbb997814cc8a2
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 6153f8f6c65c3c3b5cea48c4344edcd7f18b8cb7
+PODFILE CHECKSUM: 027d33f20a3069b1091cdc86d997f536c8bd1c35
 
 COCOAPODS: 1.2.0
