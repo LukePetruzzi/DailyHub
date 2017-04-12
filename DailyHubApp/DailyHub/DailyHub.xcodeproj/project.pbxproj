@@ -52,6 +52,7 @@
 		4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16C1E85C1A200805E40 /* FeedViewController.swift */; };
 		4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */; };
 		4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4052A1741E85C1A200805E40 /* Assets.xcassets */; };
+		40EA90921E9DB20A00171EBD /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EA90911E9DB20A00171EBD /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		4052A1721E85C1A200805E40 /* DailyHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailyHub.xcdatamodel; sourceTree = "<group>"; };
 		4052A1741E85C1A200805E40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4052A1791E85C1A200805E40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40EA90911E9DB20A00171EBD /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F4470FDB20851D526B1AAE3C /* Pods-DailyHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DailyHub/Pods-DailyHub.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 		400192471E96C242008CC191 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				40EA90911E9DB20A00171EBD /* WebView.swift */,
 				4052A16C1E85C1A200805E40 /* FeedViewController.swift */,
 				400191B31E93191D008CC191 /* LoginViewController.swift */,
 				400192451E96C234008CC191 /* SettingsViewController.swift */,
@@ -401,6 +404,7 @@
 				400191B41E93191D008CC191 /* LoginViewController.swift in Sources */,
 				325242FE1E93340700C280F3 /* Database.swift in Sources */,
 				4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */,
+				40EA90921E9DB20A00171EBD /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
