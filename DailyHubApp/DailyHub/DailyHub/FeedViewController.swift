@@ -26,6 +26,8 @@ struct ContentInfo {
 private struct Metrics {
     static let maxImageHeight:CGFloat = 300
     static let maxDescHeight:CGFloat = 100
+    static let maxAuthorHeight:CGFloat = 15
+    static let bottomCellPadding:CGFloat = 25
 }
 
 
@@ -75,9 +77,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orange,
+                                                                        NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
+        navigationController?.navigationBar.topItem?.title = "dh"
+//        self.title = "dh"
+        
         // self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.tableView = UITableView(frame: frame)
+        let rankingsButton = UIBarButtonItem(image: UIImage(named: "ranking-3"), style: .plain, target: self, action: #selector(rankingButtonTappedTapped))
+        rankingsButton.tintColor = UIColor.orange
+        navigationItem.setRightBarButton(rankingsButton, animated: true)
+        let helpButton = UIBarButtonItem(image: UIImage(named: "help"), style: .plain, target: self, action: #selector(helpButtonTappedTapped))
+        helpButton.tintColor = UIColor.orange
+        navigationItem.setLeftBarButton(helpButton, animated: true)
         
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -131,11 +144,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for item in self.userSitePrefs {
                         // gets the content for the number rank needed
                         let currentSiteContentDict = content[item.siteName]?[0] as AnyObject
-                        let siteInfo = ContentInfo(title: currentSiteContentDict["title"] as? String,
-                                                   author: currentSiteContentDict["author"] as? String,
-                                                   url: currentSiteContentDict["url"] as? String,
-                                                   thumbnail: currentSiteContentDict["thumbnail"] as? String,
-                                                   description: currentSiteContentDict["description"] as? String)
+                        let title = currentSiteContentDict["title"] as? String
+                        let author = currentSiteContentDict["author"] as? String
+                        let url = currentSiteContentDict["url"] as? String
+                        let thumbnail = currentSiteContentDict["thumbnail"] as? String
+                        let description = currentSiteContentDict["description"] as? String
+                        let siteInfo = ContentInfo(title: title?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                   author: author?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                   url: url?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                   thumbnail: thumbnail?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                   description: description?.trimmingCharacters(in: .whitespacesAndNewlines))
                         // add the site info to the array of content
                         self.masterContent[item.siteName] = [siteInfo]
                     }
@@ -151,6 +169,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl.endRefreshing()
     }
     
+    func rankingButtonTappedTapped() {
+        
+    }
+    
+    func helpButtonTappedTapped() {
+        
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return userSitePrefs.count;
@@ -175,67 +200,47 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableContentCell", for: indexPath) as! FeedTableContentCell
         let sect = userSitePrefs[indexPath.section].siteName
-        var currHeight = 0
+        var currHeight:CGFloat = 0
         
         if let title = masterContent[sect]?[0].title {
-            cell.titleLabel?.frame = CGRect(x: 5, y: 5, width: Int(UIScreen.main.bounds.width - 10), height: 0)
+            cell.titleLabel?.frame = CGRect(x: 5, y: 5, width: UIScreen.main.bounds.width - 10, height: 0)
             cell.titleLabel?.numberOfLines = 0
             cell.titleLabel?.text = title
             cell.titleLabel?.sizeToFit()
-            currHeight += Int((cell.titleLabel?.frame.size.height)!)
+            currHeight += (cell.titleLabel?.frame.size.height)!
         }
         
         if let author = masterContent[sect]?[0].author {
-            cell.authorLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: Int(UIScreen.main.bounds.width - 10), height: 15)
+            cell.authorLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxAuthorHeight)
             cell.authorLabel?.text = author
-            currHeight += 15
+            currHeight += Metrics.maxAuthorHeight
         }
         
         if let desc = masterContent[sect]?[0].description {
-            cell.descLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: Int(UIScreen.main.bounds.width - 10), height: 0)
+            cell.descLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: 0)
             cell.descLabel?.numberOfLines = 0
             cell.descLabel?.text = desc
             cell.descLabel?.sizeToFit()
             if (cell.descLabel?.frame.size.height)! > Metrics.maxDescHeight {
-                currHeight += Int(Metrics.maxDescHeight)
+                currHeight += Metrics.maxDescHeight
                 cell.descLabel?.frame.size.height = Metrics.maxDescHeight
             }
             else {
-                currHeight += Int((cell.descLabel?.frame.size.height)!)
+                currHeight += (cell.descLabel?.frame.size.height)!
             }
         }
         
         if let thumbnail = masterContent[sect]?[0].thumbnail {
             
             let url = URL(string: thumbnail)
-            cell.imgView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5+currHeight), width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
+            cell.imgView?.frame = CGRect(x: CGFloat(5), y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
             cell.imgView?.sd_setImage(with: url, placeholderImage: UIImage(named: "dogpound.jpg"))
-            
-            
-//            let url = NSURL(string: thumbnail)
-//            let data = NSData(contentsOf: url as! URL)
-//            if data != nil {
-//                let thumbnailImage = UIImage(data: data as! Data)
-//                var height:CGFloat = Metrics.maxImageHeight
-//                
-//                
-//                if let thumbimage = thumbnailImage {
-//                    if thumbimage.size.height < Metrics.maxImageHeight {
-//                        height = thumbimage.size.height
-//                    }
-//                
-//                    
-//                    
-//                    cell.imgView?.sd_setImage(with: url)
-//                
-//                }
-//            }
+
         }
         
 //        cell.authorLabel?.text = masterContent[sect]?[0].author
 
         cell.layoutIfNeeded()
-        
         return cell
     }
     
@@ -275,7 +280,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         // For padding and the boys
-        currHeight += 10
+        currHeight += Metrics.bottomCellPadding
         return currHeight
     }
 
@@ -283,7 +288,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
         
         print("SHOULD BE OPENING:")
-        
+       
         // get the section
         let sect = userSitePrefs[indexPath.section].siteName
         let urlString = masterContent[sect]?[0].url
@@ -291,9 +296,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // create a new webviewController
         let webViewController = WebViewC()
         webViewController.urlStringToLoad = urlString
-        
+
+        self.tabBarController?.present(webViewController, animated: true, completion: nil)
+//
 //        let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
-        self.navigationController?.pushViewController(webViewController, animated: true)
+//        delegate.feedNavController?.pushViewController(webViewController, animated: true)
     }
     
 }

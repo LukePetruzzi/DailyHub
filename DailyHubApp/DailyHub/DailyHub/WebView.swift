@@ -41,24 +41,24 @@ class WebViewC: UIViewController, WKNavigationDelegate {
        // navigationController?.navigationBar.barTintColor = color
       
         let upPic = UIImage(named: "up")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        let scaledIconU = UIImage(cgImage: (upPic?.cgImage!)!, scale: 13, orientation: (upPic?.imageOrientation)!)
+        let scaledIconU = UIImage(cgImage: (upPic?.cgImage!)!, scale: 16, orientation: (upPic?.imageOrientation)!)
         
         
         let upButton : UIBarButtonItem = UIBarButtonItem(image: scaledIconU, style: .plain, target: self, action: #selector(refreshTap))
         
         
         let dwPic = UIImage(named: "down")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        let scaledIconD = UIImage(cgImage: (dwPic?.cgImage!)!, scale: 13, orientation: (dwPic?.imageOrientation)!)
+        let scaledIconD = UIImage(cgImage: (dwPic?.cgImage!)!, scale: 16, orientation: (dwPic?.imageOrientation)!)
         
         let dwButton : UIBarButtonItem = UIBarButtonItem(image: scaledIconD, style: .plain, target: self, action: #selector(refreshTap))
         
         let lPic = UIImage(named: "left")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        let scaledIconL = UIImage(cgImage: (lPic?.cgImage!)!, scale: 13, orientation: (lPic?.imageOrientation)!)
+        let scaledIconL = UIImage(cgImage: (lPic?.cgImage!)!, scale: 16, orientation: (lPic?.imageOrientation)!)
         
         let lButton : UIBarButtonItem = UIBarButtonItem(image: scaledIconL, style: .plain, target: self, action: #selector(backTap))
         
         let rPic = UIImage(named: "right")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        let scaledIconR = UIImage(cgImage: (rPic?.cgImage!)!, scale: 13, orientation: (rPic?.imageOrientation)!)
+        let scaledIconR = UIImage(cgImage: (rPic?.cgImage!)!, scale: 16, orientation: (rPic?.imageOrientation)!)
         
         let rButton : UIBarButtonItem = UIBarButtonItem(image: scaledIconR, style: .plain, target: self, action: #selector(forwardTap))
         

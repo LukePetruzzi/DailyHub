@@ -20,18 +20,33 @@ class FeedTableContentCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+                
         authorLabel = UILabel()
         titleLabel = UILabel()
         descLabel = UILabel()
         imgView = UIImageView()
+        
+        self.addSubview(titleLabel!)
+        self.addSubview(authorLabel!)
+        self.addSubview(descLabel!)
+        self.addSubview(imgView!)
+        
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
         imgView?.contentMode = .scaleAspectFill
         imgView?.sd_setShowActivityIndicatorView(true)
         imgView?.sd_setIndicatorStyle(.gray)
         imgView?.layer.cornerRadius = 5
         imgView?.clipsToBounds = true
-        imgView?.layoutIfNeeded()
-                
+        //        imgView?.layoutIfNeeded()
+        
         titleLabel?.font = UIFont(name: "Avenir-Black", size: 16)
         
         authorLabel?.font = UIFont(name: "Avenir", size: 11)
@@ -40,15 +55,8 @@ class FeedTableContentCell: UITableViewCell {
         descLabel?.font = UIFont(name: "Avenir", size: 12)
         descLabel?.lineBreakMode = .byWordWrapping
         descLabel?.numberOfLines = 0
-
-        self.addSubview(titleLabel!)
-        self.addSubview(authorLabel!)
-        self.addSubview(descLabel!)
-        self.addSubview(imgView!)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        
     }
     
     internal override func prepareForReuse() {

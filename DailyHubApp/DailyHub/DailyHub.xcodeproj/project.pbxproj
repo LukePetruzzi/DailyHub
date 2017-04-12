@@ -10,6 +10,7 @@
 		325242FC1E93332600C280F3 /* FeedTableContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FB1E93332600C280F3 /* FeedTableContentCell.swift */; };
 		325242FE1E93340700C280F3 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FD1E93340700C280F3 /* Database.swift */; };
 		32CDB2681E9C8AF10099FF5D /* dogpound.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32CDB2671E9C8AF00099FF5D /* dogpound.jpg */; };
+		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
 		400191B41E93191D008CC191 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B31E93191D008CC191 /* LoginViewController.swift */; };
@@ -61,6 +62,7 @@
 		325242FB1E93332600C280F3 /* FeedTableContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableContentCell.swift; sourceTree = "<group>"; };
 		325242FD1E93340700C280F3 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		32CDB2671E9C8AF00099FF5D /* dogpound.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dogpound.jpg; sourceTree = "<group>"; };
+		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCognitoIdentityProvider.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				40EA90911E9DB20A00171EBD /* WebView.swift */,
+				32CDB2691E9ED9950099FF5D /* WebView2.swift */,
 				4052A16C1E85C1A200805E40 /* FeedViewController.swift */,
 				400191B31E93191D008CC191 /* LoginViewController.swift */,
 				400192451E96C234008CC191 /* SettingsViewController.swift */,
@@ -394,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */,
 				4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */,
 				400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */,
 				400191B81E9337E2008CC191 /* CognitoUserManager.swift in Sources */,
