@@ -219,11 +219,11 @@
 		4052A1691E85C1A200805E40 /* DailyHub */ = {
 			isa = PBXGroup;
 			children = (
+				4052A16A1E85C1A200805E40 /* AppDelegate.swift */,
 				400192491E96C283008CC191 /* Managers and Providers */,
 				400192481E96C257008CC191 /* CustomUIElements */,
 				400192471E96C242008CC191 /* View Controllers */,
 				400191B21E92E5CE008CC191 /* Images */,
-				4052A16A1E85C1A200805E40 /* AppDelegate.swift */,
 				4052A1741E85C1A200805E40 /* Assets.xcassets */,
 				4052A1791E85C1A200805E40 /* Info.plist */,
 				4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */,

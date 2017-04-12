@@ -21,7 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var configuration: AWSServiceConfiguration?
     
     var loginViewController: LoginViewController?
+    
     var feedViewController: FeedViewController?
+    var feedNavController: UINavigationController?
+    
+    var discoverViewController: UIViewController?
+    var discoverNavController: UINavigationController?
+    
+    var profileViewController: UIViewController?
+    var profileNavController: UINavigationController?
+    
     var settingsViewController: SettingsViewController?
     
     var navigationController: UINavigationController?
@@ -36,16 +45,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // setup tab controller
         tabController = UITabBarController()
-        
+
         // setup views
         feedViewController = FeedViewController()
+        discoverViewController = UIViewController()
+        profileViewController = UIViewController()
         loginViewController = LoginViewController()
+        
         settingsViewController = SettingsViewController()
         
+        // setup navigation controllers
+        feedNavController = UINavigationController(rootViewController: feedViewController!)
+        discoverNavController = UINavigationController(rootViewController: discoverViewController!)
+        profileNavController = UINavigationController(rootViewController: profileViewController!)
+        
         // array of our view controllers for the tab controller.
-        tabController?.viewControllers = [feedViewController!, settingsViewController!]
-        feedViewController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, tag: 0)
-        feedViewController?.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
+        tabController?.viewControllers = [feedNavController!, discoverNavController!, profileNavController!]
+        feedViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "feed"), tag: 0)
+        discoverViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile"), tag: 1)
+        profileViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile"), tag: 2)
         
         
         
@@ -99,9 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func switchToMainViewControllers()
     {
         // add the tab controller to the navcontroller
-        navigationController?.viewControllers = [tabController!]
-        
-        
         self.window?.rootViewController = self.tabController
     }
     
