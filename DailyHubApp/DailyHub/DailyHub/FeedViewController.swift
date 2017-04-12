@@ -281,6 +281,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        print("SHOULD BE OPENING:")
+        
+        // get the section
+        let sect = userSitePrefs[indexPath.section].siteName
+        let urlString = masterContent[sect]?[0].url
+        
+        // create a new webviewController
+        let webViewController = WebViewC()
+        webViewController.urlStringToLoad = urlString
+        
+//        let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
 }

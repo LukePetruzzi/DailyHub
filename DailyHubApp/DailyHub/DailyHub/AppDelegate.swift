@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var feedViewController: FeedViewController?
     var settingsViewController: SettingsViewController?
     
+    var navigationController: UINavigationController?
+    
     var tabController: UITabBarController?
 
 
@@ -44,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabController?.viewControllers = [feedViewController!, settingsViewController!]
         feedViewController?.tabBarItem = UITabBarItem(title: "Feed", image: nil, tag: 0)
         feedViewController?.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
+        
+        
         
         
 
@@ -94,6 +98,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func switchToMainViewControllers()
     {
+        // add the tab controller to the navcontroller
+        navigationController?.viewControllers = [tabController!]
+        
+        
         self.window?.rootViewController = self.tabController
     }
     
