@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // array of our view controllers for the tab controller.
         tabController?.viewControllers = [feedNavController!, discoverNavController!, profileNavController!]
         feedViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "feed"), tag: 0)
-        discoverViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile"), tag: 1)
+        discoverViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "explore"), tag: 1)
         profileViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile"), tag: 2)
         
         
