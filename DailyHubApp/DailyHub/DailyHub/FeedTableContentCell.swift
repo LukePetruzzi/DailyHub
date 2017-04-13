@@ -9,18 +9,20 @@
 import Foundation
 import UIKit
 
-private struct Metrics{
-    static let LEADING_OR_TRAILING:CGFloat = 8
-    static let ABOVE_OR_BELOW:CGFloat = 6
-}
 
 class FeedTableContentCell: UITableViewCell {
     
+    struct Metrics{
+        static let LEADING_OR_TRAILING:CGFloat = 8
+        static let ABOVE_OR_BELOW:CGFloat = 6
+    }
     
     var authorLabel:UILabel!
     var titleLabel:UILabel!
     var descLabel:UILabel!
     var imgView:UIImageView!
+    
+    var imgViewHeightConstraint:NSLayoutConstraint!
     
     var textHeight:CGFloat = 0
     
@@ -100,7 +102,8 @@ class FeedTableContentCell: UITableViewCell {
         // bottom
         self.contentView.addConstraint(NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0 - Metrics.ABOVE_OR_BELOW))
         // height
-        self.contentView.addConstraint(NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 300 - Metrics.ABOVE_OR_BELOW ))
+        self.imgViewHeightConstraint = NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 300 - Metrics.ABOVE_OR_BELOW)
+        self.contentView.addConstraint(self.imgViewHeightConstraint)
         
         
         // set all subviews left and right constraints to the sides
@@ -113,8 +116,6 @@ class FeedTableContentCell: UITableViewCell {
             
             // width
             self.contentView.addConstraint(NSLayoutConstraint(item: sub, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.contentView.bounds.width - Metrics.LEADING_OR_TRAILING * 2))
-            
-            
         }
     }
 
@@ -122,6 +123,12 @@ class FeedTableContentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // update the image view's height
+    func updateImgViewHeightConstraint(constant: CGFloat){
+        
+        self.imgViewHeightConstraint.constant = constant
+    }
     
 //    override func layoutSubviews() {
 //        super.layoutSubviews()

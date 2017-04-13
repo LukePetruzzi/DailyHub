@@ -33,7 +33,7 @@ def lambda_handler(json_input, context):
     # json.dumps() converts a dictionary to str object, json.loads() converts the str back to a dictionary
 
     # print(masterJsonString)
-    print("MASTER DICTIONARY WAS UPDATED AT: " + str(datetime.now(tz.gettz('EST')).strftime("%Y-%m-%d")) + " EST")
+    print("MASTER DICTIONARY WAS UPDATED AT: " + str(datetime.now(tz.gettz('ET')).strftime("%Y-%m-%d")) + " ET")
     sys.stdout.flush()
 
     dynamodb = boto3.resource('dynamodb', region_name='us-west-2', endpoint_url="https://dynamodb.us-west-2.amazonaws.com")
@@ -43,7 +43,7 @@ def lambda_handler(json_input, context):
     # just save each database entry as the latest date. yymmdd format?
 
     # the Eastern Standard Time date in ISO 8601 format
-    dateFormatted = datetime.now(tz.gettz('EST')).strftime("%Y-%m-%d")
+    dateFormatted = datetime.now(tz.gettz('ET')).strftime("%Y-%m-%d")
 
     # update the dynamoDb table
     # UpdateId is always 1 because single partition can hold 10GB of data, and 

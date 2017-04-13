@@ -42,7 +42,7 @@ class Database {
         formatter.calendar = Calendar(identifier: .iso8601)
         // Eastern Standard Time
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(abbreviation: "EST")
+        formatter.timeZone = TimeZone(abbreviation: "ET")
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: Date())
     }

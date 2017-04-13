@@ -221,6 +221,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if let thumbnail = masterContent[sect]?[0].thumbnail {
             
+            cell.updateImgViewHeightConstraint(constant: 300 - FeedTableContentCell.Metrics.LEADING_OR_TRAILING)
+            
             let url = URL(string: thumbnail)
             //cell.imgView?.frame = CGRect(x: CGFloat(5), y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
             print("LOADING IMAGE NOW: "+thumbnail)
@@ -228,6 +230,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         else{
+            cell.updateImgViewHeightConstraint(constant: 0)
             cell.imgView.image = nil
         }
 
