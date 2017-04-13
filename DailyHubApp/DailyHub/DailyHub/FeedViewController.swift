@@ -80,9 +80,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orange,
                                                                         NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
         navigationController?.navigationBar.topItem?.title = "dh"
-//        self.title = "dh"
+
         
-        // self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.tableView = UITableView(frame: frame)
         let rankingsButton = UIBarButtonItem(image: UIImage(named: "ranking-3"), style: .plain, target: self, action: #selector(rankingButtonTappedTapped))
@@ -96,8 +95,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView?.dataSource = self
         tableView?.register(FeedTableTitleCell.self, forCellReuseIdentifier: "FeedTableTitleCell")
         tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
-        tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = 500
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
@@ -200,89 +197,47 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableContentCell", for: indexPath) as! FeedTableContentCell
         let sect = userSitePrefs[indexPath.section].siteName
-        var currHeight:CGFloat = 0
         
         if let title = masterContent[sect]?[0].title {
-            cell.titleLabel?.frame = CGRect(x: 5, y: 5, width: UIScreen.main.bounds.width - 10, height: 0)
-            cell.titleLabel?.numberOfLines = 0
             cell.titleLabel?.text = title
-            cell.titleLabel?.sizeToFit()
-            currHeight += (cell.titleLabel?.frame.size.height)!
+        }
+        else{
+            cell.titleLabel.text = ""
         }
         
         if let author = masterContent[sect]?[0].author {
-            cell.authorLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxAuthorHeight)
             cell.authorLabel?.text = author
-            currHeight += Metrics.maxAuthorHeight
+        }
+        else{
+            cell.authorLabel.text = ""
         }
         
         if let desc = masterContent[sect]?[0].description {
-            cell.descLabel?.frame = CGRect(x: 5, y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: 0)
-            cell.descLabel?.numberOfLines = 0
             cell.descLabel?.text = desc
-            cell.descLabel?.sizeToFit()
-            if (cell.descLabel?.frame.size.height)! > Metrics.maxDescHeight {
-                currHeight += Metrics.maxDescHeight
-                cell.descLabel?.frame.size.height = Metrics.maxDescHeight
-            }
-            else {
-                currHeight += (cell.descLabel?.frame.size.height)!
-            }
+        }
+        else{
+            cell.descLabel.text = ""
         }
         
         if let thumbnail = masterContent[sect]?[0].thumbnail {
             
+            cell.updateImgViewHeightConstraint(constant: 300 - FeedTableContentCell.Metrics.ABOVE_OR_BELOW)
+            
             let url = URL(string: thumbnail)
-            cell.imgView?.frame = CGRect(x: CGFloat(5), y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
-            cell.imgView?.sd_setImage(with: url, placeholderImage: UIImage(named: "dogpound.jpg"))
-
+            //cell.imgView?.frame = CGRect(x: CGFloat(5), y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
+            print("LOADING IMAGE NOW: "+thumbnail)
+            cell.imgView?.sd_setImage(with: url)
+            
         }
-        
-//        cell.authorLabel?.text = masterContent[sect]?[0].author
+        else{
+            cell.updateImgViewHeightConstraint(constant: 0)
+            cell.imgView.image = nil
+        }
 
-        cell.layoutIfNeeded()
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        var currHeight:CGFloat = 0
-        let sect = userSitePrefs[indexPath.section].siteName
-
-        
-        if let _ = masterContent[sect]?[0].title {
-            let titleLabel = UILabel(frame: CGRect(x: 5, y: 5, width: Int(UIScreen.main.bounds.width - 10), height: 0))
-            titleLabel.numberOfLines = 0
-            titleLabel.text = title
-            titleLabel.sizeToFit()
-            currHeight += titleLabel.frame.size.height
-        }
-        
-        if let _ = masterContent[sect]?[0].author {
-            currHeight += 15
-        }
-        
-        if let descText = masterContent[sect]?[0].description {
-            let descLabel = UILabel(frame: CGRect(x: 5, y: 0, width: Int(UIScreen.main.bounds.width - 10), height: 0))
-            descLabel.numberOfLines = 0
-            descLabel.text = descText
-            descLabel.sizeToFit()
-            if (descLabel.frame.size.height) > Metrics.maxDescHeight {
-                currHeight += Metrics.maxDescHeight
-            }
-            else {
-                currHeight += descLabel.frame.size.height
-            }
-        }
-        
-        if let _ = masterContent[sect]?[0].thumbnail {
-            currHeight += Metrics.maxImageHeight
-        }
-        
-        // For padding and the boys
-        currHeight += Metrics.bottomCellPadding
-        return currHeight
-    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -294,13 +249,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let urlString = masterContent[sect]?[0].url
         
         // create a new webviewController
-        let webViewController = WebViewC()
-        webViewController.urlStringToLoad = urlString
+        let webViewController = CustomWebView()
+        webViewController.urlStringToLoad = urlString!
+        webViewController.logoToShow = sect
 
         self.tabBarController?.present(webViewController, animated: true, completion: nil)
-//
-//        let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
-//        delegate.feedNavController?.pushViewController(webViewController, animated: true)
     }
     
 }
