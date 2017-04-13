@@ -9,7 +9,7 @@
 import Foundation
 import WebKit
 
-class CustomWebView: UIViewController, WKNavigationDelegate {
+class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegate {
     
     var webView: WKWebView = WKWebView()
     var headerView : UIView = UIView()
@@ -18,18 +18,22 @@ class CustomWebView: UIViewController, WKNavigationDelegate {
     var urlStringToLoad: String = ""
     var logoToShow: String = ""
     
+    private var lastContentOffset: CGFloat = 0
+    
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        webView.backgroundColor = UIColor.clear
+        webView.navigationDelegate = self
+        webView.scrollView.delegate = self
         headerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+        headerView.tintColor = UIColor.red
         footerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-        
+        footerView.tintColor = UIColor.clear
+
         let closeButton = UIButton(frame: CGRect(x: 0, y: statusBarHeight, width: 45, height: 45))
-        closeButton.setTitleColor(UIColor.gray, for: .highlighted)
         closeButton.setImage(UIImage(named: "close"), for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         headerView.addSubview(closeButton)
@@ -56,7 +60,7 @@ class CustomWebView: UIViewController, WKNavigationDelegate {
         logoButton.addTarget(self, action: #selector(logoButtonTapped), for: .touchUpInside)
         footerView.addSubview(logoButton)
         
-        let backButton = UIButton(frame: CGRect(x: self.view.frame.size.width - 150, y: 0, width: 45, height: 45))
+        let backButton = UIButton(frame: CGRect(x: self.view.frame.size.width - 130, y: 0, width: 45, height: 45))
         backButton.setImage(UIImage(named: "back"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         footerView.addSubview(backButton)
@@ -70,8 +74,9 @@ class CustomWebView: UIViewController, WKNavigationDelegate {
         webView.allowsBackForwardNavigationGestures = false
         webView.load(URLRequest(url: url))
         
-        self.view.addSubview(self.headerView)
+//        headerView.bringSubview(toFront: self.view)
         self.view.addSubview(self.webView)
+        self.view.addSubview(self.headerView)
         self.view.addSubview(self.footerView)
     }
     
@@ -85,7 +90,8 @@ class CustomWebView: UIViewController, WKNavigationDelegate {
         super.viewWillLayoutSubviews()
         
         self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: statusBarHeight + 45)
-        self.webView.frame = CGRect(x: 0, y: statusBarHeight + 45, width: self.view.frame.size.width, height: self.view.frame.size.height - statusBarHeight - 90)
+//        self.webView.frame = CGRect(x: 0, y: statusBarHeight + 45, width: self.view.frame.size.width, height: self.view.frame.size.height - statusBarHeight - 90)
+        self.webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.footerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 45, width: self.view.frame.size.width, height: 45)
         
     }
@@ -107,15 +113,60 @@ class CustomWebView: UIViewController, WKNavigationDelegate {
     }
     
     func backButtonTapped() {
-        
+        if (webView.canGoBack) {
+            webView.goBack()
+        }
     }
     
     func forwardButtonTapped() {
-        
+        if (webView.canGoForward) {
+            webView.goForward()
+        }
     }
     
     func logoButtonTapped() {
         
     }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print("last \(lastContentOffset)")
+//        print("new \(scrollView.contentOffset.y)")
+//        if (self.lastContentOffset > scrollView.contentOffset.y) {
+//            self.headerView.isHidden = true
+//            self.footerView.isHidden = true
+//        }
+//        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+//            self.headerView.isHidden = false
+//            self.footerView.isHidden = false
+//        }
+//        
+//        // update the new position acquired
+//        self.lastContentOffset = scrollView.contentOffset.y
+//    }
+    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        
+//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+//            
+//            
+//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+//                
+//                self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 10)
+//            }, completion: nil)
+//           
+//        }
+//        else{
+//            self.headerView.isHidden = false
+//            self.footerView.isHidden = false
+//        }
+//    }
     
 }
