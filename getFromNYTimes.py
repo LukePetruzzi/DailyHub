@@ -31,7 +31,10 @@ def getFromNYTimes():
 		singleDict['author'] = result['byline'][3:]
 
 		# get the thumbnail photo for the article
-		singleDict['thumbnail'] = result['media'][0]['media-metadata'][0]['url']
+		if result['media'] != '':
+			singleDict['thumbnail'] = result['media'][0]['media-metadata'][0]['url']
+		else:
+			singleDict['thumbnail'] = None
 
 		# get the abstract description of the article
 		singleDict['description'] = result['abstract']
