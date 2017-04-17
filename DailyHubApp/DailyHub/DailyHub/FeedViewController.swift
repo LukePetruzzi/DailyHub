@@ -31,7 +31,7 @@ private struct Metrics {
 }
 
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var masterData: String = ""
     
@@ -114,14 +114,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(constraints)
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         // refresh the table with new things
+//        navigationController?.hidesBarsOnSwipe = true
         self.refreshTable()
     }
 
@@ -129,7 +128,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+ 
     func refreshTable() {
         Database.getDatabaseInfo(completionHandler: {(data, error) in
             if let d = data {
@@ -255,5 +254,32 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.tabBarController?.present(webViewController, animated: true, completion: nil)
     }
+//    
+//    func setTabBarVisible(visible: Bool, animated: Bool) {
+//        guard let frame = self.tabBarController?.tabBar.frame else { return }
+//        let height = frame.size.height
+//        let offsetY = (visible ? -height : height)
+//        let duration: TimeInterval = (animated ? 0.3 : 0.0)
+//        
+//        UIView.animate(withDuration: duration,
+//                       delay: 0.0,
+//                       options: UIViewAnimationOptions.curveEaseIn,
+//                       animations: { [weak self] () -> Void in
+//                        guard let weakSelf = self else { return }
+//                        weakSelf.tabBarController?.tabBar.frame = frame.offsetBy(dx: 0, dy: offsetY)
+//                        weakSelf.view.frame = CGRect(x: 0, y: 0, width: weakSelf.view.frame.width, height: weakSelf.view.frame.height + offsetY)
+//                        weakSelf.view.setNeedsDisplay()
+//                        weakSelf.view.layoutIfNeeded()
+//        })
+//    }
+//    
+//    func handleTap(recognizer: UITapGestureRecognizer) {
+//        setTabBarVisible(visible: !tabBarIsVisible(), animated: true)
+//    }
+//    
+//    func tabBarIsVisible() -> Bool {
+//        guard let tabBar = tabBarController?.tabBar else { return false }
+//        return tabBar.frame.origin.y < UIScreen.main.bounds.height
+//    }
     
 }
