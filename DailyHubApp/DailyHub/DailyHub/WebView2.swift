@@ -21,6 +21,7 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
     var logoButton: UIButton = UIButton()
     var backButton: UIButton = UIButton()
     var forwardButton: UIButton = UIButton()
+    var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     
     var urlStringToLoad: String = ""
@@ -85,8 +86,10 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         forwardButton.isEnabled = false
         footerView.addSubview(forwardButton)
         
-        // create progress bar
-        self.initProgressBar()
+        loadingIndicator.activityIndicatorViewStyle = .gray
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.frame = CGRect(x: self.view.frame.size.width - 90, y: 0, width: 45, height: 45)
+        headerView.addSubview(loadingIndicator)
         
         let url = URL(string: urlStringToLoad)!
 //        webView.allowsBackForwardNavigationGestures = false
@@ -121,16 +124,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
 //        self.webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.footerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 45, width: self.view.frame.size.width, height: 45)
         
-    }
-    
-    private func initProgressBar()
-    {
-        
-//        _progressBarFlatRainbow.type               = YLProgressBarTypeFlat;
-//        _progressBarFlatRainbow.progressTintColors = tintColors;
-//        _progressBarFlatRainbow.hideStripes        = YES;
-//        _progressBarFlatRainbow.hideTrack          = YES;
-//        _progressBarFlatRainbow.behavior           = YLProgressBarBehaviorDefault;
     }
     
     func closeButtonTapped() {
@@ -169,11 +162,15 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        refreshButton.isHidden = true
+        loadingIndicator.startAnimating()
         configureBackForwardButtons()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        loadingIndicator.stopAnimating()
+//        refreshButton.isHidden = false
         configureBackForwardButtons()
     }
     
