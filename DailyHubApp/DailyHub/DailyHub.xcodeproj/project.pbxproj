@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		325242FC1E93332600C280F3 /* FeedTableContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FB1E93332600C280F3 /* FeedTableContentCell.swift */; };
 		325242FE1E93340700C280F3 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FD1E93340700C280F3 /* Database.swift */; };
+		325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F79981EA8371800F523FA /* PreferencesViewController.swift */; };
 		32CDB2681E9C8AF10099FF5D /* dogpound.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 32CDB2671E9C8AF00099FF5D /* dogpound.jpg */; };
 		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
@@ -61,6 +62,7 @@
 		2BE3060466B86C894033614B /* Pods-DailyHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailyHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailyHub/Pods-DailyHub.release.xcconfig"; sourceTree = "<group>"; };
 		325242FB1E93332600C280F3 /* FeedTableContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableContentCell.swift; sourceTree = "<group>"; };
 		325242FD1E93340700C280F3 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		325F79981EA8371800F523FA /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		32CDB2671E9C8AF00099FF5D /* dogpound.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dogpound.jpg; sourceTree = "<group>"; };
 		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				4052A16C1E85C1A200805E40 /* FeedViewController.swift */,
 				400191B31E93191D008CC191 /* LoginViewController.swift */,
 				400192451E96C234008CC191 /* SettingsViewController.swift */,
+				325F79981EA8371800F523FA /* PreferencesViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				325242FC1E93332600C280F3 /* FeedTableContentCell.swift in Sources */,
 				400191B61E932662008CC191 /* FacebookCognitoIdentityProvider.swift in Sources */,
 				4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */,
+				325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */,
 				400191B41E93191D008CC191 /* LoginViewController.swift in Sources */,
 				325242FE1E93340700C280F3 /* Database.swift in Sources */,
 				4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */,

@@ -166,7 +166,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func rankingButtonTappedTapped() {
-        
+        let pvc = PreferencesViewController()
+        self.tabBarController?.present(pvc, animated: true, completion: nil)
     }
     
     func helpButtonTappedTapped() {
