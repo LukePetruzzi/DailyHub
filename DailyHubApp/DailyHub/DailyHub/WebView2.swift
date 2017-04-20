@@ -22,6 +22,7 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
     var backButton: UIButton = UIButton()
     var forwardButton: UIButton = UIButton()
     
+    
     var urlStringToLoad: String = ""
     var logoToShow: String = ""
     
@@ -84,6 +85,9 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         forwardButton.isEnabled = false
         footerView.addSubview(forwardButton)
         
+        // create progress bar
+        self.initProgressBar()
+        
         let url = URL(string: urlStringToLoad)!
 //        webView.allowsBackForwardNavigationGestures = false
         webView.load(URLRequest(url: url))
@@ -117,6 +121,16 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
 //        self.webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.footerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 45, width: self.view.frame.size.width, height: 45)
         
+    }
+    
+    private func initProgressBar()
+    {
+        
+//        _progressBarFlatRainbow.type               = YLProgressBarTypeFlat;
+//        _progressBarFlatRainbow.progressTintColors = tintColors;
+//        _progressBarFlatRainbow.hideStripes        = YES;
+//        _progressBarFlatRainbow.hideTrack          = YES;
+//        _progressBarFlatRainbow.behavior           = YLProgressBarBehaviorDefault;
     }
     
     func closeButtonTapped() {

@@ -29,4 +29,5 @@ target :'DailyHub' do
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
     pod 'SDWebImage'
+    pod 'YLProgressBar', '~> 3.10.1'
 end
