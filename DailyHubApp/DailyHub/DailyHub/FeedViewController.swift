@@ -100,7 +100,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
-        refreshControl.addTarget(self, action: #selector(FeedViewController.refreshTable(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControlEvents.valueChanged)
         tableView?.addSubview(refreshControl)
         
         tableView?.rowHeight = UITableViewAutomaticDimension
@@ -127,16 +127,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSLayoutConstraint.activate(constraints)
     }
     
+    func completion() {
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         // add on the loading overlay
         view.addSubview(loadingOverlay)
         // refresh the table
-        self.refreshTable(){
-            // remove loading overlay when done
-            self.loadingOverlay.removeFromSuperview()
-        }
+        self.refreshTable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -144,7 +145,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
  
-    func refreshTable(_ completion: @escaping () -> Void) {
+    func refreshTable() {
         Database.getDatabaseInfo(completionHandler: {(data, error) in
             if let d = data {
                 
@@ -183,9 +184,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 DispatchQueue.main.async {
                     self.tableView?.reloadData()
-                    self.refreshControl.endRefreshing()
-                    completion()
+                    self.loadingOverlay.removeFromSuperview()
                 }
+                self.refreshControl.endRefreshing()
             }
         })
     }
