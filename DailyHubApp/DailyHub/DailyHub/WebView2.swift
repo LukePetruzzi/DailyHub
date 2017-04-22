@@ -121,7 +121,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         
         self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 45)
         self.webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 45)
-//        self.webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.footerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 45, width: self.view.frame.size.width, height: 45)
         
     }
