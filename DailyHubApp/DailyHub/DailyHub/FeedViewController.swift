@@ -41,11 +41,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var masterContent = [String:[ContentInfo]]()
 
-    var userSitePrefs = [SitePref(siteName: "500px", numPosts: 1),
-                         SitePref(siteName: "AP", numPosts: 1),
-                        SitePref(siteName: "BBCNews", numPosts: 1),
+    var userSitePrefs = [SitePref(siteName: "500px", numPosts: 3),
+                         SitePref(siteName: "AP", numPosts: 2),
+                        SitePref(siteName: "BBCNews", numPosts: 5),
                         SitePref(siteName: "BBCSport", numPosts: 1),
-                        SitePref(siteName: "Bloomberg", numPosts: 1),
+                        SitePref(siteName: "Bloomberg", numPosts: 3),
                         SitePref(siteName: "BusinessInsider", numPosts: 1),
                         SitePref(siteName: "Buzzfeed", numPosts: 1),
                         SitePref(siteName: "CNN", numPosts: 1),
@@ -139,19 +139,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let content = try JSONSerialization.jsonObject(with: json!, options: []) as! [String: NSArray]
                     for item in self.userSitePrefs {
                         // gets the content for the number rank needed
-                        let currentSiteContentDict = content[item.siteName]?[0] as AnyObject
-                        let title = currentSiteContentDict["title"] as? String
-                        let author = currentSiteContentDict["author"] as? String
-                        let url = currentSiteContentDict["url"] as? String
-                        let thumbnail = currentSiteContentDict["thumbnail"] as? String
-                        let description = currentSiteContentDict["description"] as? String
-                        let siteInfo = ContentInfo(title: title?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                   author: author?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                   url: url?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                   thumbnail: thumbnail?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                   description: description?.trimmingCharacters(in: .whitespacesAndNewlines))
-                        // add the site info to the array of content
-                        self.masterContent[item.siteName] = [siteInfo]
+                        
+                        var currentResults: [ContentInfo] = []
+                        for i in 0..<item.numPosts {
+                        
+                            
+                            let currentSiteContentDict = content[item.siteName]?[i] as AnyObject
+                            let title = currentSiteContentDict["title"] as? String
+                            let author = currentSiteContentDict["author"] as? String
+                            let url = currentSiteContentDict["url"] as? String
+                            let thumbnail = currentSiteContentDict["thumbnail"] as? String
+                            let description = currentSiteContentDict["description"] as? String
+                            let siteInfo = ContentInfo(title: title?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                       author: author?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                       url: url?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                       thumbnail: thumbnail?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                       description: description?.trimmingCharacters(in: .whitespacesAndNewlines))
+                            currentResults.append(siteInfo)
+                            // add the site info to the array of content
+                            
+                        }
+                        self.masterContent[item.siteName] = currentResults
                     }
                 }
                 catch {
@@ -184,7 +192,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell") as! FeedTableTitleCell
-        let image = userSitePrefs[section].siteName + ".png"
+        let image = userSitePrefs[section].siteName
         cell.logoImageView.image = UIImage(named: image)
         return cell
     }
@@ -198,34 +206,33 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableContentCell", for: indexPath) as! FeedTableContentCell
         let sect = userSitePrefs[indexPath.section].siteName
         
-        if let title = masterContent[sect]?[0].title {
+        if let title = masterContent[sect]?[indexPath.row].title {
             cell.titleLabel?.text = title
         }
         else{
             cell.titleLabel.text = ""
         }
         
-        if let author = masterContent[sect]?[0].author {
+        if let author = masterContent[sect]?[indexPath.row].author {
             cell.authorLabel?.text = author
         }
         else{
             cell.authorLabel.text = ""
         }
         
-        if let desc = masterContent[sect]?[0].description {
+        if let desc = masterContent[sect]?[indexPath.row].description {
             cell.descLabel?.text = desc
         }
         else{
             cell.descLabel.text = ""
         }
         
-        if let thumbnail = masterContent[sect]?[0].thumbnail {
+        if let thumbnail = masterContent[sect]?[indexPath.row].thumbnail {
             
             cell.updateImgViewHeightConstraint(constant: 300 - FeedTableContentCell.Metrics.ABOVE_OR_BELOW)
             
             let url = URL(string: thumbnail)
             //cell.imgView?.frame = CGRect(x: CGFloat(5), y: 5+currHeight, width: UIScreen.main.bounds.width - 10, height: Metrics.maxImageHeight)
-            print("LOADING IMAGE NOW: "+thumbnail)
             cell.imgView?.sd_setImage(with: url)
             
         }
@@ -242,11 +249,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        print("SHOULD BE OPENING:")
-       
         // get the section
         let sect = userSitePrefs[indexPath.section].siteName
-        let urlString = masterContent[sect]?[0].url
+        let urlString = masterContent[sect]?[indexPath.row].url
         
         // create a new webviewController
         let webViewController = CustomWebView()
@@ -254,33 +259,5 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         webViewController.logoToShow = sect
 
         self.tabBarController?.present(webViewController, animated: true, completion: nil)
-    }
-//    
-//    func setTabBarVisible(visible: Bool, animated: Bool) {
-//        guard let frame = self.tabBarController?.tabBar.frame else { return }
-//        let height = frame.size.height
-//        let offsetY = (visible ? -height : height)
-//        let duration: TimeInterval = (animated ? 0.3 : 0.0)
-//        
-//        UIView.animate(withDuration: duration,
-//                       delay: 0.0,
-//                       options: UIViewAnimationOptions.curveEaseIn,
-//                       animations: { [weak self] () -> Void in
-//                        guard let weakSelf = self else { return }
-//                        weakSelf.tabBarController?.tabBar.frame = frame.offsetBy(dx: 0, dy: offsetY)
-//                        weakSelf.view.frame = CGRect(x: 0, y: 0, width: weakSelf.view.frame.width, height: weakSelf.view.frame.height + offsetY)
-//                        weakSelf.view.setNeedsDisplay()
-//                        weakSelf.view.layoutIfNeeded()
-//        })
-//    }
-//    
-//    func handleTap(recognizer: UITapGestureRecognizer) {
-//        setTabBarVisible(visible: !tabBarIsVisible(), animated: true)
-//    }
-//    
-//    func tabBarIsVisible() -> Bool {
-//        guard let tabBar = tabBarController?.tabBar else { return false }
-//        return tabBar.frame.origin.y < UIScreen.main.bounds.height
-//    }
-    
+    }    
 }
