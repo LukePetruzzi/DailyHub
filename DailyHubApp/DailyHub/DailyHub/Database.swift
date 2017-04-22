@@ -40,7 +40,6 @@ class Database {
     class func getFormattedESTDate() -> String{
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
-        // Eastern Standard Time
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd"
