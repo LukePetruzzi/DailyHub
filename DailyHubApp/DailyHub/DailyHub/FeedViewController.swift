@@ -37,6 +37,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var tableView: UITableView?
     
+    var loadingOverlay: UIView!
+    
     var refreshControl: UIRefreshControl!
     
     var masterContent = [String:[ContentInfo]]()
@@ -98,13 +100,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
-        refreshControl.addTarget(self, action: #selector(self.refreshTable), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(FeedViewController.refreshTable(_:)), for: UIControlEvents.valueChanged)
         tableView?.addSubview(refreshControl)
         
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = 500
         
         self.view.addSubview(tableView!)
+        
+        // loading overlay
+        loadingOverlay = UIView(frame: UIScreen.main.bounds)
+        loadingOverlay.backgroundColor = UIColor.white
+        let indicator = UIActivityIndicatorView()
+        indicator.activityIndicatorViewStyle = .gray
+        indicator.frame = loadingOverlay.frame
+        indicator.startAnimating()
+        loadingOverlay.addSubview(indicator)
         
         let views: [String: UIView] = ["t": tableView!]
         var constraints: [NSLayoutConstraint] = []
@@ -119,9 +130,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        // refresh the table with new things
-//        navigationController?.hidesBarsOnSwipe = true
-        self.refreshTable()
+        // add on the loading overlay
+        view.addSubview(loadingOverlay)
+        // refresh the table
+        self.refreshTable(){
+            // remove loading overlay when done
+            self.loadingOverlay.removeFromSuperview()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,7 +144,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
  
-    func refreshTable() {
+    func refreshTable(_ completion: @escaping () -> Void) {
         Database.getDatabaseInfo(completionHandler: {(data, error) in
             if let d = data {
                 
@@ -166,11 +181,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print("Error deserializing JSON: \(error)")
                 }
 
-                
-                self.tableView?.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                    self.refreshControl.endRefreshing()
+                    completion()
+                }
             }
         })
-        refreshControl.endRefreshing()
     }
     
     func rankingButtonTappedTapped() {
