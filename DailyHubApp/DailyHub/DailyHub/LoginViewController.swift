@@ -32,11 +32,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if (!result.isCancelled)
+        {
             let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
         
             // authorize the user and open the app's feed view
             delegate.initializeAuthorizedCognito()
             delegate.switchToMainViewControllers()
+        }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
