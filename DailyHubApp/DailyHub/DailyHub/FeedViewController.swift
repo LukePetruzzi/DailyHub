@@ -117,14 +117,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         indicator.startAnimating()
         loadingOverlay.addSubview(indicator)
         
-        let views: [String: UIView] = ["t": tableView!]
-        var constraints: [NSLayoutConstraint] = []
-        
+        // CREATING THE CONSTRAINTS RIGHT HERE IN OUR VIEWDIDLOAD MAY BE CAUSING THE CRASHES?
+//        let views: [String: UIView] = ["t": tableView!]
+//        var constraints: [NSLayoutConstraint] = []
+//        
 //        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]|", options: [], metrics: nil, views: views)
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
+//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]|", options: [], metrics: nil, views: views)
+//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
+//        
+//        NSLayoutConstraint.activate(constraints)
         
-        NSLayoutConstraint.activate(constraints)
+        // add loading view and refresh the table when it loads
+        // add on the loading overlay
+        view.addSubview(loadingOverlay)
+        // refresh the table
+        self.refreshTable()
     }
     
     func completion() {
@@ -133,11 +140,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        // add on the loading overlay
-        view.addSubview(loadingOverlay)
-        // refresh the table
-        self.refreshTable()
     }
 
     override func didReceiveMemoryWarning() {
