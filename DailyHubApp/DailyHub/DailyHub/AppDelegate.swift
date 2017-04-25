@@ -28,11 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var discoverViewController: UIViewController?
     var discoverNavController: UINavigationController?
     
-    var profileViewController: UIViewController?
+    var profileViewController: ProfileViewController?
     var profileNavController: UINavigationController?
-    
-    var settingsViewController: SettingsViewController?
-    
+        
     var navigationController: UINavigationController?
     
     var tabController: UITabBarController?
@@ -49,10 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup views
         feedViewController = FeedViewController()
         discoverViewController = UIViewController()
-        profileViewController = UIViewController()
+        profileViewController = ProfileViewController()
         loginViewController = LoginViewController()
-        
-        settingsViewController = SettingsViewController()
         
         // setup navigation controllers
         feedNavController = UINavigationController(rootViewController: feedViewController!)
