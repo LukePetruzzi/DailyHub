@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class ProfileViewController: UIViewController {
     
-    var logoutButton: UIButton?
+    var logoutButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class SettingsViewController: UIViewController {
         logoutButton?.contentHorizontalAlignment = .center
         
         logoutButton?.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 1)
-        logoutButton?.setTitle("Click Me", for: .normal)
+        logoutButton?.setTitle("Logout", for: .normal)
         logoutButton?.addTarget(self, action: #selector(logout), for: .touchUpInside)
         self.view.addSubview(logoutButton!)
     }
