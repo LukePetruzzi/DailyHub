@@ -10,6 +10,7 @@
 		325242FC1E93332600C280F3 /* FeedTableContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FB1E93332600C280F3 /* FeedTableContentCell.swift */; };
 		325242FE1E93340700C280F3 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FD1E93340700C280F3 /* Database.swift */; };
 		325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F79981EA8371800F523FA /* PreferencesViewController.swift */; };
+		325F799B1EAEC14300F523FA /* PreferencesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F799A1EAEC14300F523FA /* PreferencesCell.swift */; };
 		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
@@ -29,6 +30,7 @@
 		325242FB1E93332600C280F3 /* FeedTableContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableContentCell.swift; sourceTree = "<group>"; };
 		325242FD1E93340700C280F3 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		325F79981EA8371800F523FA /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		325F799A1EAEC14300F523FA /* PreferencesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesCell.swift; sourceTree = "<group>"; };
 		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				325242FB1E93332600C280F3 /* FeedTableContentCell.swift */,
 				400191B01E92E588008CC191 /* FeedTableTitleCell.swift */,
+				325F799A1EAEC14300F523FA /* PreferencesCell.swift */,
 			);
 			name = CustomUIElements;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */,
 				4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */,
+				325F799B1EAEC14300F523FA /* PreferencesCell.swift in Sources */,
 				400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */,
 				400191B81E9337E2008CC191 /* CognitoUserManager.swift in Sources */,
 				400192461E96C234008CC191 /* SettingsViewController.swift in Sources */,
