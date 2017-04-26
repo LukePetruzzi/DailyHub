@@ -43,38 +43,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var masterContent = [String:[ContentInfo]]()
 
-    var userSitePrefs = [SitePref(siteName: "500px", numPosts: 3),
-                         SitePref(siteName: "AP", numPosts: 2),
-                        SitePref(siteName: "BBCNews", numPosts: 5),
-                        SitePref(siteName: "BBCSport", numPosts: 1),
-                        SitePref(siteName: "Bloomberg", numPosts: 3),
-                        SitePref(siteName: "BusinessInsider", numPosts: 1),
-                        SitePref(siteName: "Buzzfeed", numPosts: 1),
-                        SitePref(siteName: "CNN", numPosts: 1),
-                        SitePref(siteName: "Deviant", numPosts: 1),
-                        SitePref(siteName: "EntertainmentWeekly", numPosts: 1),
-                        SitePref(siteName: "ESPN", numPosts: 1),
-                        SitePref(siteName: "Etsy", numPosts: 1),
-                        SitePref(siteName: "Giphy", numPosts: 1),
-                        SitePref(siteName: "HackerNews", numPosts: 1),
-                        SitePref(siteName: "IGN", numPosts: 1),
-                        SitePref(siteName: "Imgur", numPosts: 1),
-                        SitePref(siteName: "MTV", numPosts: 1),
-                        SitePref(siteName: "NationalGeographic", numPosts: 1),
-                        SitePref(siteName: "Newsweek", numPosts: 1),
-                        SitePref(siteName: "NYMag", numPosts: 1),
-                        SitePref(siteName: "NYTimes", numPosts: 1),
-                        SitePref(siteName: "Reuters", numPosts: 1),
-                        SitePref(siteName: "Soundcloud", numPosts: 1),
-                        SitePref(siteName: "Spotify", numPosts: 1),
-                        SitePref(siteName: "StackOverflow", numPosts: 1),
-                        SitePref(siteName: "Techcrunch", numPosts: 1),
-                        SitePref(siteName: "Time", numPosts: 1),
-                        SitePref(siteName: "USAToday", numPosts: 1),
-                        SitePref(siteName: "Vimeo", numPosts: 1),
-                        SitePref(siteName: "WashPost", numPosts: 1),
-                        SitePref(siteName: "WSJ", numPosts: 1),
-                        SitePref(siteName: "YouTube", numPosts: 1)]
+    var userSitePrefs = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -101,6 +101,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             return task;
         })
+        
+        // perform first time setup IF its a new user
+        CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
     }
     
     func logoutCurrentUser()
