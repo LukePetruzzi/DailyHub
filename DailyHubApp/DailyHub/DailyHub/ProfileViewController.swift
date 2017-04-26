@@ -16,6 +16,8 @@ class ProfileViewController: UIViewController {
     var profileNameLabel: UILabel = UILabel()
     var logoutButton: UIButton = UIButton()
     
+    let PADDING:CGFloat = 6
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,65 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = "dh"
         
         
-
         
+        // label with name
+        profileNameLabel.font = UIFont(name: "Avenir-Black", size: 16)
+        
+        // logout button
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        
+        
+        // add all the subviews
+        self.view.addSubview(logoutButton)
+        self.view.addSubview(profileImageView)
+        self.view.addSubview(profileNameLabel)
+        
+        // create all constraints
+        // get rid of constraints I DIDN'T FRIGGIN MAKE
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        for sub in self.view.subviews{
+            sub.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        // create constraints for the content view itself
+        //self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
+        
+        let navBarHeight = navigationController!.navigationBar.bounds.height
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let centerX = self.view.center.x
+        
+        print("HEIHGT: \(navBarHeight)")
+        
+        // constraints for the imageview
+        self.view.addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: navBarHeight + statusBarHeight + PADDING))
+        self.view.addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.view.bounds.width / 2))
+        self.view.addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.view.bounds.width / 2))
+        self.view.addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: centerX))
+
+        // name label
+        self.view.addConstraint(NSLayoutConstraint(item: profileNameLabel, attribute: .top, relatedBy: NSLayoutRelation.equal, toItem: profileImageView, attribute: .bottom, multiplier: 1, constant: PADDING))
+        self.view.addConstraint(NSLayoutConstraint(item: profileNameLabel, attribute: .centerX, relatedBy: .equal, toItem: profileImageView, attribute: .centerX, multiplier: 1, constant: 0))
+        
+        // logout button
+        self.view.addConstraint(NSLayoutConstraint(item: logoutButton, attribute: .top, relatedBy: NSLayoutRelation.equal, toItem: profileNameLabel, attribute: .bottom, multiplier: 1, constant: PADDING))
+        self.view.addConstraint(NSLayoutConstraint(item: logoutButton, attribute: .centerX, relatedBy: NSLayoutRelation.equal, toItem: profileNameLabel, attribute: .centerX, multiplier: 1, constant: 0))
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // load the data for image and name
+        loadFacebookData()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func loadFacebookData()
+    {
         var userId:String? = nil
         var userName:String? = nil
         
@@ -60,54 +119,18 @@ class ProfileViewController: UIViewController {
                 self.profileNameLabel.text = userName!
             }
         }
-        // profile image view
-        profileImageView.clipsToBounds = true
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
-        
-        // label with name
-        profileNameLabel.font = UIFont(name: "Avenir-Black", size: 16)
-        
-        // logout button
-        logoutButton.contentVerticalAlignment = .bottom
-        logoutButton.contentHorizontalAlignment = .center
-        logoutButton.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 1)
-        logoutButton.setTitle("Logout", for: .normal)
-        logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
-        
-        
-        // add all the subviews
-        self.view.addSubview(logoutButton)
-        self.view.addSubview(profileImageView)
-        self.view.addSubview(profileNameLabel)
-        
-        // create all constraints
-        // get rid of constraints I DIDN'T FRIGGIN MAKE
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        for sub in self.view.subviews{
-            sub.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        // create constraints for the content view itself
-        //self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
-        
-        // constraints for the imageview
-        //self.view.addConstraint(NSLayoutConstraint(item: profileImageView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: navigationController!.navigationBar.bounds, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
-//        self.view.addConstraint(NSLayoutConstraint(item: profileImageView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.view.bounds.width / 2))
-        
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+
         // arrange all the frames
-//        profileImageView.frame = CGRect(x: self.view.center.x - self.view.bounds.width / 4, y: self.view.bounds.width / 4, width: self.view.bounds.width / 2, height: self.view.bounds.width / 2)
-//        
+        //profileImageView.frame = CGRect(x: self.view.center.x - self.view.bounds.width / 4, y: self.view.bounds.width / 4, width: self.view.bounds.width / 2, height: self.view.bounds.width / 2)
+        profileImageView.clipsToBounds = true
+        profileImageView.contentMode = .scaleAspectFill
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
+        
 //        logoutButton = UIButton(frame: CGRect(x: 0, y: 200 , width: self.view.bounds.width, height: 50))
 
     }
