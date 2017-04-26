@@ -22,11 +22,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
+        //self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         
         // create the facebook login button
         loginButton.center = self.view.center
         loginButton.delegate = self
+        loginButton.loginBehavior = .web
         self.view.addSubview(loginButton)
         
     }

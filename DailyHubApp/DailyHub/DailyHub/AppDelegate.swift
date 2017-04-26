@@ -108,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // clear the credentials
         self.credentialsProvider?.clearCredentials()
         FBSDKAccessToken.setCurrent(nil)
+        FBSDKProfile.setCurrent(nil)
     }
     
     func switchToMainViewControllers()
