@@ -38,8 +38,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
         
             // authorize the user and open the app's feed view
-            delegate.initializeAuthorizedCognito()
-            delegate.switchToMainViewControllers()
+            let waitGroup = DispatchGroup()
+            waitGroup.enter()
+            
+            DispatchQueue.main.async {
+                delegate.initializeAuthorizedCognito()
+                waitGroup.leave()
+            }
+            waitGroup.notify(queue: .main) {
+                delegate.switchToMainViewControllers()
+            }
         }
     }
     
