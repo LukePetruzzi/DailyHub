@@ -9,7 +9,7 @@
 import UIKit
 
 class PreferencesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-    public var sections = ["Displayed", "Not Displayed"]
+    public var sections = ["In Feed", "Not In Feed"]
     public var Array  = [[#imageLiteral(resourceName: "YouTube"), #imageLiteral(resourceName: "AP"), #imageLiteral(resourceName: "BBCNews"), #imageLiteral(resourceName: "BBCSport"), #imageLiteral(resourceName: "Bloomberg"), #imageLiteral(resourceName: "BusinessInsider"), #imageLiteral(resourceName: "Buzzfeed"), #imageLiteral(resourceName: "CNN"), #imageLiteral(resourceName: "Deviant"), #imageLiteral(resourceName: "EntertainmentWeekly"), #imageLiteral(resourceName: "ESPN"), #imageLiteral(resourceName: "Etsy"), #imageLiteral(resourceName: "Giphy"), #imageLiteral(resourceName: "HackerNews"), #imageLiteral(resourceName: "IGN"), #imageLiteral(resourceName: "Imgur"), #imageLiteral(resourceName: "MTV"), #imageLiteral(resourceName: "NationalGeographic"), #imageLiteral(resourceName: "Newsweek"), #imageLiteral(resourceName: "NYMag"),  #imageLiteral(resourceName: "NYTimes"), #imageLiteral(resourceName: "Reuters"), #imageLiteral(resourceName: "Soundcloud"),#imageLiteral(resourceName: "Spotify"), #imageLiteral(resourceName: "StackOverflow"), #imageLiteral(resourceName: "Techcrunch"), #imageLiteral(resourceName: "Time"), #imageLiteral(resourceName: "USAToday"), #imageLiteral(resourceName: "Vimeo"), #imageLiteral(resourceName: "WashPost"), #imageLiteral(resourceName: "WSJ")],[]]
     
     var userSitePrefs = [[SitePref(siteName: "500px", numPosts: 3),
@@ -175,6 +175,11 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         if (indexPath.section == 0) {
             
             cell.dropDownButton.setImage(UIImage(named: "down"), for: .normal)
+            cell.dropDownButton.tag = indexPath.row
+            cell.dropDownButton.removeTarget(self, action: #selector(moveToTop), for: .touchUpInside)
+            cell.dropDownButton.addTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
+            
+            //cell.numPostsButton.addTarget(self, action: #selector(numPostsButtonTapped(forSite: siteName)), for: .touchUpInside)
             
             switch userSitePrefs[indexPath.section][indexPath.row].numPosts {
             case 1:
@@ -203,6 +208,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else {
             cell.dropDownButton.setImage(UIImage(named: "up"), for: .normal)
+            cell.dropDownButton.tag = indexPath.row
+            cell.dropDownButton.removeTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
+            cell.dropDownButton.addTarget(self, action: #selector(moveToTop), for: .touchUpInside)
             cell.numPostsButton.setTitle("", for: .normal)
         }
         
@@ -254,5 +262,46 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         }
         return cell
     }
+    
+    
+    func moveToBottom(sender: UIButton) {
+        
+        let sourceItem = userSitePrefs[0][sender.tag]
+        
+        tableView.beginUpdates()
+        userSitePrefs[0].remove(at: sender.tag)
+        userSitePrefs[1].append(sourceItem)
+        
+        let sourceIndexPath = IndexPath(row: sender.tag, section: 0)
+        let destIndexPath = IndexPath(row: userSitePrefs[1].count-1, section: 1)
+        
+        tableView.moveRow(at: sourceIndexPath, to: destIndexPath)
+        tableView.endUpdates()
+        tableView.reloadData()
+
+        
+    }
+    
+    func moveToTop(sender: UIButton) {
+        
+        let sourceItem = userSitePrefs[1][sender.tag]
+        
+        tableView.beginUpdates()
+        userSitePrefs[1].remove(at: sender.tag)
+        userSitePrefs[0].append(sourceItem)
+       
+        let sourceIndexPath = IndexPath(row: sender.tag, section: 1)
+        let destIndexPath = IndexPath(row: userSitePrefs[0].count-1, section: 0)
+        
+        tableView.moveRow(at: sourceIndexPath, to: destIndexPath)
+        tableView.endUpdates()
+        tableView.reloadData()
+        
+    }
+    
+    func numPostsButtonTapped(forSite siteName: String) {
+        
+    }
+    
 }
 
