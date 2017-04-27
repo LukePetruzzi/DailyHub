@@ -90,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         // Retrieve your Amazon Cognito ID
+        let waitGroup = DispatchGroup()
+        waitGroup.enter()
         credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
             if (task.error != nil) {
                 print("ERROR GETTING ID: " + task.error!.localizedDescription)
@@ -98,12 +100,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // the task result will contain the identity id
                 let cognitoId = task.result!
                 print("Cognito id: \(cognitoId)")
+                
             }
+            waitGroup.leave()
+            waitGroup.notify(queue: .main){
+                if (task.error  == nil){
+                    // create the first time user prefs (put in all the supported sites!
+                    let newSitePrefs = [[SitePref(siteName: "Giphy", numPosts: 1),
+                                         SitePref(siteName: "Buzzfeed", numPosts: 1),
+                                         SitePref(siteName: "Deviant", numPosts: 1),
+                                         SitePref(siteName: "ESPN", numPosts: 1),
+                                         SitePref(siteName: "IGN", numPosts: 1),
+                                         SitePref(siteName: "Imgur", numPosts: 1),
+                                         SitePref(siteName: "Soundcloud", numPosts: 1),
+                                         SitePref(siteName: "Techcrunch", numPosts: 1),
+                                         SitePref(siteName: "Vimeo", numPosts: 1),
+                                         SitePref(siteName: "YouTube", numPosts: 1)], // end of "inFeed" prefs
+                                        [SitePref(siteName: "500px", numPosts: 3),
+                                         SitePref(siteName: "AP", numPosts: 2),
+                                         SitePref(siteName: "BBCNews", numPosts: 5),
+                                         SitePref(siteName: "BBCSport", numPosts: 1),
+                                         SitePref(siteName: "Bloomberg", numPosts: 3),
+                                         SitePref(siteName: "BusinessInsider", numPosts: 1),
+                                         SitePref(siteName: "CNN", numPosts: 1),
+                                         SitePref(siteName: "EntertainmentWeekly", numPosts: 1),
+                                         SitePref(siteName: "Etsy", numPosts: 1),
+                                         SitePref(siteName: "HackerNews", numPosts: 1),
+                                         SitePref(siteName: "MTV", numPosts: 1),
+                                         SitePref(siteName: "NationalGeographic", numPosts: 1),
+                                         SitePref(siteName: "Newsweek", numPosts: 1),
+                                         SitePref(siteName: "NYMag", numPosts: 1),
+                                         SitePref(siteName: "NYTimes", numPosts: 1),
+                                         SitePref(siteName: "Reuters", numPosts: 1),
+                                         SitePref(siteName: "Spotify", numPosts: 1),
+                                         SitePref(siteName: "StackOverflow", numPosts: 1),
+                                         SitePref(siteName: "Time", numPosts: 1),
+                                         SitePref(siteName: "USAToday", numPosts: 1),
+                                         SitePref(siteName: "WashPost", numPosts: 1),
+                                         SitePref(siteName: "WSJ", numPosts: 1)]]
+                    
+                    print("ORIGINAL SITEPREFS: \(newSitePrefs)")
+                    // perform first time setup IF its a new user
+                    CognitoUserManager.sharedInstance.convertSitePrefsToJSONString(newPrefs: newSitePrefs)
+                }
+            }
+            
             return task;
         })
         
-        // perform first time setup IF its a new user
-        CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
+        
+        
     }
     
     func logoutCurrentUser()
