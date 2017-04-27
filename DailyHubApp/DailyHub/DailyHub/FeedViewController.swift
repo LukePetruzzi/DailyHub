@@ -10,10 +10,7 @@ import UIKit
 import Foundation
 import SDWebImage
 
-struct SitePref {
-    var siteName:String
-    var numPosts:Int
-}
+
 
 struct ContentInfo {
     var title:String?

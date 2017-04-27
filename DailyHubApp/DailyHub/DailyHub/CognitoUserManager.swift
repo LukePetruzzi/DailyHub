@@ -27,32 +27,88 @@ class CognitoUserManager
     }
 
     
-    func testDataSet(dataSetName: String)
-    {
-        let dataset = self.syncClient.openOrCreateDataset(dataSetName)
-        
-        dataset.setString("my value", forKey:"myKey")
-        
-        dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
-            
-            if task.isCancelled {
-                // Task cancelled.
-            } else if task.error != nil {
-                // Error while executing task
-            } else {
-                // Task succeeded. The data was saved in the sync store.
-            }
-            return task
-        })
-    }
+
     
     func retrieveUserSitePrefs(){
+        print("ASS")
+    }
+    
+    func convertJSONStringToSitePrefsArray(jsonString: String)
+    {
+        //In production, you usually want to try and cast as the root data structure. Here we are casting as a dictionary. If the root object is an array cast as [AnyObject].
+        if let data = jsonString.data(using: .utf8) {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
+                print("ACTUAL JSON: \(json)")
+                
+                
+                var feedArray = [SitePref]()
+                var output = [[SitePref]]()
+                
+                // need to understand how we are doing it in feedview and itll work
+                for array in json{
+                    for element in array{
+                        let name = element["siteName"] as! String
+                        let num = element["numPosts"] as! Int
+                        
+                        
+                        let pref =
+                    }
+                    output.append(feedArray)
+                    feedArray = [SitePref]()
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func convertSitePrefsToJSONString(newPrefs: [[SitePref]]){
+     
+        
+        // create in-feed array
+        var inFeedArray: Array<String> = []
+        for pref in newPrefs[0]{
+            if let json = pref.toJSON() {
+                inFeedArray.append(json)
+            }
+        }
+        // create not-in-feed array
+        var notInFeedArray: Array<String> = []
+        for pref in newPrefs[1]{
+            if let json = pref.toJSON() {
+                notInFeedArray.append(json)
+            }
+        }
+        
+        let dict:[String:[String]] = ["inFeed":inFeedArray, "notInFeed:":notInFeedArray]
+        
+        // convert to json string
+        do {
+            //Convert to Data
+            let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted)
+            
+            //Convert back to string. Usually only do this for debugging
+            if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+                print("JSON STRING:",JSONString)
+                convertJSONStringToSitePrefsArray(jsonString: JSONString)
+
+            }
+            
+            
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+
         
     }
     
-    
-    func updateUserSitePrefs(newPrefs: Array<Any>)
+    func updateUserSitePrefs(newPrefs: [[SitePref]])
     {
+        
+        
         let dataset = self.syncClient.openOrCreateDataset("userSitePrefs")
         
         // set the value to be the double array of in feed or not in feed prefs
