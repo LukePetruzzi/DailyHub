@@ -89,7 +89,7 @@ class FeedTableContentCell: UITableViewCell {
         
         // descLabel
         // top
-        self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0 - Metrics.ABOVE_OR_BELOW))
         // bottom
         self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.imgView!, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0))
         // height
@@ -98,11 +98,11 @@ class FeedTableContentCell: UITableViewCell {
         
         // imgView
         // top
-        self.contentView.addConstraint(NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.descLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        self.contentView.addConstraint(NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.descLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0 - Metrics.ABOVE_OR_BELOW))
         // bottom
         self.contentView.addConstraint(NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0 - Metrics.ABOVE_OR_BELOW))
         // height
-        self.imgViewHeightConstraint = NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 300 - Metrics.ABOVE_OR_BELOW)
+        self.imgViewHeightConstraint = NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 300 - 2*Metrics.ABOVE_OR_BELOW)
         self.contentView.addConstraint(self.imgViewHeightConstraint)
         
         
