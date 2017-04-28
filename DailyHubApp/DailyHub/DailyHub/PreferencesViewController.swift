@@ -48,9 +48,8 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     
     private var tableView: UITableView!
     
-    var headerView: UIView = UIView()
-    var closeButton: UIButton = UIButton()
-    var checkButton: UIButton = UIButton()
+    var checkView: UIButton = UIButton()
+    var closeView: UIButton = UIButton()
     var numPostView: UIVisualEffectView = UIVisualEffectView()
     var pickerView: UIPickerView = UIPickerView()
     var logoView: UIImageView = UIImageView()
@@ -69,19 +68,14 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.setEditing(true, animated: true)
         tableView.isScrollEnabled = true
         
-        headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 45)
-        headerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
+        checkView.backgroundColor = UIColor(red:0.00, green:1.00, blue:0.60, alpha:1.0)
+        checkView.setImage(UIImage(named: "check"), for: .normal)
+        checkView.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
-        checkButton.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-        checkButton.setImage(UIImage(named: "check"), for: .normal)
-        checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-        headerView.addSubview(checkButton)
-        
-        closeButton.frame = CGRect(x: self.view.frame.size.width - 45, y: 0, width: 45, height: 45)
-        closeButton.setImage(UIImage(named: "close"), for: .normal)
-        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        headerView.addSubview(closeButton)
-        
+        closeView.backgroundColor = UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0)
+        closeView.setImage(UIImage(named: "close"), for: .normal)
+        closeView.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+
         numPostView.frame = self.view.frame;
         let blurEffect = UIBlurEffect(style: .dark)
         numPostView.effect = blurEffect
@@ -102,16 +96,17 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         logoView.contentMode = .scaleAspectFit
         numPostView.addSubview(logoView)
 
+        self.view.addSubview(checkView)
+        self.view.addSubview(closeView)
         self.view.addSubview(tableView)
-        self.view.addSubview(headerView)
         self.view.addSubview(numPostView)
         
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 45)
+        checkView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width/2, height: 45)
+        closeView.frame = CGRect(x: self.view.frame.size.width/2, y: 0, width: self.view.frame.size.width/2, height: 45)
         tableView.frame = CGRect(x: 0, y: 45, width: self.view.frame.width, height: self.view.frame.height - 45)
     }
     
@@ -205,30 +200,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.numPostsButton.tag = indexPath.row
             cell.numPostsButton.addTarget(self, action: #selector(numPostsButtonTapped), for: .touchUpInside)
             
-            switch userSitePrefs[indexPath.section][indexPath.row].numPosts {
-            case 1:
-                cell.numPostsButton.setTitle("\u{2460}", for: .normal)
-            case 2:
-                cell.numPostsButton.setTitle("\u{2461}", for: .normal)
-            case 3:
-                cell.numPostsButton.setTitle("\u{2462}", for: .normal)
-            case 4:
-                cell.numPostsButton.setTitle("\u{2463}", for: .normal)
-            case 5:
-                cell.numPostsButton.setTitle("\u{2464}", for: .normal)
-            case 6:
-                cell.numPostsButton.setTitle("\u{2465}", for: .normal)
-            case 7:
-                cell.numPostsButton.setTitle("\u{2466}", for: .normal)
-            case 8:
-                cell.numPostsButton.setTitle("\u{2467}", for: .normal)
-            case 9:
-                cell.numPostsButton.setTitle("\u{2468}", for: .normal)
-            case 10:
-                cell.numPostsButton.setTitle("\u{2469}", for: .normal)
-            default:
-                break
-            }
+            cell.numPostsButton.setTitle(String(userSitePrefs[indexPath.section][indexPath.row].numPosts), for: .normal)
         }
         else {
             cell.dropDownButton.setImage(UIImage(named: "up"), for: .normal)
