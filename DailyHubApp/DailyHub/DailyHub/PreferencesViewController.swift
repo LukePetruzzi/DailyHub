@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PreferencesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class PreferencesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     public var sections = ["In Feed", "Not In Feed"]
     public var Array  = [[#imageLiteral(resourceName: "YouTube"), #imageLiteral(resourceName: "AP"), #imageLiteral(resourceName: "BBCNews"), #imageLiteral(resourceName: "BBCSport"), #imageLiteral(resourceName: "Bloomberg"), #imageLiteral(resourceName: "BusinessInsider"), #imageLiteral(resourceName: "Buzzfeed"), #imageLiteral(resourceName: "CNN"), #imageLiteral(resourceName: "Deviant"), #imageLiteral(resourceName: "EntertainmentWeekly"), #imageLiteral(resourceName: "ESPN"), #imageLiteral(resourceName: "Etsy"), #imageLiteral(resourceName: "Giphy"), #imageLiteral(resourceName: "HackerNews"), #imageLiteral(resourceName: "IGN"), #imageLiteral(resourceName: "Imgur"), #imageLiteral(resourceName: "MTV"), #imageLiteral(resourceName: "NationalGeographic"), #imageLiteral(resourceName: "Newsweek"), #imageLiteral(resourceName: "NYMag"),  #imageLiteral(resourceName: "NYTimes"), #imageLiteral(resourceName: "Reuters"), #imageLiteral(resourceName: "Soundcloud"),#imageLiteral(resourceName: "Spotify"), #imageLiteral(resourceName: "StackOverflow"), #imageLiteral(resourceName: "Techcrunch"), #imageLiteral(resourceName: "Time"), #imageLiteral(resourceName: "USAToday"), #imageLiteral(resourceName: "Vimeo"), #imageLiteral(resourceName: "WashPost"), #imageLiteral(resourceName: "WSJ")],[]]
     
@@ -51,6 +51,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     var headerView: UIView = UIView()
     var closeButton: UIButton = UIButton()
     var checkButton: UIButton = UIButton()
+    var numPostView: UIVisualEffectView = UIVisualEffectView()
+    var pickerView: UIPickerView = UIPickerView()
+    var logoView: UIImageView = UIImageView()
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -78,9 +81,30 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         closeButton.setImage(UIImage(named: "close"), for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         headerView.addSubview(closeButton)
-                    
+        
+        numPostView.frame = self.view.frame;
+        let blurEffect = UIBlurEffect(style: .dark)
+        numPostView.effect = blurEffect
+        numPostView.isHidden = true
+        numPostView.tag = 0
+        
+        pickerView.frame = CGRect(x: self.view.bounds.width/2 - 40, y: self.view.bounds.height/2 - 100, width: 80, height: 200)
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        numPostView.addSubview(pickerView)
+        
+        let closePickerButton = UIButton(frame: CGRect(x: self.view.bounds.width/2 - 25, y: self.view.bounds.height/2 + 100, width: 50, height: 50))
+        closePickerButton.setImage(UIImage(named: "checkCircleWhite"), for: .normal)
+        closePickerButton.addTarget(self, action: #selector(closePickerTapped), for: .touchUpInside)
+        numPostView.addSubview(closePickerButton)
+        
+        logoView.frame = CGRect(x: 100, y: self.view.bounds.height/2 - 150, width: self.view.bounds.width - 200, height: 50)
+        logoView.contentMode = .scaleAspectFit
+        numPostView.addSubview(logoView)
+
         self.view.addSubview(tableView)
         self.view.addSubview(headerView)
+        self.view.addSubview(numPostView)
         
     }
     
@@ -96,7 +120,14 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func checkButtonTapped() {
-
+        
+    }
+    
+    func closePickerTapped() {
+        
+        userSitePrefs[0][numPostView.tag].numPosts = pickerView.selectedRow(inComponent: 0) + 1
+        tableView.reloadData()
+        self.view.sendSubview(toBack: numPostView)
     }
     
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -123,12 +154,6 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             userSitePrefs[sourceIndexPath.section].remove(at: sourceIndexPath.row )
             userSitePrefs[destinationIndexPath.section].insert(sourceItem, at: destinationIndexPath.row)
             tableView.reloadData()
-            
-//            let sourceItem = Array[sourceIndexPath.section][sourceIndexPath.row]
-//            Array[sourceIndexPath.section].remove(at: sourceIndexPath.row )
-//            Array[destinationIndexPath.section].insert(sourceItem, at: destinationIndexPath.row)
-//            tableView.reloadData()
-//            print ("HET")
         }
     }
     
@@ -137,8 +162,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("Num: \(indexPath.row)")
-//        print("Value: \(Array[indexPath.row])")
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -174,12 +198,12 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         
         if (indexPath.section == 0) {
             
-            cell.dropDownButton.setImage(UIImage(named: "down"), for: .normal)
+            cell.dropDownButton.setImage(UIImage(named: "close"), for: .normal)
             cell.dropDownButton.tag = indexPath.row
             cell.dropDownButton.removeTarget(self, action: #selector(moveToTop), for: .touchUpInside)
             cell.dropDownButton.addTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
-            
-            //cell.numPostsButton.addTarget(self, action: #selector(numPostsButtonTapped(forSite: siteName)), for: .touchUpInside)
+            cell.numPostsButton.tag = indexPath.row
+            cell.numPostsButton.addTarget(self, action: #selector(numPostsButtonTapped), for: .touchUpInside)
             
             switch userSitePrefs[indexPath.section][indexPath.row].numPosts {
             case 1:
@@ -214,44 +238,6 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.numPostsButton.setTitle("", for: .normal)
         }
         
-//        let frame = tableView.rectForRow(at: indexPath)
-        
-//        let widthRatio = 0.6 * frame.size.width / ImageA.size.width
-//        let heightRatio = 0.8 * frame.size.height / ImageA.size.height
-//
-//        var newSize: CGSize
-//        if (widthRatio > heightRatio) {
-//            newSize = CGSize(width: ImageA.size.width * heightRatio, height: ImageA.size.height * heightRatio)
-//        } else {
-//            newSize = CGSize(width: ImageA.size.width * widthRatio, height: ImageA.size.height * widthRatio)
-//        }
-//        // This is the rect that we've calculated out and this is what is actually used below
-//        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-//        
-//        // Actually do the resizing to the rect using the ImageContext stuff
-//        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-//        UIGraphicsGetCurrentContext()?.interpolationQuality = .high
-//        ImageA.draw(in: rect)
-//        
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-//        UIGraphicsEndImageContext()
-        
-        
-        
-        
-        
-        
-        // UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        // ImageA.draw(in: rect)
-        // let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        // UIGraphicsEndImageContext()
-        //UIImage(data: #imageLiteral(resourceName: "YouTube"), scale: 13)
-        //let scaledIconD = UIImage(#imageLiteral(resourceName: "YouTube"), scale: 13, orientation: (#imageLiteral(resourceName: "YouTube").imageOrientation))
-        
-        
-//        cell.imageView?.image = newImage
-//        //different image
         if(indexPath.section == 0){
             cell.backgroundColor = UIColor.white
             cell.imageView?.alpha = 1
@@ -268,16 +254,23 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         
         let sourceItem = userSitePrefs[0][sender.tag]
         
+        CATransaction.begin()
+        
+        CATransaction.setCompletionBlock({
+            self.tableView.reloadData()
+        })
+        
         tableView.beginUpdates()
         userSitePrefs[0].remove(at: sender.tag)
         userSitePrefs[1].append(sourceItem)
         
         let sourceIndexPath = IndexPath(row: sender.tag, section: 0)
         let destIndexPath = IndexPath(row: userSitePrefs[1].count-1, section: 1)
-        
+
         tableView.moveRow(at: sourceIndexPath, to: destIndexPath)
         tableView.endUpdates()
-        tableView.reloadData()
+       
+        CATransaction.commit()
 
         
     }
@@ -285,6 +278,12 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     func moveToTop(sender: UIButton) {
         
         let sourceItem = userSitePrefs[1][sender.tag]
+        
+        CATransaction.begin()
+        
+        CATransaction.setCompletionBlock({
+            self.tableView.reloadData()
+        })
         
         tableView.beginUpdates()
         userSitePrefs[1].remove(at: sender.tag)
@@ -295,13 +294,35 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         
         tableView.moveRow(at: sourceIndexPath, to: destIndexPath)
         tableView.endUpdates()
-        tableView.reloadData()
+        
+        CATransaction.commit()
         
     }
     
-    func numPostsButtonTapped(forSite siteName: String) {
-        
+    func numPostsButtonTapped(sender: UIButton) {
+        numPostView.isHidden = false
+        numPostView.tag = sender.tag
+        let imageString = userSitePrefs[0][sender.tag].siteName
+        logoView.image = UIImage(named: imageString)
+        pickerView.selectRow(userSitePrefs[0][sender.tag].numPosts-1, inComponent: 0, animated: false)
+        self.view.bringSubview(toFront: numPostView)
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let value = row + 1
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.center
+        let str = NSAttributedString(string: String(value), attributes: [NSForegroundColorAttributeName: UIColor.white, NSParagraphStyleAttributeName: style])
+        return str
+    }
+
 }
 

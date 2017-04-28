@@ -12,8 +12,8 @@ import WebKit
 class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegate {
     
     var webView: WKWebView = WKWebView()
-    var headerView: UIView = UIView()
-    var footerView: UIView = UIView()
+    var headerView: UIVisualEffectView = UIVisualEffectView()
+    var footerView: UIVisualEffectView = UIVisualEffectView()
     var closeButton: UIButton = UIButton()
     var refreshButton: UIButton = UIButton()
     var upButton: UIButton = UIButton()
@@ -26,6 +26,10 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
     
     var urlStringToLoad: String = ""
     var logoToShow: String = ""
+    var masterContent = [String:[ContentInfo]]()
+    var userSitePrefs = [SitePref]()
+    var currSite: Int = 0
+    var currPostForSite: Int = 0
     
     private var lastContentOffset: CGFloat = 0
     
@@ -41,10 +45,14 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         webView.scrollView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
         webView.scrollView.layer.masksToBounds = false
         
-        headerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
-        headerView.tintColor = UIColor.gray
-        footerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
-        footerView.tintColor = UIColor.gray
+//        headerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
+//        headerView.tintColor = UIColor.gray
+//        footerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
+//        footerView.tintColor = UIColor.gray
+        
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        headerView.effect = blurEffect
+        footerView.effect = blurEffect
         
         closeButton.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
         closeButton.setImage(UIImage(named: "close"), for: .normal)
@@ -68,9 +76,8 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         headerView.addSubview(downButton)
         
         logoButton.frame = CGRect(x: 8, y: 4, width: 100, height: 37)
-        let logoImage = logoToShow + ".png"
         logoButton.imageView?.contentMode = .scaleAspectFit
-        logoButton.setImage(UIImage(named: logoImage), for: .normal)
+        logoButton.setImage(UIImage(named: logoToShow), for: .normal)
         logoButton.addTarget(self, action: #selector(logoButtonTapped), for: .touchUpInside)
         footerView.addSubview(logoButton)
         
@@ -91,8 +98,9 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         loadingIndicator.frame = CGRect(x: self.view.frame.size.width - 90, y: 0, width: 45, height: 45)
         headerView.addSubview(loadingIndicator)
         
+        configureUpDownButtons()
+        
         let url = URL(string: urlStringToLoad)!
-//        webView.allowsBackForwardNavigationGestures = false
         webView.load(URLRequest(url: url))
         
 //        headerView.bringSubview(toFront: self.view)
@@ -135,10 +143,84 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
     
     func upButtonTapped() {
         
+        if (currSite > 0) {
+            var newSiteToLoad: String = ""
+            if (currPostForSite > 0) {
+                currPostForSite -= 1
+            }
+            else {
+                currSite = currSite - 1
+                logoToShow = userSitePrefs[currSite].siteName
+                currPostForSite = (masterContent[logoToShow]?.count)! - 1
+            }
+            newSiteToLoad = (masterContent[logoToShow]?[currPostForSite].url)!
+            let url = URL(string: newSiteToLoad)
+            webView.load(URLRequest(url: url!))
+            logoButton.setImage(UIImage(named: logoToShow), for: .normal)
+            
+            backButton.isEnabled = false
+            forwardButton.isEnabled = false
+        }
+            
+        else if currPostForSite > 0 {
+            currPostForSite -= 1
+            let newSiteToLoad = (masterContent[logoToShow]?[currPostForSite].url)!
+            let url = URL(string: newSiteToLoad)
+            webView.load(URLRequest(url: url!))
+            
+            backButton.isEnabled = false
+            forwardButton.isEnabled = false
+        }
+        configureUpDownButtons()
     }
     
     func downButtonTapped() {
         
+        if (currSite < userSitePrefs.count - 1) {
+            var newSiteToLoad: String = ""
+            if (currPostForSite < (masterContent[logoToShow]?.count)! - 1) {
+                currPostForSite += 1
+            }
+            else {
+                currSite = currSite + 1
+                logoToShow = userSitePrefs[currSite].siteName
+                currPostForSite = 0
+            }
+            newSiteToLoad = (masterContent[logoToShow]?[currPostForSite].url)!
+            let url = URL(string: newSiteToLoad)
+            webView.load(URLRequest(url: url!))
+            logoButton.setImage(UIImage(named: logoToShow), for: .normal)
+            
+            backButton.isEnabled = false
+            forwardButton.isEnabled = false
+        }
+            
+        else if (currPostForSite < (masterContent[logoToShow]?.count)! - 1) {
+            currPostForSite += 1
+            let newSiteToLoad = (masterContent[logoToShow]?[currPostForSite].url)!
+            let url = URL(string: newSiteToLoad)
+            webView.load(URLRequest(url: url!))
+            
+            backButton.isEnabled = false
+            forwardButton.isEnabled = false
+        }
+        configureUpDownButtons()
+    }
+    
+    func configureUpDownButtons() {
+        if (currSite == 0 && currPostForSite == 0) {
+            upButton.isEnabled = false
+        }
+        else {
+            upButton.isEnabled = true
+        }
+        
+        if (currSite == userSitePrefs.count - 1 && currPostForSite == userSitePrefs[userSitePrefs.count - 1].numPosts - 1) {
+            downButton.isEnabled = false
+        }
+        else {
+            downButton.isEnabled = true
+        }
     }
     
     func backButtonTapped() {
@@ -152,24 +234,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         if (webView.canGoForward) {
             webView.goForward()
         }
-        configureBackForwardButtons()
-    }
-    
-    func logoButtonTapped() {
-        
-    }
-    
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//        refreshButton.isHidden = true
-        loadingIndicator.startAnimating()
-        configureBackForwardButtons()
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        loadingIndicator.stopAnimating()
-//        refreshButton.isHidden = false
         configureBackForwardButtons()
     }
     
@@ -189,24 +253,19 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         }
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print("last \(lastContentOffset)")
-//        print("new \(scrollView.contentOffset.y)")
-//        if (self.lastContentOffset > scrollView.contentOffset.y) {
-//            self.headerView.isHidden = true
-//            self.footerView.isHidden = true
-//        }
-//        else if (self.lastContentOffset < scrollView.contentOffset.y) {
-//            self.headerView.isHidden = false
-//            self.footerView.isHidden = false
-//        }
-//        
-//        // update the new position acquired
-//        self.lastContentOffset = scrollView.contentOffset.y
-//    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-       
+    func logoButtonTapped() {
         
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        loadingIndicator.startAnimating()
+        configureBackForwardButtons()
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        loadingIndicator.stopAnimating()
+        configureBackForwardButtons()
     }
 }
