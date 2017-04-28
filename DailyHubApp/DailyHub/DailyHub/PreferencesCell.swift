@@ -41,9 +41,9 @@ class PreferencesCell: UITableViewCell
 //        logoImageView.frame = CGRect(x: 50, y: 5, width: 100, height: 40)
         logoImageView.contentMode = .scaleAspectFit
         
-        numPostsButton.frame = CGRect(x: 155, y: 0, width: self.contentView.frame.size.width-25, height: 50)
+        numPostsButton.frame = CGRect(x: self.contentView.frame.size.width-30, y: 0, width: 30, height: 50)
         numPostsButton.setTitleColor(UIColor.black, for: .normal)
-        numPostsButton.titleLabel?.font = UIFont(name: "Avenir", size: 16)
+        numPostsButton.titleLabel?.font = UIFont(name: "Avenir", size: 13)
         
         self.contentView.addSubview(dropDownButton)
         self.contentView.addSubview(logoImageView)

@@ -277,6 +277,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let webViewController = CustomWebView()
         webViewController.urlStringToLoad = urlString!
         webViewController.logoToShow = sect
+        webViewController.masterContent = masterContent
+        webViewController.userSitePrefs = userSitePrefs
+        webViewController.currSite = indexPath.section
+        webViewController.currPostForSite = indexPath.row
 
         self.tabBarController?.present(webViewController, animated: true, completion: nil)
     }    
