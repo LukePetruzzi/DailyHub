@@ -12,38 +12,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     public var sections = ["In Feed", "Not In Feed"]
     public var Array  = [[#imageLiteral(resourceName: "YouTube"), #imageLiteral(resourceName: "AP"), #imageLiteral(resourceName: "BBCNews"), #imageLiteral(resourceName: "BBCSport"), #imageLiteral(resourceName: "Bloomberg"), #imageLiteral(resourceName: "BusinessInsider"), #imageLiteral(resourceName: "Buzzfeed"), #imageLiteral(resourceName: "CNN"), #imageLiteral(resourceName: "Deviant"), #imageLiteral(resourceName: "EntertainmentWeekly"), #imageLiteral(resourceName: "ESPN"), #imageLiteral(resourceName: "Etsy"), #imageLiteral(resourceName: "Giphy"), #imageLiteral(resourceName: "HackerNews"), #imageLiteral(resourceName: "IGN"), #imageLiteral(resourceName: "Imgur"), #imageLiteral(resourceName: "MTV"), #imageLiteral(resourceName: "NationalGeographic"), #imageLiteral(resourceName: "Newsweek"), #imageLiteral(resourceName: "NYMag"),  #imageLiteral(resourceName: "NYTimes"), #imageLiteral(resourceName: "Reuters"), #imageLiteral(resourceName: "Soundcloud"),#imageLiteral(resourceName: "Spotify"), #imageLiteral(resourceName: "StackOverflow"), #imageLiteral(resourceName: "Techcrunch"), #imageLiteral(resourceName: "Time"), #imageLiteral(resourceName: "USAToday"), #imageLiteral(resourceName: "Vimeo"), #imageLiteral(resourceName: "WashPost"), #imageLiteral(resourceName: "WSJ")],[]]
     
-    var userSitePrefs = [[SitePref(siteName: "500px", numPosts: 3),
-                         SitePref(siteName: "AP", numPosts: 2),
-                         SitePref(siteName: "BBCNews", numPosts: 5),
-                         SitePref(siteName: "BBCSport", numPosts: 1),
-                         SitePref(siteName: "Bloomberg", numPosts: 3),
-                         SitePref(siteName: "BusinessInsider", numPosts: 1),
-                         SitePref(siteName: "Buzzfeed", numPosts: 1),
-                         SitePref(siteName: "CNN", numPosts: 1),
-                         SitePref(siteName: "Deviant", numPosts: 1),
-                         SitePref(siteName: "EntertainmentWeekly", numPosts: 1),
-                         SitePref(siteName: "ESPN", numPosts: 1),
-                         SitePref(siteName: "Etsy", numPosts: 1),
-                         SitePref(siteName: "Giphy", numPosts: 1),
-                         SitePref(siteName: "HackerNews", numPosts: 1),
-                         SitePref(siteName: "IGN", numPosts: 1),
-                         SitePref(siteName: "Imgur", numPosts: 1),
-                         SitePref(siteName: "MTV", numPosts: 1),
-                         SitePref(siteName: "NationalGeographic", numPosts: 1),
-                         SitePref(siteName: "Newsweek", numPosts: 1),
-                         SitePref(siteName: "NYMag", numPosts: 1),
-                         SitePref(siteName: "NYTimes", numPosts: 1),
-                         SitePref(siteName: "Reuters", numPosts: 1),
-                         SitePref(siteName: "Soundcloud", numPosts: 1),
-                         SitePref(siteName: "Spotify", numPosts: 1),
-                         SitePref(siteName: "StackOverflow", numPosts: 1),
-                         SitePref(siteName: "Techcrunch", numPosts: 1),
-                         SitePref(siteName: "Time", numPosts: 1),
-                         SitePref(siteName: "USAToday", numPosts: 1),
-                         SitePref(siteName: "Vimeo", numPosts: 1),
-                         SitePref(siteName: "WashPost", numPosts: 1),
-                         SitePref(siteName: "WSJ", numPosts: 1),
-                         SitePref(siteName: "YouTube", numPosts: 1)], []]
+    var userSitePrefs:[Array<SitePref>] = []
 
     
     private var tableView: UITableView!
@@ -60,6 +29,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // load the user preferences right when view loads
+        userSitePrefs = CognitoUserManager.sharedInstance.retrieveUserSitePrefs(feedNumber: 0)!
         
         tableView = UITableView()
         tableView.dataSource = self
@@ -101,6 +73,8 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         self.view.addSubview(tableView)
         self.view.addSubview(numPostView)
         
+        
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -115,7 +89,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func checkButtonTapped() {
-        
+        CognitoUserManager.sharedInstance.updateUserSitePrefs(newPrefs: userSitePrefs)
     }
     
     func closePickerTapped() {
