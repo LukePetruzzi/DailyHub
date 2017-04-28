@@ -90,6 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         // Retrieve your Amazon Cognito ID
+        let waitGroup = DispatchGroup()
+        waitGroup.enter()
         credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
             if (task.error != nil) {
                 print("ERROR GETTING ID: " + task.error!.localizedDescription)
@@ -98,12 +100,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // the task result will contain the identity id
                 let cognitoId = task.result!
                 print("Cognito id: \(cognitoId)")
+                
             }
+            waitGroup.leave()
+            waitGroup.notify(queue: .main){
+                if (task.error  == nil){
+                    // perform first time setup IF its a new user
+                    CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
+                }
+            }
+            
             return task;
         })
-        
-        // perform first time setup IF its a new user
-        CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
     }
     
     func logoutCurrentUser()
