@@ -40,38 +40,39 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var masterContent = [String:[ContentInfo]]()
 
-    var userSitePrefs = [SitePref(siteName: "500px", numPosts: 3),
-                         SitePref(siteName: "AP", numPosts: 2),
-                        SitePref(siteName: "BBCNews", numPosts: 5),
-                        SitePref(siteName: "BBCSport", numPosts: 1),
-                        SitePref(siteName: "Bloomberg", numPosts: 3),
-                        SitePref(siteName: "BusinessInsider", numPosts: 1),
-                        SitePref(siteName: "Buzzfeed", numPosts: 1),
-                        SitePref(siteName: "CNN", numPosts: 1),
-                        SitePref(siteName: "Deviant", numPosts: 1),
-                        SitePref(siteName: "EntertainmentWeekly", numPosts: 1),
-                        SitePref(siteName: "ESPN", numPosts: 1),
-                        SitePref(siteName: "Etsy", numPosts: 1),
-                        SitePref(siteName: "Giphy", numPosts: 1),
-                        SitePref(siteName: "HackerNews", numPosts: 1),
-                        SitePref(siteName: "IGN", numPosts: 1),
-                        SitePref(siteName: "Imgur", numPosts: 1),
-                        SitePref(siteName: "MTV", numPosts: 1),
-                        SitePref(siteName: "NationalGeographic", numPosts: 1),
-                        SitePref(siteName: "Newsweek", numPosts: 1),
-                        SitePref(siteName: "NYMag", numPosts: 1),
-                        SitePref(siteName: "NYTimes", numPosts: 1),
-                        SitePref(siteName: "Reuters", numPosts: 1),
-                        SitePref(siteName: "Soundcloud", numPosts: 1),
-                        SitePref(siteName: "Spotify", numPosts: 1),
-                        SitePref(siteName: "StackOverflow", numPosts: 1),
-                        SitePref(siteName: "Techcrunch", numPosts: 1),
-                        SitePref(siteName: "Time", numPosts: 1),
-                        SitePref(siteName: "USAToday", numPosts: 1),
-                        SitePref(siteName: "Vimeo", numPosts: 1),
-                        SitePref(siteName: "WashPost", numPosts: 1),
-                        SitePref(siteName: "WSJ", numPosts: 1),
-                        SitePref(siteName: "YouTube", numPosts: 1)]
+//    var userSitePrefs = [SitePref(siteName: "500px", numPosts: 3),
+//                         SitePref(siteName: "AP", numPosts: 2),
+//                        SitePref(siteName: "BBCNews", numPosts: 5),
+//                        SitePref(siteName: "BBCSport", numPosts: 1),
+//                        SitePref(siteName: "Bloomberg", numPosts: 3),
+//                        SitePref(siteName: "BusinessInsider", numPosts: 1),
+//                        SitePref(siteName: "Buzzfeed", numPosts: 1),
+//                        SitePref(siteName: "CNN", numPosts: 1),
+//                        SitePref(siteName: "Deviant", numPosts: 1),
+//                        SitePref(siteName: "EntertainmentWeekly", numPosts: 1),
+//                        SitePref(siteName: "ESPN", numPosts: 1),
+//                        SitePref(siteName: "Etsy", numPosts: 1),
+//                        SitePref(siteName: "Giphy", numPosts: 1),
+//                        SitePref(siteName: "HackerNews", numPosts: 1),
+//                        SitePref(siteName: "IGN", numPosts: 1),
+//                        SitePref(siteName: "Imgur", numPosts: 1),
+//                        SitePref(siteName: "MTV", numPosts: 1),
+//                        SitePref(siteName: "NationalGeographic", numPosts: 1),
+//                        SitePref(siteName: "Newsweek", numPosts: 1),
+//                        SitePref(siteName: "NYMag", numPosts: 1),
+//                        SitePref(siteName: "NYTimes", numPosts: 1),
+//                        SitePref(siteName: "Reuters", numPosts: 1),
+//                        SitePref(siteName: "Soundcloud", numPosts: 1),
+//                        SitePref(siteName: "Spotify", numPosts: 1),
+//                        SitePref(siteName: "StackOverflow", numPosts: 1),
+//                        SitePref(siteName: "Techcrunch", numPosts: 1),
+//                        SitePref(siteName: "Time", numPosts: 1),
+//                        SitePref(siteName: "USAToday", numPosts: 1),
+//                        SitePref(siteName: "Vimeo", numPosts: 1),
+//                        SitePref(siteName: "WashPost", numPosts: 1),
+//                        SitePref(siteName: "WSJ", numPosts: 1),
+//                        SitePref(siteName: "YouTube", numPosts: 1)]
+    var userSitePrefs:[SitePref] = [SitePref]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,49 +146,81 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
  
     func refreshTable() {
-        Database.getDatabaseInfo(completionHandler: {(data, error) in
-            if let d = data {
-                
-                let json = d.data(using: .utf8)
-                
-                do {
-                    let content = try JSONSerialization.jsonObject(with: json!, options: []) as! [String: NSArray]
-                    for item in self.userSitePrefs {
-                        // gets the content for the number rank needed
-                        
-                        var currentResults: [ContentInfo] = []
-                        for i in 0..<item.numPosts {
-                        
+        
+//        let waitGroup = DispatchGroup()
+//        waitGroup.enter()
+//        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, relationship_status"]).start(completionHandler: {(connection, result, error) -> Void in
+//            if ((error) != nil)
+//            {
+//                print("Error: \(error)")
+//            }
+//            else{
+//                let res = result as! [String:AnyObject]
+//                userId = res["id"] as! String?
+//                userName = res["name"] as! String?
+//            }
+//            
+//            // leave dispatch group when finished
+//            waitGroup.leave()
+//        })
+//        waitGroup.notify(queue: .main) {
+//            // set name and ID
+//            if (userId != nil) {
+//                let url =  URL(string: "http://graph.facebook.com/\(userId!)/picture?type=large")
+//                self.profileImageView.sd_setImage(with: url)
+//            }
+//            if (userName != nil) {
+//                self.profileNameLabel.text = userName!
+//            }
+//        }
+        
+        userSitePrefs = (CognitoUserManager.sharedInstance.retrieveUserSitePrefs(feedNumber: 0)?[0])!
+        if userSitePrefs.count > 0
+        {
+            Database.getDatabaseInfo(completionHandler: {(data, error) in
+                if let d = data {
+                    
+                    let json = d.data(using: .utf8)
+                    
+                    do {
+                        let content = try JSONSerialization.jsonObject(with: json!, options: []) as! [String: NSArray]
+                        for item in self.userSitePrefs {
+                            // gets the content for the number rank needed
                             
-                            let currentSiteContentDict = content[item.siteName]?[i] as AnyObject
-                            let title = currentSiteContentDict["title"] as? String
-                            let author = currentSiteContentDict["author"] as? String
-                            let url = currentSiteContentDict["url"] as? String
-                            let thumbnail = currentSiteContentDict["thumbnail"] as? String
-                            let description = currentSiteContentDict["description"] as? String
-                            let siteInfo = ContentInfo(title: title?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                       author: author?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                       url: url?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                       thumbnail: thumbnail?.trimmingCharacters(in: .whitespacesAndNewlines),
-                                                       description: description?.trimmingCharacters(in: .whitespacesAndNewlines))
-                            currentResults.append(siteInfo)
-                            // add the site info to the array of content
+                            var currentResults: [ContentInfo] = []
+                            for i in 0..<item.numPosts {
                             
+                                
+                                let currentSiteContentDict = content[item.siteName]?[i] as AnyObject
+                                let title = currentSiteContentDict["title"] as? String
+                                let author = currentSiteContentDict["author"] as? String
+                                let url = currentSiteContentDict["url"] as? String
+                                let thumbnail = currentSiteContentDict["thumbnail"] as? String
+                                let description = currentSiteContentDict["description"] as? String
+                                let siteInfo = ContentInfo(title: title?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                           author: author?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                           url: url?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                           thumbnail: thumbnail?.trimmingCharacters(in: .whitespacesAndNewlines),
+                                                           description: description?.trimmingCharacters(in: .whitespacesAndNewlines))
+                                currentResults.append(siteInfo)
+                                // add the site info to the array of content
+                                
+                            }
+                            self.masterContent[item.siteName] = currentResults
                         }
-                        self.masterContent[item.siteName] = currentResults
                     }
-                }
-                catch {
-                    print("Error deserializing JSON: \(error)")
-                }
+                    catch {
+                        print("Error deserializing JSON: \(error)")
+                    }
 
-                DispatchQueue.main.async {
-                    self.tableView?.reloadData()
-                    self.loadingOverlay.removeFromSuperview()
+                    DispatchQueue.main.async {
+                        self.tableView?.reloadData()
+                        self.loadingOverlay.removeFromSuperview()
+                    }
+                    self.refreshControl.endRefreshing()
                 }
-                self.refreshControl.endRefreshing()
-            }
-        })
+            })
+        }
     }
     
     func rankingButtonTappedTapped() {
