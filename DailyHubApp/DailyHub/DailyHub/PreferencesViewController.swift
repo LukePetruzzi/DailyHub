@@ -69,11 +69,11 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.isScrollEnabled = true
         
         checkView.backgroundColor = UIColor(red:0.00, green:1.00, blue:0.60, alpha:1.0)
-        checkView.setImage(UIImage(named: "check"), for: .normal)
+        checkView.setImage(UIImage(named: "whiteCheck"), for: .normal)
         checkView.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
         closeView.backgroundColor = UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0)
-        closeView.setImage(UIImage(named: "close"), for: .normal)
+        closeView.setImage(UIImage(named: "whiteClose"), for: .normal)
         closeView.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         numPostView.frame = self.view.frame;
@@ -197,9 +197,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.dropDownButton.tag = indexPath.row
             cell.dropDownButton.removeTarget(self, action: #selector(moveToTop), for: .touchUpInside)
             cell.dropDownButton.addTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
+            cell.numPostsButton.isHidden = false
             cell.numPostsButton.tag = indexPath.row
             cell.numPostsButton.addTarget(self, action: #selector(numPostsButtonTapped), for: .touchUpInside)
-            
             cell.numPostsButton.setTitle(String(userSitePrefs[indexPath.section][indexPath.row].numPosts), for: .normal)
         }
         else {
@@ -207,7 +207,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.dropDownButton.tag = indexPath.row
             cell.dropDownButton.removeTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
             cell.dropDownButton.addTarget(self, action: #selector(moveToTop), for: .touchUpInside)
-            cell.numPostsButton.setTitle("", for: .normal)
+            cell.numPostsButton.isHidden = true
         }
         
         if(indexPath.section == 0){
