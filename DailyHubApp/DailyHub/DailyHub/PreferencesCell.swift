@@ -13,7 +13,7 @@ import UIKit
 class PreferencesCell: UITableViewCell
 {
     var dropDownButton:UIButton = UIButton()
-    var logoImageView:UIImageView = UIImageView()
+    var logoImageView:UIButton = UIButton()
     var numPostsButton:UIButton = UIButton()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -39,7 +39,7 @@ class PreferencesCell: UITableViewCell
         dropDownButton.frame = CGRect(x: 10, y: 15, width: 20, height: 20)
         
 //        logoImageView.frame = CGRect(x: 50, y: 5, width: 100, height: 40)
-        logoImageView.contentMode = .scaleAspectFit
+//        logoImageView.imageView?.contentMode = .scaleAspectFit
         
         numPostsButton.frame = CGRect(x: self.contentView.frame.size.width-35, y: 15/2, width: 35, height: 35)
         numPostsButton.setTitleColor(UIColor.black, for: .normal)

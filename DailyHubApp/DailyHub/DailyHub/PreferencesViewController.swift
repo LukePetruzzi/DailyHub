@@ -10,10 +10,10 @@ import UIKit
 
 class PreferencesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     public var sections = ["In Feed", "Not In Feed"]
-    public var Array  = [[#imageLiteral(resourceName: "YouTube"), #imageLiteral(resourceName: "AP"), #imageLiteral(resourceName: "BBCNews"), #imageLiteral(resourceName: "BBCSport"), #imageLiteral(resourceName: "Bloomberg"), #imageLiteral(resourceName: "BusinessInsider"), #imageLiteral(resourceName: "Buzzfeed"), #imageLiteral(resourceName: "CNN"), #imageLiteral(resourceName: "Deviant"), #imageLiteral(resourceName: "EntertainmentWeekly"), #imageLiteral(resourceName: "ESPN"), #imageLiteral(resourceName: "Etsy"), #imageLiteral(resourceName: "Giphy"), #imageLiteral(resourceName: "HackerNews"), #imageLiteral(resourceName: "IGN"), #imageLiteral(resourceName: "Imgur"), #imageLiteral(resourceName: "MTV"), #imageLiteral(resourceName: "NationalGeographic"), #imageLiteral(resourceName: "Newsweek"), #imageLiteral(resourceName: "NYMag"),  #imageLiteral(resourceName: "NYTimes"), #imageLiteral(resourceName: "Reuters"), #imageLiteral(resourceName: "Soundcloud"),#imageLiteral(resourceName: "Spotify"), #imageLiteral(resourceName: "StackOverflow"), #imageLiteral(resourceName: "Techcrunch"), #imageLiteral(resourceName: "Time"), #imageLiteral(resourceName: "USAToday"), #imageLiteral(resourceName: "Vimeo"), #imageLiteral(resourceName: "WashPost"), #imageLiteral(resourceName: "WSJ")],[]]
-    
+
     var userSitePrefs:[Array<SitePref>] = []
 
+    var delegate: FeedViewController?
     
     private var tableView: UITableView!
     
@@ -90,6 +90,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     
     func checkButtonTapped() {
         CognitoUserManager.sharedInstance.updateUserSitePrefs(newPrefs: userSitePrefs)
+        delegate?.userSitePrefs = userSitePrefs[0]
+        delegate?.refreshTable()
+        self.dismiss(animated: true, completion: nil)
     }
     
     func closePickerTapped() {
@@ -163,7 +166,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         
         // This is the rect that we've calculated out and this is what is actually used below
         cell.logoImageView.frame = CGRect(x: 50, y: 8, width: newSize.width, height: 36)
-        cell.logoImageView.image = image
+        cell.logoImageView.setImage(image, for: .normal)
         
         if (indexPath.section == 0) {
             
@@ -171,10 +174,14 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.dropDownButton.tag = indexPath.row
             cell.dropDownButton.removeTarget(self, action: #selector(moveToTop), for: .touchUpInside)
             cell.dropDownButton.addTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
+            
             cell.numPostsButton.isHidden = false
             cell.numPostsButton.tag = indexPath.row
             cell.numPostsButton.addTarget(self, action: #selector(numPostsButtonTapped), for: .touchUpInside)
             cell.numPostsButton.setTitle(String(userSitePrefs[indexPath.section][indexPath.row].numPosts), for: .normal)
+            
+            cell.logoImageView.tag = indexPath.row
+            cell.logoImageView.addTarget(self, action: #selector(logoTappedForCell), for: .touchDownRepeat)
         }
         else {
             cell.dropDownButton.setImage(UIImage(named: "up"), for: .normal)
@@ -195,6 +202,27 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    func logoTappedForCell(sender: UIButton) {
+        let sourceItem = userSitePrefs[0][sender.tag]
+        
+        CATransaction.begin()
+        
+        CATransaction.setCompletionBlock({
+            self.tableView.reloadData()
+        })
+        
+        tableView.beginUpdates()
+        userSitePrefs[0].remove(at: sender.tag)
+        userSitePrefs[0].insert(sourceItem, at: 0)
+        
+        let sourceIndexPath = IndexPath(row: sender.tag, section: 0)
+        let destIndexPath = IndexPath(row: 0, section: 0)
+        
+        tableView.moveRow(at: sourceIndexPath, to: destIndexPath)
+        tableView.endUpdates()
+        
+        CATransaction.commit()
+    }
     
     func moveToBottom(sender: UIButton) {
         
