@@ -225,6 +225,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func rankingButtonTappedTapped() {
         let pvc = PreferencesViewController()
+        pvc.delegate = self
         self.tabBarController?.present(pvc, animated: true, completion: nil)
     }
     
@@ -311,7 +312,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         webViewController.userSitePrefs = userSitePrefs
         webViewController.currSite = indexPath.section
         webViewController.currPostForSite = indexPath.row
-
+        
         self.tabBarController?.present(webViewController, animated: true, completion: nil)
     }    
 }
