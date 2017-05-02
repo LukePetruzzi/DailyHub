@@ -70,7 +70,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView?.addSubview(refreshControl)
         
         tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = 500
+        tableView?.estimatedRowHeight = 500.0
+
         
         self.view.addSubview(tableView!)
         

@@ -138,9 +138,7 @@ class CognitoUserManager
     {
         if let data = jsonString.data(using: .utf8) {
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: Any]
-                print("ACTUAL JSON: \(json)")
-                
+                let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: Any]                
                 
                 var feedArray = [SitePref]()
                 var notFeedArray = [SitePref]()
