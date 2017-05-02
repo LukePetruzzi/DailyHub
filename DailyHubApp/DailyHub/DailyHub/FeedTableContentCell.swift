@@ -89,7 +89,7 @@ class FeedTableContentCell: UITableViewCell {
         
         // descLabel
         // top
-        self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0 - Metrics.ABOVE_OR_BELOW))
+        self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
         // bottom
         self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.imgView!, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0-Metrics.ABOVE_OR_BELOW))
         // height
