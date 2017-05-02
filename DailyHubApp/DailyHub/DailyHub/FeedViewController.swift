@@ -61,8 +61,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView?.delegate = self
         tableView?.dataSource = self
-        tableView?.register(FeedTableTitleCell.self, forCellReuseIdentifier: "FeedTableTitleCell")
+        tableView?.register(FeedTableTitleCell.self, forHeaderFooterViewReuseIdentifier: "FeedTableTitleCell")
         tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
+//        tableView?.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
@@ -190,7 +191,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell") as! FeedTableTitleCell
+        let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FeedTableTitleCell") as! FeedTableTitleCell
         let image = userSitePrefs[section].siteName
         cell.logoImageView.image = UIImage(named: image)
         return cell
@@ -244,7 +245,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -262,5 +262,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         webViewController.currPostForSite = indexPath.row
         
         self.tabBarController?.present(webViewController, animated: true, completion: nil)
-    }    
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let favoriteAction = UITableViewRowAction(style: .normal, title: "Favorite") { (rowAction, indexPath) in
+            
+            
+            
+        }
+        favoriteAction.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
+        
+        return [favoriteAction]
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.portrait]
+    }
 }
