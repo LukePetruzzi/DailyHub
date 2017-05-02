@@ -10,16 +10,17 @@ import Foundation
 import UIKit
 
 // has an image of the current site and a background color to match the site
-class FeedTableTitleCell: UITableViewCell
+class FeedTableTitleCell: UITableViewHeaderFooterView
 {
     var logoImageView:UIImageView
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(reuseIdentifier: String?) {
         self.logoImageView = UIImageView()
 
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(reuseIdentifier: reuseIdentifier)
 
-        self.backgroundColor = UIColor(red:0.78, green: 0.78, blue:0.78, alpha: 1.0)
+        self.backgroundView = UIView(frame: self.bounds)
+        self.backgroundView?.backgroundColor = UIColor(red:0.78, green: 0.78, blue:0.78, alpha: 1.0)
         self.arrangeUI()
     }
     
