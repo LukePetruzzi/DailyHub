@@ -89,7 +89,7 @@ class FeedTableContentCell: UITableViewCell {
         
         // descLabel
         // top
-        self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
+        self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self.authorLabel!, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0 - Metrics.ABOVE_OR_BELOW))
         // bottom
         self.contentView.addConstraint(NSLayoutConstraint(item: self.descLabel!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.imgView!, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0-Metrics.ABOVE_OR_BELOW))
         // height
@@ -103,7 +103,7 @@ class FeedTableContentCell: UITableViewCell {
         let bottom = NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.contentView, attribute: .bottom, multiplier: 1, constant: 0-Metrics.ABOVE_OR_BELOW)
         bottom.priority = 999
         self.contentView.addConstraint(bottom)
-//        // height
+        // height
         self.imgViewHeightConstraint = NSLayoutConstraint(item: self.imgView!, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 300 - 2*Metrics.ABOVE_OR_BELOW)
         self.contentView.addConstraint(self.imgViewHeightConstraint)
         
