@@ -77,7 +77,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView?.delegate = self
         tableView?.dataSource = self
-        tableView?.register(FeedTableTitleCell.self, forCellReuseIdentifier: "FeedTableTitleCell")
+        tableView?.register(FeedTableTitleCell.self, forHeaderFooterViewReuseIdentifier: "FeedTableTitleCell")
         tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
         
         refreshControl = UIRefreshControl()
@@ -225,7 +225,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTitleCell") as! FeedTableTitleCell
+        let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FeedTableTitleCell") as! FeedTableTitleCell
         let image = userSitePrefs[section].siteName
         cell.logoImageView.image = UIImage(named: image)
         return cell
