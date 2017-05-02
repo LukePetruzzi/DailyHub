@@ -206,7 +206,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let sect = userSitePrefs[indexPath.section].siteName
         
         if let title = masterContent[sect]?[indexPath.row].title {
-            print("TITLE: \(title)")
             cell.titleLabel?.text = title
         }
         else{
