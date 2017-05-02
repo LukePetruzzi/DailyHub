@@ -64,7 +64,6 @@ class CognitoUserManager
                     print("ERROR WHEN ADDING NEW SITE PREFS: \(task.error?.localizedDescription)")
                 } else {
                     // Task succeeded. The data was saved in the sync store.
-                    print("ADDED: \(jsonString)")
                 }
                 return task
             })
@@ -130,6 +129,9 @@ class CognitoUserManager
                              SitePref(siteName: "USAToday", numPosts: 1),
                              SitePref(siteName: "WashPost", numPosts: 1),
                              SitePref(siteName: "WSJ", numPosts: 1)]]
+        
+        print("CREATING NEW USER PREFS FOR FIRST TIME USER!")
+        
         // save them for the new user
         updateUserSitePrefs(newPrefs: newSitePrefs)
     }
