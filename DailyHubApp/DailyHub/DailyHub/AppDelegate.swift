@@ -118,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         // clear the credentials
         self.credentialsProvider?.clearCredentials()
+        self.credentialsProvider?.clearKeychain()
         FBSDKAccessToken.setCurrent(nil)
         FBSDKProfile.setCurrent(nil)
     }
@@ -125,6 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func switchToMainViewControllers()
     {
         // add the tab controller to the navcontroller
+        self.tabController?.selectedViewController = feedNavController
         self.window?.rootViewController = self.tabController
     }
     

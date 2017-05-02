@@ -129,7 +129,7 @@ class FeedTableContentCell: UITableViewCell {
     // update the image view's height
     func updateImgViewHeightConstraint(constant: CGFloat){
         
-        //self.imgViewHeightConstraint.constant = constant
+        self.imgViewHeightConstraint.constant = constant
     }
     
 //    override func layoutSubviews() {
