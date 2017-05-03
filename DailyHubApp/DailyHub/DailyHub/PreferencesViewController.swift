@@ -72,9 +72,6 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         self.view.addSubview(closeView)
         self.view.addSubview(tableView)
         self.view.addSubview(numPostView)
-        
-        
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -170,7 +167,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         
         if (indexPath.section == 0) {
             
-            cell.dropDownButton.setImage(UIImage(named: "close"), for: .normal)
+            cell.dropDownButton.setImage(UIImage(named: "close1"), for: .normal)
             cell.dropDownButton.tag = indexPath.row
             cell.dropDownButton.removeTarget(self, action: #selector(moveToTop), for: .touchUpInside)
             cell.dropDownButton.addTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
@@ -184,7 +181,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
             cell.logoImageView.addTarget(self, action: #selector(logoTappedForCell), for: .touchDownRepeat)
         }
         else {
-            cell.dropDownButton.setImage(UIImage(named: "up"), for: .normal)
+            cell.dropDownButton.setImage(UIImage(named: "up1"), for: .normal)
             cell.dropDownButton.tag = indexPath.row
             cell.dropDownButton.removeTarget(self, action: #selector(moveToBottom), for: .touchUpInside)
             cell.dropDownButton.addTarget(self, action: #selector(moveToTop), for: .touchUpInside)
@@ -193,11 +190,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         
         if(indexPath.section == 0){
             cell.backgroundColor = UIColor.white
-            cell.imageView?.alpha = 1
         }
         else{
             cell.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
-            cell.imageView?.alpha = 0.5
         }
         return cell
     }
