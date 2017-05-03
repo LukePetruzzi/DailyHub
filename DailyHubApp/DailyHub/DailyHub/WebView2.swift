@@ -45,34 +45,40 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         webView.scrollView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
         webView.scrollView.layer.masksToBounds = false
         
-//        headerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
-//        headerView.tintColor = UIColor.gray
-//        footerView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:0.9)
-//        footerView.tintColor = UIColor.gray
-        
         let blurEffect = UIBlurEffect(style: .extraLight)
         headerView.effect = blurEffect
         footerView.effect = blurEffect
         
-        closeButton.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-        closeButton.setImage(UIImage(named: "close"), for: .normal)
+        closeButton.setImage(UIImage(named: "close1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        closeButton.tintColor = UIColor.black
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDown)
+        closeButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDragEnter)
+        closeButton.addTarget(self, action: #selector(changeTintColorBlack), for: .touchDragExit)
         headerView.addSubview(closeButton)
         
-        refreshButton.frame = CGRect(x: self.view.frame.size.width - 45, y: 0, width: 45, height: 45)
-        refreshButton.setImage(UIImage(named: "refresh"), for: .normal)
+        refreshButton.setImage(UIImage(named: "refresh1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        refreshButton.tintColor = UIColor.black
         refreshButton.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
-        refreshButton.tintColor = UIColor.gray
+        refreshButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDown)
+        refreshButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDragEnter)
+        refreshButton.addTarget(self, action: #selector(changeTintColorBlack), for: .touchDragExit)
         headerView.addSubview(refreshButton)
         
-        upButton.frame = CGRect(x: self.view.frame.size.width/2 - 50, y: 0, width: 45, height: 45)
-        upButton.setImage(UIImage(named: "up"), for: .normal)
+        upButton.setImage(UIImage(named: "up1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        upButton.tintColor = UIColor.black
         upButton.addTarget(self, action: #selector(upButtonTapped), for: .touchUpInside)
+        upButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDown)
+        upButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDragEnter)
+        upButton.addTarget(self, action: #selector(changeTintColorBlack), for: .touchDragExit)
         headerView.addSubview(upButton)
         
-        downButton.frame = CGRect(x: self.view.frame.size.width/2 + 5, y: 0, width: 45, height: 45)
-        downButton.setImage(UIImage(named: "down"), for: .normal)
+        downButton.setImage(UIImage(named: "down1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        downButton.tintColor = UIColor.black
         downButton.addTarget(self, action: #selector(downButtonTapped), for: .touchUpInside)
+        downButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDown)
+        downButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDragEnter)
+        downButton.addTarget(self, action: #selector(changeTintColorBlack), for: .touchDragExit)
         headerView.addSubview(downButton)
         
         logoButton.frame = CGRect(x: 8, y: 4, width: 100, height: 37)
@@ -81,21 +87,26 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         logoButton.addTarget(self, action: #selector(logoButtonTapped), for: .touchUpInside)
         footerView.addSubview(logoButton)
         
-        backButton.frame = CGRect(x: self.view.frame.size.width - 130, y: 0, width: 45, height: 45)
-        backButton.setImage(UIImage(named: "back"), for: .normal)
+        backButton.setImage(UIImage(named: "left1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        backButton.tintColor = UIColor.black
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDown)
+        backButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDragEnter)
+        backButton.addTarget(self, action: #selector(changeTintColorBlack), for: .touchDragExit)
         backButton.isEnabled = false
         footerView.addSubview(backButton)
         
-        forwardButton.frame = CGRect(x: self.view.frame.size.width - 60, y: 0, width: 45, height: 45)
-        forwardButton.setImage(UIImage(named: "forward"), for: .normal)
+        forwardButton.setImage(UIImage(named: "right1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        forwardButton.tintColor = UIColor.black
         forwardButton.addTarget(self, action: #selector(forwardButtonTapped), for: .touchUpInside)
+        forwardButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDown)
+        forwardButton.addTarget(self, action: #selector(changeTintColorGray), for: .touchDragEnter)
+        forwardButton.addTarget(self, action: #selector(changeTintColorBlack), for: .touchDragExit)
         forwardButton.isEnabled = false
         footerView.addSubview(forwardButton)
         
         loadingIndicator.activityIndicatorViewStyle = .gray
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.frame = CGRect(x: self.view.frame.size.width - 90, y: 0, width: 45, height: 45)
         headerView.addSubview(loadingIndicator)
         
         configureUpDownButtons()
@@ -103,7 +114,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         let url = URL(string: urlStringToLoad)!
         webView.load(URLRequest(url: url))
         
-//        headerView.bringSubview(toFront: self.view)
         self.view.addSubview(self.webView)
         self.view.addSubview(self.headerView)
         self.view.addSubview(self.footerView)
@@ -127,21 +137,36 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         
         super.viewWillLayoutSubviews()
         
-        self.headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 45)
-        self.webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 45)
-        self.footerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 45, width: self.view.frame.size.width, height: 45)
-        
+        headerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 45)
+        webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 45)
+        footerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 45, width: self.view.frame.size.width, height: 45)
+        closeButton.frame = CGRect(x: 5, y: 5, width: 35, height: 35)
+        refreshButton.frame = CGRect(x: self.view.frame.size.width - 45, y: 0, width: 45, height: 45)
+        upButton.frame = CGRect(x: self.view.frame.size.width/2 - 55, y: 0, width: 45, height: 45)
+        downButton.frame = CGRect(x: self.view.frame.size.width/2 + 10, y: 0, width: 45, height: 45)
+        backButton.frame = CGRect(x: self.view.frame.size.width - 150, y: 5, width: 35, height: 35)
+        forwardButton.frame = CGRect(x: self.view.frame.size.width - 60, y: 5, width: 35, height: 35)
+        loadingIndicator.frame = CGRect(x: self.view.frame.size.width - 90, y: 0, width: 45, height: 45)
+    }
+    
+    func changeTintColorGray(sender: UIButton) {
+        sender.tintColor = UIColor.lightGray
+    }
+    
+    func changeTintColorBlack(sender: UIButton) {
+        sender.tintColor = UIColor.black
     }
     
     func closeButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func refreshButtonTapped() {
+    func refreshButtonTapped(sender:UIButton) {
+        sender.tintColor = UIColor.black
         webView.reload()
     }
     
-    func upButtonTapped() {
+    func upButtonTapped(sender: UIButton) {
         
         if (currSite > 0) {
             var newSiteToLoad: String = ""
@@ -171,10 +196,11 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             backButton.isEnabled = false
             forwardButton.isEnabled = false
         }
+        sender.tintColor = UIColor.black
         configureUpDownButtons()
     }
     
-    func downButtonTapped() {
+    func downButtonTapped(sender: UIButton) {
         
         if (currSite < userSitePrefs.count - 1) {
             var newSiteToLoad: String = ""
@@ -204,6 +230,7 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             backButton.isEnabled = false
             forwardButton.isEnabled = false
         }
+        sender.tintColor = UIColor.black
         configureUpDownButtons()
     }
     
@@ -223,17 +250,19 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         }
     }
     
-    func backButtonTapped() {
+    func backButtonTapped(sender: UIButton) {
         if (webView.canGoBack) {
             webView.goBack()
         }
+        sender.tintColor = UIColor.black
         configureBackForwardButtons()
     }
     
-    func forwardButtonTapped() {
+    func forwardButtonTapped(sender: UIButton) {
         if (webView.canGoForward) {
             webView.goForward()
         }
+        sender.tintColor = UIColor.black
         configureBackForwardButtons()
     }
     
