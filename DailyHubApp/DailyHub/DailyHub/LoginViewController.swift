@@ -33,7 +33,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if (!result.isCancelled)
+        if (!result.isCancelled && FBSDKAccessToken.current() != nil)
         {
             let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
         
@@ -42,11 +42,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             waitGroup.enter()
             
             DispatchQueue.main.async {
-                delegate.initializeAuthorizedCognito()
-                waitGroup.leave()
+                CognitoUserManager.sharedInstance.initializeAuthorizedCognito(fbAccessTokenString: FBSDKAccessToken.current().tokenString, completion: {(err) -> Void in
+
+                    if err != nil {
+                        print("ERROR GETTING LOGGING IN COGNITO: \(err!.localizedDescription)")
+                    }
+                    waitGroup.leave()
+                })
             }
             waitGroup.notify(queue: .main) {
                 delegate.switchToMainViewControllers()
+            }
+        }
+        else {
+            print("ERROR LOGGING IN: ")
+            if (error != nil){
+                print(error.localizedDescription)
             }
         }
     }

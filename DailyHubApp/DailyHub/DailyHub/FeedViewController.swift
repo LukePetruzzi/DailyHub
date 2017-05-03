@@ -123,10 +123,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if userSitePrefs.count > 0
             {
+                print("THIS IS PREFS: \(prefs)")
+
+                
                 Database.getDatabaseInfo(completionHandler: {(data, error) in
                     if let d = data {
-                        
-                        
+                        print("THIS IS DATA: \(d)")
+
                         let json = d.data(using: .utf8)
                         
                         do {
@@ -164,11 +167,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                         self.refreshControl.endRefreshing()
                     }
-                    if error != nil{
+                    else if error != nil{
                         print("ERROR GETTING FROM DATABASE: \(error!.localizedDescription)")
+                    }
+                    else{
+                        print("COULDNT LOAD FROM DATABASE")
+                        self.loadingOverlay.removeFromSuperview()
+                        self.showAlertWithError(nil, stringBeforeMessage: "There's nothing to see here.")
                     }
                 })
             }
+            else {
+                self.loadingOverlay.removeFromSuperview()
+                print("NO SITE PREFS LOADED")
+            }
+        }
+        else{
+            self.loadingOverlay.removeFromSuperview()
+            print("NO SITE PREFS LOADED")
         }
     }
     
