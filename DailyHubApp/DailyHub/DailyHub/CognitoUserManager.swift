@@ -8,6 +8,7 @@
 
 import Foundation
 import AWSCognito
+import AWSCore
 
 class CognitoUserManager
 {
@@ -16,21 +17,73 @@ class CognitoUserManager
     static let sharedInstance: CognitoUserManager = CognitoUserManager()
     
     // the sync client used to update the user data to the Cognito cloud
-    private let syncClient = AWSCognito.default()
+    var syncClient: AWSCognito?
     
+    var credentialsProvider: AWSCognitoCredentialsProvider?
+    var configuration: AWSServiceConfiguration?
+    
+    func updateSyncClient(){
+        print("UPDATED THE SYNC CLIENT")
+        syncClient = AWSCognito.default()
+    }
     
     func showAllDatasets()
     {
-        for set in self.syncClient.listDatasets(){
+        for set in self.syncClient!.listDatasets(){
             print("DATASET: ", set.name)
         }
     }
 
     
+    // initialize the cognito by getting the identity id from the facebook access token
+    func initializeAuthorizedCognito(fbAccessTokenString: String, completion: @escaping ((_ error:NSError?) -> Void))
+    {
+        // get authorized AWS credentials
+        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: fbAccessTokenString))
+        self.configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        // Retrieve your Amazon Cognito ID
+        let waitGroup = DispatchGroup()
+        
+        credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
+            
+            waitGroup.enter()
+            
+            if (task.error != nil) {
+                completion(task.error! as NSError)
+            }
+            else {
+                // the task result will contain the identity id
+                let cognitoId = task.result!
+                print("Cognito id: \(cognitoId)")
+                
+                completion(nil)
+                waitGroup.leave()
+
+            }
+            
+            waitGroup.notify(queue: .main)
+            {
+                print("ENTERED HERE")
+                if (task.error == nil) {
+                    // perform first time setup IF its a new user
+                    CognitoUserManager.sharedInstance.updateSyncClient()
+                    CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
+                    
+                    print("DONE HERE")
+                }
+            }
+
+            
+            return task;
+        })
+    }
+    
 
     
     func retrieveUserSitePrefs(feedNumber: Int) -> [Array<SitePref>]? {
-        let dataset = self.syncClient.openOrCreateDataset("userSitePrefs")
+        let dataset = self.syncClient!.openOrCreateDataset("userSitePrefs")
         
         // set the value to be the double array of in feed or not in feed prefs
         // key is 0. so they can have many different feeds if they want
@@ -50,7 +103,7 @@ class CognitoUserManager
         if let jsonString = convertSitePrefsToJSONString(newPrefs: newPrefs)
         {
             
-            let dataset = self.syncClient.openOrCreateDataset("userSitePrefs")
+            let dataset = self.syncClient!.openOrCreateDataset("userSitePrefs")
             
             // set the value to be the double array of in feed or not in feed prefs
             // key is 0. so they can have many different feeds if they want
@@ -72,16 +125,31 @@ class CognitoUserManager
     
     func firstTimeUserCheckAndSetup()
     {
-        // return if its been set up before
-        for set in self.syncClient.listDatasets(){
-            if (set.name == "hasSetUp")
-            {
-                return
+        
+        // Retrieve your Amazon Cognito ID
+        let waitGroup = DispatchGroup()
+        
+       // DispatchQueue.main.async {
+            // return if its been set up before
+            for set in self.syncClient!.listDatasets() {
+                waitGroup.enter()
+                
+                print("SET NAME: \(set.name!)")
+                
+                if (set.name! == "hasSetUp")
+                {
+                    return
+                }
+                
+                waitGroup.leave()
             }
-        }
+        
+        //}
+        waitGroup.wait()
+
         
         // set up for the first time
-        let dataset = self.syncClient.openOrCreateDataset("hasSetUp")
+        let dataset = self.syncClient!.openOrCreateDataset("hasSetUp")
         // doesn't matter whats stored in here
         dataset.setString("Anything", forKey: "AnythingElse")
         dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
@@ -89,7 +157,7 @@ class CognitoUserManager
             if task.isCancelled {
                 print("TASK CANCELLED WHEN ADDING hasSetUp dataset")
             } else if task.error != nil {
-                print("ERROR WHEN ADDING hasSetUp dataset: \(task.error?.localizedDescription)")
+                print("ERROR WHEN ADDING hasSetUp dataset: \(task.error!.localizedDescription)")
             } else {
                 // Task succeeded. The data was saved in the sync store.
             }

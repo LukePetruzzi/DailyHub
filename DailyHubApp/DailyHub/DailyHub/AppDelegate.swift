@@ -10,15 +10,10 @@ import UIKit
 import CoreData
 import FBSDKCoreKit
 
-import AWSCore
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    var credentialsProvider: AWSCognitoCredentialsProvider?
-    var configuration: AWSServiceConfiguration?
     
     var loginViewController: LoginViewController?
     
@@ -68,12 +63,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         
+        // this should our app launch screen or something like "Attepting to log you in"
+        self.window?.rootViewController = self.loginViewController
+
         // go to login screen if not logged in
+        let waitGroup = DispatchGroup()
         if (FBSDKAccessToken.current() != nil){
             // setup aws credentials
-            self.initializeAuthorizedCognito()
-            // go to the main view controller
-            self.switchToMainViewControllers()
+            waitGroup.enter()
+            CognitoUserManager.sharedInstance.initializeAuthorizedCognito(fbAccessTokenString: FBSDKAccessToken.current().tokenString, completion: {(err) -> Void in
+                if err != nil{
+                    print("ERROR SETTING UP COGNITO LOGIN WHEN FBACCESS TOKEN NOT NIL : \(err!.localizedDescription)")
+                }
+                waitGroup.leave()
+            })
+            waitGroup.notify(queue: .main){
+                // go to the main view controller
+                self.switchToMainViewControllers()
+            }
         }
         else {
             self.switchToLoginViewController()
@@ -82,51 +89,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func initializeAuthorizedCognito()
-    {
-        // get authorized AWS credentials
-        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: FBSDKAccessToken.current().tokenString))
-        self.configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // Retrieve your Amazon Cognito ID
-        let waitGroup = DispatchGroup()
-        waitGroup.enter()
-        credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
-            if (task.error != nil) {
-                print("ERROR GETTING ID: " + task.error!.localizedDescription)
-            }
-            else {
-                // the task result will contain the identity id
-                let cognitoId = task.result!
-                print("Cognito id: \(cognitoId)")
-                
-            }
-            waitGroup.leave()
-            waitGroup.notify(queue: .main){
-                if (task.error  == nil){
-                    // perform first time setup IF its a new user
-                    CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
-                }
-            }
-            
-            return task;
-        })
-    }
+    
     
     func logoutCurrentUser()
     {
         // clear the credentials
-        self.credentialsProvider?.clearCredentials()
-        self.credentialsProvider?.clearKeychain()
+        CognitoUserManager.sharedInstance.credentialsProvider?.clearCredentials()
+        CognitoUserManager.sharedInstance.credentialsProvider?.clearKeychain()
         FBSDKAccessToken.setCurrent(nil)
         FBSDKProfile.setCurrent(nil)
     }
     
     func switchToMainViewControllers()
     {
+        // reinitialize the feed controller on login
+//        feedViewController = FeedViewController()
+//        feedNavController = UINavigationController(rootViewController: feedViewController!)
+//
+//        tabController?.viewControllers?[0] = feedNavController!
+        
+        
         // add the tab controller to the navcontroller
-        self.tabController?.selectedViewController = feedNavController
+//        self.tabController?.selectedViewController = feedNavController
+//        print("refreshing from appdelegate")
         self.window?.rootViewController = self.tabController
     }
     
