@@ -162,8 +162,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
 
                         DispatchQueue.main.async {
-                            self.tableView?.reloadData()
                             self.loadingOverlay.removeFromSuperview()
+                            self.tableView?.reloadData()
                         }
                         self.refreshControl.endRefreshing()
                     }
@@ -172,19 +172,28 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                     else{
                         print("COULDNT LOAD FROM DATABASE")
-                        self.loadingOverlay.removeFromSuperview()
-                        self.showAlertWithError(nil, stringBeforeMessage: "There's nothing to see here.")
+                        DispatchQueue.main.async {
+                            self.loadingOverlay.removeFromSuperview()
+                            self.tableView?.reloadData()
+                        }
+                        self.showAlertWithError(nil, stringBeforeMessage: "There's nothing to see here")
                     }
                 })
             }
             else {
-                self.loadingOverlay.removeFromSuperview()
-                print("NO SITE PREFS LOADED")
+                DispatchQueue.main.async {
+                    self.loadingOverlay.removeFromSuperview()
+                    self.tableView?.reloadData()
+                }
+                self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be loaded")
             }
         }
         else{
-            self.loadingOverlay.removeFromSuperview()
-            print("NO SITE PREFS LOADED")
+            DispatchQueue.main.async {
+                self.loadingOverlay.removeFromSuperview()
+                self.tableView?.reloadData()
+            }
+            self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be loaded")
         }
     }
     
@@ -268,16 +277,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let sect = userSitePrefs[indexPath.section].siteName
         let urlString = masterContent[sect]?[indexPath.row].url
         
-        // create a new webviewController
-        let webViewController = CustomWebView()
-        webViewController.urlStringToLoad = urlString!
-        webViewController.logoToShow = sect
-        webViewController.masterContent = masterContent
-        webViewController.userSitePrefs = userSitePrefs
-        webViewController.currSite = indexPath.section
-        webViewController.currPostForSite = indexPath.row
-        
-        self.tabBarController?.present(webViewController, animated: true, completion: nil)
+        // ensure there's actually a url to load
+        if (urlString != nil){
+            // create a new webviewController
+            let webViewController = CustomWebView()
+            webViewController.urlStringToLoad = urlString!
+            webViewController.logoToShow = sect
+            webViewController.masterContent = masterContent
+            webViewController.userSitePrefs = userSitePrefs
+            webViewController.currSite = indexPath.section
+            webViewController.currPostForSite = indexPath.row
+            self.tabBarController?.present(webViewController, animated: true, completion: nil)
+        }
+        else{
+            self.showAlertWithError(nil, stringBeforeMessage: "\(sect) didn't provide us with a url for this post")
+        }
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
