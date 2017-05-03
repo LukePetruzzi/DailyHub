@@ -149,6 +149,9 @@ class CognitoUserManager
         
         // Retrieve your Amazon Cognito ID
         checkForFirstTimeUser(completion: {(isFirstTimeUser) -> Void in
+            
+            print("THIS IS THE VALUE OF FIRST TIME USER")
+            
             if (!isFirstTimeUser){
                 return
             }
