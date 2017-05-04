@@ -13,6 +13,22 @@ struct SitePref: JSONSerializable {
     var numPosts:Int
 }
 
+struct FavoritedPost: JSONSerializable {
+    var siteName:String
+    var title:String?
+    var author:String?
+    var url:String?
+    var thumbnail:String?
+    var description:String?
+}
+
+struct ContentInfo {
+    var title:String?
+    var author:String?
+    var url:String?
+    var thumbnail:String?
+    var description:String?
+}
 
 // all this json representable protocol stuff I created by reference from here: 
 // http://codelle.com/blog/2016/5/an-easy-way-to-convert-swift-structs-to-json/
