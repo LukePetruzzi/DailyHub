@@ -103,6 +103,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // add the tab controller to the navcontroller
 //        self.tabController?.selectedViewController = feedNavController
 //        print("refreshing from appdelegate")
+        
+        // reinstantiate the view controllers that depend on feed stuff
+        feedViewController = nil
+        discoverViewController = nil
+        feedViewController = FeedViewController()
+        discoverViewController = DiscoverViewController()
+        
         self.window?.rootViewController = self.tabController
     }
     

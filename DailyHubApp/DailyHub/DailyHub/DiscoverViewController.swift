@@ -25,7 +25,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orange,
                                                                         NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
-        navigationController?.navigationBar.topItem?.title = "dh"
+        navigationController?.navigationBar.topItem?.title = "Discover"
         
         
         let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
