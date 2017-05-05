@@ -87,8 +87,8 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
     
     func checkButtonTapped() {
         CognitoUserManager.sharedInstance.updateUserSitePrefs(newPrefs: userSitePrefs)
-        delegate?.userSitePrefs = userSitePrefs[0]
-        delegate?.refreshTable()
+        self.delegate?.userSitePrefs = self.userSitePrefs[0]
+        self.delegate?.refreshTable()
         self.dismiss(animated: true, completion: nil)
     }
     

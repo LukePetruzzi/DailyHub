@@ -91,15 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func logoutCurrentUser()
-    {
-        // clear the credentials
-        CognitoUserManager.sharedInstance.credentialsProvider?.clearCredentials()
-        CognitoUserManager.sharedInstance.credentialsProvider?.clearKeychain()
-        FBSDKAccessToken.setCurrent(nil)
-        FBSDKProfile.setCurrent(nil)
-    }
-    
     func switchToMainViewControllers()
     {
         // reinitialize the feed controller on login

@@ -9,6 +9,8 @@
 import Foundation
 import AWSCognito
 import AWSCore
+import FBSDKCoreKit
+
 
 class CognitoUserManager
 {
@@ -22,66 +24,49 @@ class CognitoUserManager
     var credentialsProvider: AWSCognitoCredentialsProvider?
     var configuration: AWSServiceConfiguration?
     
-    func updateSyncClient(){
+    func updateSyncClient(completion: @escaping ((_ error:NSError?) -> Void)){
+        
+        
         print("UPDATED THE SYNC CLIENT")
-        syncClient = AWSCognito.default()
-    }
-    
-    func showAllDatasets()
-    {
-        for set in self.syncClient!.listDatasets(){
-            print("DATASET: ", set.name)
+        if syncClient == nil {
+            syncClient = AWSCognito.default()
         }
-    }
-
-    
-    // initialize the cognito by getting the identity id from the facebook access token
-    func initializeAuthorizedCognito(fbAccessTokenString: String, completion: @escaping ((_ error:NSError?) -> Void))
-    {
-        // get authorized AWS credentials
-        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: fbAccessTokenString))
-        self.configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
         
-        // Retrieve your Amazon Cognito ID
         let waitGroup = DispatchGroup()
-        
-        credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
-            
-            waitGroup.enter()
-            
-            if (task.error != nil) {
-                completion(task.error! as NSError)
+        waitGroup.enter()
+        syncClient?.refreshDatasetMetadata().continueWith(block: { (task) -> AnyObject? in
+
+            if task.error != nil {
+                print("ERROR WHEN GETTING DATASET METADATA: \(task.error!.localizedDescription)")
+
             }
-            else {
-                // the task result will contain the identity id
-                let cognitoId = task.result!
-                print("Cognito id: \(cognitoId)")
-                
-                waitGroup.leave()
+
+            for set in self.syncClient!.listDatasets(){
+                print("DATASET: ", set.name)
             }
             
-            waitGroup.notify(queue: .main)
-            {
-                print("ENTERED HERE")
-                if (task.error == nil) {
-                    // perform first time setup IF its a new user
-                    CognitoUserManager.sharedInstance.updateSyncClient()
-                    CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
-                    
-                    print("DONE HERE")
+            waitGroup.leave()
+            waitGroup.notify(queue: .main){
+                if task.error != nil{
+                    completion(task.error! as NSError)
+                }
+                else{
+                    completion(nil)
                 }
             }
-
-            completion(nil)
-            return task;
+            return task
         })
+    
     }
+
+    
     
 
     
     func retrieveUserSitePrefs(feedNumber: Int) -> [Array<SitePref>]? {
         let dataset = self.syncClient!.openOrCreateDataset("userSitePrefs")
+
+        
         
         // set the value to be the double array of in feed or not in feed prefs
         // key is 0. so they can have many different feeds if they want
@@ -106,22 +91,16 @@ class CognitoUserManager
             // set the value to be the double array of in feed or not in feed prefs
             // key is 0. so they can have many different feeds if they want
             dataset.setString(jsonString, forKey: "0")
-            
-            dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
-                
-                if task.isCancelled {
-                    print("TASK CANCELLED WHEN SYNCHRONIZING NEW SITE PREFS")
-                } else if task.error != nil {
-                    print("ERROR WHEN ADDING NEW SITE PREFS: \(task.error?.localizedDescription)")
-                } else {
-                    // Task succeeded. The data was saved in the sync store.
-                }
-                return task
-            })
+            dataset.synchronize()
+        }
+        else{
+            print("ERROR! COULDNT CONVERT SITE PREFS TO JSON STRING")
         }
     }
     
-    func checkForFirstTimeUser(completion: @escaping ((_ isFirstTimeUser: Bool) -> Void)){
+    func checkForFirstTimeUser(completion: @escaping (_ isFirstTimeUser: Bool) -> Void){
+        
+        var overallAnswer = true
         
         let waitGroup = DispatchGroup()
         
@@ -134,25 +113,44 @@ class CognitoUserManager
                 
                 if (set.name! == "hasSetUp")
                 {
-                    completion(false)
+                    overallAnswer = false
                 }
                 waitGroup.leave()
             }
         
         waitGroup.notify(queue: .main){
-            completion(true)
+            completion(overallAnswer)
         }
     }
     
-    func firstTimeUserCheckAndSetup()
+    func firstTimeUserCheckAndSetup(completion: @escaping (_ error: NSError?) -> Void)
     {
         
         // Retrieve your Amazon Cognito ID
         checkForFirstTimeUser(completion: {(isFirstTimeUser) -> Void in
             
-            print("THIS IS THE VALUE OF FIRST TIME USER")
+            print("THIS IS THE VALUE OF isFirstTimeUser BOOL: \(isFirstTimeUser)")
             
             if (!isFirstTimeUser){
+                // synchronize the existing user site preferences
+                let dataset = self.syncClient!.openOrCreateDataset("userSitePrefs")
+                dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
+                    
+                    if task.error != nil {
+                        print("ERROR WHEN RETRIEVING EXISTING SITE PREFS: \(task.error!.localizedDescription)")
+                        completion(task.error! as NSError)
+                    } else {
+                        // Task succeeded. The data was saved in the sync store.
+                        print("SUCCESSFULLY RETRIEVED EXISTING USER SITE PREFS")
+                        print("THESE ARE THEM: \(dataset.string(forKey: String(0)))")
+                        completion(nil)
+                    }
+
+                    
+                    return task
+                })
+                
+                // leave before overwriting preferences below
                 return
             }
             
@@ -160,17 +158,7 @@ class CognitoUserManager
             let dataset = self.syncClient!.openOrCreateDataset("hasSetUp")
             // doesn't matter whats stored in here
             dataset.setString("Anything", forKey: "AnythingElse")
-            dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
-                
-                if task.isCancelled {
-                    print("TASK CANCELLED WHEN SYNCHRONIZING hasSetUp dataset")
-                } else if task.error != nil {
-                    print("ERROR WHEN ADDING hasSetUp dataset: \(task.error!.localizedDescription)")
-                } else {
-                    // Task succeeded. The data was saved in the sync store.
-                }
-                return task
-            })
+            dataset.synchronize()
             
             // create the first time user prefs (put in all the supported sites!
             let newSitePrefs = [[SitePref(siteName: "Giphy", numPosts: 1),
@@ -208,8 +196,32 @@ class CognitoUserManager
             
             print("CREATING NEW USER PREFS FOR FIRST TIME USER!")
             
-            // save them for the new user
-            self.updateUserSitePrefs(newPrefs: newSitePrefs)
+            // update user site prefs... but wait to do it instead of using async function above
+            if let jsonString = self.convertSitePrefsToJSONString(newPrefs: newSitePrefs)
+            {
+                
+                let dataset = self.syncClient!.openOrCreateDataset("userSitePrefs")
+                
+                // set the value to be the double array of in feed or not in feed prefs
+                // key is 0. so they can have many different feeds if they want
+                dataset.setString(jsonString, forKey: "0")
+                dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
+                    
+                    if task.error != nil {
+                        print("ERROR WHEN UPDATING NEW SITE PREFS: \(task.error!.localizedDescription)")
+                        completion(task.error! as NSError)
+                    } else {
+                        // Task succeeded. The data was saved in the sync store.
+                        print("SUCCESSFULLY UPDATED USER NEW SITE PREFS")
+                        completion(nil)
+                    }
+                    
+                    return task
+                })
+            }
+            else{
+                print("ERROR! COULDNT CONVERT NEW SITE PREFS TO JSONSTRING")
+            }
         })
     }
     
@@ -250,8 +262,107 @@ class CognitoUserManager
         }
     }
     
+    // *********************************************** LOGIN AND LOGOUT *******************************************************************************************
     
-    // ************************************* PRIVATE HELPER FUNCTIONS **************************************************************
+    // initialize the cognito by getting the identity id from the facebook access token
+    func initializeAuthorizedCognito(fbAccessTokenString: String, completion: @escaping ((_ error:NSError?) -> Void))
+    {
+        // get authorized AWS credentials
+        self.credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USWest2, identityPoolId: "us-west-2:d5f1d3e5-446b-4726-96cc-4faca9cd8ecb", identityProviderManager: FacebookCognitoIdentityProvider(tokens: fbAccessTokenString))
+        self.configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2 , credentialsProvider:credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        //        if credentialsProvider?.identityId != nil {
+        //            print("Cognito id: \(credentialsProvider!.identityId)")
+        //            // perform first time setup IF its a new user
+        //            CognitoUserManager.sharedInstance.updateSyncClient()
+        //            CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup()
+        //            completion(nil)
+        //        }
+        //        else {
+        //            print("THE CREDENTNTIALS MANAGER DIDN'T SET UP ")
+        //        }
+        
+        // Ensures I'm waiting until the credentials provider is set up
+        let waitGroup = DispatchGroup()
+        
+        credentialsProvider?.getIdentityId().continueWith(block: { (task) -> AnyObject? in
+            
+            waitGroup.enter()
+            
+            if (task.error != nil) {
+                waitGroup.leave()
+            }
+            else {
+                // the task result will contain the identity id
+                let cognitoId = task.result!
+                print("Cognito id: \(cognitoId)")
+                
+                waitGroup.leave()
+            }
+            
+            waitGroup.notify(queue: .main)
+            {
+                if (task.error == nil) {
+                    // perform first time setup IF its a new user
+                    CognitoUserManager.sharedInstance.updateSyncClient(completion: {(err) -> Void in
+                        if (err != nil){
+                            print("ERROR SETTING UP THE COGNITO MANAGER SYNC CLIENT")
+                            completion(err)
+                        }
+                        else {
+                            CognitoUserManager.sharedInstance.firstTimeUserCheckAndSetup(completion: {(e) -> Void in
+                                if (e != nil){
+                                    completion(e)
+                                }
+                                else{
+                                    completion(nil)
+                                }
+                            })
+                            
+                        }
+                    })
+                }
+            }
+            
+            return task;
+        })
+    }
+
+    
+    func logoutCurrentUser()
+    {
+
+        
+        // clear the credentials
+        credentialsProvider?.clearCredentials()
+        credentialsProvider?.clearKeychain()
+        credentialsProvider?.invalidateCachedTemporaryCredentials()
+        
+        assert(credentialsProvider?.identityId == nil)
+        
+        // this just doesn't work because whenever I try to sync the preferences again after getting them I end up saving an empty set of them
+        // clear all dataset information from local storage
+        var setNames = [String]()
+        for set in syncClient!.listDatasets(){
+            setNames.append(set.name!)
+        }
+        for name in setNames{
+            let dataset = self.syncClient!.openOrCreateDataset(name)
+            dataset.clear()
+            print("BEFORE LOGOUT, CLEARED DATASET: \(name)")
+        }
+        
+        if syncClient != nil {
+            syncClient!.wipe()
+            syncClient = nil
+        }
+        //syncClient = nil
+        FBSDKAccessToken.setCurrent(nil)
+        FBSDKProfile.setCurrent(nil)
+    }
+    
+    // ************************************* PRIVATE HELPER FUNCTIONS ********************************************************************************************
     
     private func convertJSONStringToSitePrefsArray(jsonString: String) -> [Array<SitePref>]?
     {
