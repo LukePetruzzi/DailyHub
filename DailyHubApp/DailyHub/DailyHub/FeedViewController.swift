@@ -117,12 +117,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if userSitePrefs.count > 0
             {
-                print("THIS IS PREFS: \(prefs)")
-
-                
                 Database.getDatabaseInfo(completionHandler: {(data, error) in
                     if let d = data {
-                        print("THIS IS DATA: \(d)")
 
                         let json = d.data(using: .utf8)
                         
@@ -170,6 +166,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                             self.loadingOverlay.removeFromSuperview()
                             self.tableView?.reloadData()
                         }
+                        self.refreshControl.endRefreshing()
                         self.showAlertWithError(nil, stringBeforeMessage: "There's nothing to see here")
                     }
                 })
@@ -179,6 +176,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.loadingOverlay.removeFromSuperview()
                     self.tableView?.reloadData()
                 }
+                self.refreshControl.endRefreshing()
                 self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be loaded")
             }
         }
@@ -187,7 +185,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.loadingOverlay.removeFromSuperview()
                 self.tableView?.reloadData()
             }
-            self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be loaded")
+            self.refreshControl.endRefreshing()
+            self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be retrieved from our database")
         }
     }
     
