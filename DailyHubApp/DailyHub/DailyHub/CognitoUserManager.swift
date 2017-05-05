@@ -38,7 +38,6 @@ class CognitoUserManager
 
             if task.error != nil {
                 print("ERROR WHEN GETTING DATASET METADATA: \(task.error!.localizedDescription)")
-
             }
 
             for set in self.syncClient!.listDatasets(){
