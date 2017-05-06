@@ -89,6 +89,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         CognitoUserManager.sharedInstance.updateUserSitePrefs(newPrefs: userSitePrefs)
         delegate?.userSitePrefs = userSitePrefs[0]
         delegate?.refreshTable()
+        delegate?.tableView?.setContentOffset(CGPoint.zero, animated: true)
         self.dismiss(animated: true, completion: nil)
     }
     
