@@ -41,16 +41,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let waitGroup = DispatchGroup()
             waitGroup.enter()
             
-            DispatchQueue.main.async {
-                CognitoUserManager.sharedInstance.initializeAuthorizedCognito(fbAccessTokenString: FBSDKAccessToken.current().tokenString, completion: {(err) -> Void in
+            CognitoUserManager.sharedInstance.initializeAuthorizedCognito(fbAccessTokenString: FBSDKAccessToken.current().tokenString, completion: {(err) -> Void in
 
-                    if err != nil {
-                        print("ERROR GETTING LOGGING IN COGNITO: \(err!.localizedDescription)")
-                    }
-                    waitGroup.leave()
-                })
-            }
+                if err != nil {
+                    print("ERROR LOGGING IN COGNITO: \(err!.localizedDescription)")
+                }
+                waitGroup.leave()
+            })
+            
             waitGroup.notify(queue: .main) {
+                print("SWITCHING TO MAIN VIEW CONTROLLERS NOW")
                 delegate.switchToMainViewControllers()
             }
         }
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        
+        CognitoUserManager.sharedInstance.logoutCurrentUser()
     }
     
     override func didReceiveMemoryWarning() {

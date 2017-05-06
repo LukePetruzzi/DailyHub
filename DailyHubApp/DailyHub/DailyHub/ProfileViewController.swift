@@ -140,7 +140,7 @@ class ProfileViewController: UIViewController {
         let delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate!
         
         // authorize the user and open the app's feed view
-        delegate.logoutCurrentUser()
+        CognitoUserManager.sharedInstance.logoutCurrentUser()
         delegate.switchToLoginViewController()
     }
 }

@@ -12,13 +12,7 @@ import SDWebImage
 
 
 
-struct ContentInfo {
-    var title:String?
-    var author:String?
-    var url:String?
-    var thumbnail:String?
-    var description:String?
-}
+
 
 private struct Metrics {
     static let maxImageHeight:CGFloat = 300
@@ -123,12 +117,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if userSitePrefs.count > 0
             {
-                print("THIS IS PREFS: \(prefs)")
-
-                
                 Database.getDatabaseInfo(completionHandler: {(data, error) in
                     if let d = data {
-                        print("THIS IS DATA: \(d)")
 
                         let json = d.data(using: .utf8)
                         
@@ -176,6 +166,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                             self.loadingOverlay.removeFromSuperview()
                             self.tableView?.reloadData()
                         }
+                        self.refreshControl.endRefreshing()
                         self.showAlertWithError(nil, stringBeforeMessage: "There's nothing to see here")
                     }
                 })
@@ -185,6 +176,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.loadingOverlay.removeFromSuperview()
                     self.tableView?.reloadData()
                 }
+                self.refreshControl.endRefreshing()
                 self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be loaded")
             }
         }
@@ -193,7 +185,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.loadingOverlay.removeFromSuperview()
                 self.tableView?.reloadData()
             }
-            self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be loaded")
+            self.refreshControl.endRefreshing()
+            self.showAlertWithError(nil, stringBeforeMessage: "Your preferences couldn't be retrieved from our database")
         }
     }
     
@@ -298,13 +291,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favorite") { (rowAction, indexPath) in
             
+            let sect = self.userSitePrefs[indexPath.section].siteName
+            let info = self.masterContent[sect]?[indexPath.row]
             
+            if info != nil{
+                CognitoUserManager.sharedInstance.addPostToFavorites(siteName: sect, contentInfo: info!)
+            }
+            else {
+                self.showAlertWithError(nil, stringBeforeMessage: "Couldn't get contentInfo for favorite")
+            }
             
         }
         favoriteAction.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
         
         return [favoriteAction]
     }
+
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [UIInterfaceOrientationMask.portrait]
