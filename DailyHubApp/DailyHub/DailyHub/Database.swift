@@ -45,6 +45,15 @@ class Database {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: Date())
     }
+    
+    class func getFormattedESTDateAndTime() -> String{
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss:SSSS"
+        return formatter.string(from: Date())
+    }
 
     
 }
