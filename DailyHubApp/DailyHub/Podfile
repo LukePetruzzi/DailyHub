@@ -29,4 +29,7 @@ target :'DailyHub' do
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
     pod 'SDWebImage'
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Auth'
 end

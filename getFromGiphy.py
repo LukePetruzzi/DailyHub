@@ -12,6 +12,9 @@ def getFromGiphy():
 	
 	results = r.json()['data']
 
+	#print(json.dumps(results, indent=4, sort_keys=True))
+
+
 	# create a list for each dict item
 	resultList = list()
 
@@ -28,7 +31,7 @@ def getFromGiphy():
 		singleDict['author'] = result['username']
 	
 		# print URL to thumbnail (can change to more HQ)
-		singleDict['thumbnail'] = result['images']['downsized']['url']
+		singleDict['thumbnail'] = result['images']['downsized_large']['url']
 
 		# print the link to the article
 		singleDict['url'] = result['url']
@@ -48,4 +51,5 @@ def getFromGiphy():
 	outerDict['Giphy'] = resultList
 	return outerDict
 
+#getFromGiphy()
 # print(json.dumps(getFromGiphy(), indent=4, sort_keys=True))

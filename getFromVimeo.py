@@ -36,7 +36,7 @@ def getFromVimeo():
 		singleDict['author'] = result['user']['name']
 
 		# get the thumbnail image of the video (this is the lowest res)
-		singleDict['thumbnail'] = result['pictures']['sizes'][1]['link']
+		singleDict['thumbnail'] = result['pictures']['sizes'][3]['link']
 
 		# get the youtube url
 		singleDict['url'] = result['link']

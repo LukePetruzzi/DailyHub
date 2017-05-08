@@ -9,7 +9,9 @@
 import UIKit
 import Foundation
 import SDWebImage
-
+import FirebaseAnalytics
+import FirebaseDatabase
+import FBSDKLoginKit
 
 private struct Metrics {
     static let maxImageHeight:CGFloat = 300
@@ -21,6 +23,9 @@ private struct Metrics {
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
+    
+    var user : String = ""
+    
     var masterData: String = ""
     
     var tableView: UITableView?
@@ -30,8 +35,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var refreshControl: UIRefreshControl!
     
     var masterContent = [String:[ContentInfo]]()
-
+    
     var userSitePrefs:[SitePref] = [SitePref]()
+    
+    var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +64,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView?.dataSource = self
         tableView?.register(FeedTableTitleCell.self, forHeaderFooterViewReuseIdentifier: "FeedTableTitleCell")
         tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
-//        tableView?.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
+        //        tableView?.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
@@ -66,7 +73,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = 500.0
-
+        
         
         self.view.addSubview(tableView!)
         
@@ -80,14 +87,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         loadingOverlay.addSubview(indicator)
         
         // CREATING THE CONSTRAINTS RIGHT HERE IN OUR VIEWDIDLOAD MAY BE CAUSING THE CRASHES?
-//        let views: [String: UIView] = ["t": tableView!]
-//        var constraints: [NSLayoutConstraint] = []
-//        
-//        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]|", options: [], metrics: nil, views: views)
-//        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
-//        
-//        NSLayoutConstraint.activate(constraints)
+        //        let views: [String: UIView] = ["t": tableView!]
+        //        var constraints: [NSLayoutConstraint] = []
+        //
+        //        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
+        //        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]|", options: [], metrics: nil, views: views)
+        //        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
+        //
+        //        NSLayoutConstraint.activate(constraints)
         
         // add loading view and refresh the table when it loads
         // add on the loading overlay
@@ -103,12 +110,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
- 
+    
     func refreshTable() {
         
         if let prefs = CognitoUserManager.sharedInstance.retrieveUserSitePrefs(feedNumber: 0)?[0]
@@ -119,7 +126,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             {
                 Database.getDatabaseInfo(completionHandler: {(data, error) in
                     if let d = data {
-
+                        
                         let json = d.data(using: .utf8)
                         
                         do {
@@ -128,7 +135,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 // gets the content for the number rank needed
                                 var currentResults: [ContentInfo] = []
                                 for i in 0..<item.numPosts {
-                                
+                                    
                                     let currentSiteContentDict = content[item.siteName]?[i] as AnyObject
                                     let title = currentSiteContentDict["title"] as? String
                                     let author = currentSiteContentDict["author"] as? String
@@ -150,7 +157,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                         catch {
                             print("Error deserializing JSON: \(error.localizedDescription)")
                         }
-
+                        
                         DispatchQueue.main.async {
                             self.loadingOverlay.removeFromSuperview()
                             self.tableView?.reloadData()
@@ -261,7 +268,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.updateImgViewHeightConstraint(constant: 0)
             cell.imgView.image = nil
         }
-
+        
         
         return cell
     }
@@ -288,6 +295,66 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         else{
             self.showAlertWithError(nil, stringBeforeMessage: "\(sect) didn't provide us with a url for this post")
         }
+        let newsItem = masterContent[sect]?[indexPath.row]
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .full
+        formatter.dateStyle = .full
+        let dater = formatter.string(from: NSDate() as Date)
+        
+        let newsValues = [
+            "title": newsItem?.title,
+            "author": newsItem?.author,
+            "url": newsItem?.url,
+            "thumbnail":newsItem?.thumbnail,
+            "description":newsItem?.description,
+            "time": dater]
+        loadFacebookData(completion: {(err) -> Void in
+            if err != nil{
+                print("ERROR GETTIN FACEBOOK NAME: \(err!)")
+            }
+            else{
+                let USERTIME = dater + self.user
+                self.ref?.updateChildValues([
+                    USERTIME: newsValues
+                    ])
+            }
+        })
+        
+        
+    }
+    
+    func loadFacebookData(completion: @escaping ((_ error:NSError?) -> Void))
+    {
+        var userId:String? = nil
+        var userName:String? = nil
+        
+        // wait to load the image and name
+        let waitGroup = DispatchGroup()
+        waitGroup.enter()
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, relationship_status"]).start(completionHandler: {(connection, result, error) -> Void in
+            if ((error) != nil)
+            {
+                completion(error! as NSError)
+            }
+            else{
+                let res = result as! [String:AnyObject]
+                userId = res["id"] as! String?
+                userName = res["name"] as! String?
+            }
+            
+            // leave dispatch group when finished
+            waitGroup.leave()
+        })
+        waitGroup.notify(queue: .main) {
+            // set name and ID
+            if (userId != nil) {
+                let url =  URL(string: "http://graph.facebook.com/\(userId!)/picture?type=large")
+                self.user = userId!
+                completion(nil)
+            }
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -309,7 +376,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return [favoriteAction]
     }
-
+    
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [UIInterfaceOrientationMask.portrait]
