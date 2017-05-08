@@ -8,6 +8,9 @@
 
 import Foundation
 import WebKit
+import FirebaseAnalytics
+import FirebaseDatabase
+import FBSDKLoginKit
 
 class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegate {
     
@@ -22,7 +25,8 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
     var backButton: UIButton = UIButton()
     var forwardButton: UIButton = UIButton()
     var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
+    var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
+    var user : String = ""
     
     var urlStringToLoad: String = ""
     var logoToShow: String = ""
@@ -166,6 +170,49 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         webView.reload()
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    func loadFacebookData(completion: @escaping ((_ error:NSError?) -> Void))
+    {
+        var userId:String? = nil
+        var userName:String? = nil
+        
+        // wait to load the image and name
+        let waitGroup = DispatchGroup()
+        waitGroup.enter()
+        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, relationship_status"]).start(completionHandler: {(connection, result, error) -> Void in
+            if ((error) != nil)
+            {
+                completion(error! as NSError)
+            }
+            else{
+                let res = result as! [String:AnyObject]
+                userId = res["id"] as! String?
+                userName = res["name"] as! String?
+            }
+            
+            // leave dispatch group when finished
+            waitGroup.leave()
+        })
+        waitGroup.notify(queue: .main) {
+            // set name and ID
+            if (userId != nil) {
+                let url =  URL(string: "http://graph.facebook.com/\(userId!)/picture?type=large")
+                self.user = userId!
+                completion(nil)
+            }
+        }
+        
+    }
+    
+    
+    
     func upButtonTapped(sender: UIButton) {
         
         if (currSite > 0) {
@@ -185,7 +232,35 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             
             backButton.isEnabled = false
             forwardButton.isEnabled = false
+            let newsItem = masterContent[logoToShow]?[currPostForSite]
+            
+            
+            let formatter = DateFormatter()
+            formatter.timeStyle = .full
+            formatter.dateStyle = .full
+            let dater = formatter.string(from: NSDate() as Date)
+            
+            let newsValues = [
+                "title": newsItem?.title,
+                "author": newsItem?.author,
+                "url": newsItem?.url,
+                "thumbnail":newsItem?.thumbnail,
+                "description":newsItem?.description,
+                "time": dater]
+            loadFacebookData(completion: {(err) -> Void in
+                if err != nil{
+                    print("ERROR GETTIN FACEBOOK NAME: \(err!)")
+                }
+                else{
+                    let USERTIME = dater + self.user
+                    self.ref?.updateChildValues([
+                        USERTIME: newsValues
+                        ])
+                }
+            })
         }
+            
+            
             
         else if currPostForSite > 0 {
             currPostForSite -= 1
@@ -219,6 +294,34 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             
             backButton.isEnabled = false
             forwardButton.isEnabled = false
+            
+            let newsItem = masterContent[logoToShow]?[currPostForSite]
+            
+            
+            let formatter = DateFormatter()
+            formatter.timeStyle = .full
+            formatter.dateStyle = .full
+            let dater = formatter.string(from: NSDate() as Date)
+            
+            let newsValues = [
+                "title": newsItem?.title,
+                "author": newsItem?.author,
+                "url": newsItem?.url,
+                "thumbnail":newsItem?.thumbnail,
+                "description":newsItem?.description,
+                "time": dater]
+            loadFacebookData(completion: {(err) -> Void in
+                if err != nil{
+                    print("ERROR GETTIN FACEBOOK NAME: \(err!)")
+                }
+                else{
+                    let USERTIME = dater + self.user
+                    self.ref?.updateChildValues([
+                        USERTIME: newsValues
+                        ])
+                }
+            })
+            
         }
             
         else if (currPostForSite < (masterContent[logoToShow]?.count)! - 1) {

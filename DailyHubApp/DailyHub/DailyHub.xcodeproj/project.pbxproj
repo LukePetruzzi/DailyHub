@@ -23,6 +23,7 @@
 		400951B91EB293EB001B856C /* CustomStructsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400951B81EB293EB001B856C /* CustomStructsManager.swift */; };
 		400951BB1EB2D57C001B856C /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400951BA1EB2D57C001B856C /* DiscoverViewController.swift */; };
 		403127281EB95D1700FC0BC7 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403127271EB95D1700FC0BC7 /* ViewControllerExtension.swift */; };
+		4031272A1EC10D4600FC0BC7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 403127291EC10D4600FC0BC7 /* GoogleService-Info.plist */; };
 		4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16A1E85C1A200805E40 /* AppDelegate.swift */; };
 		4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4052A16C1E85C1A200805E40 /* FeedViewController.swift */; };
 		4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */; };
@@ -47,6 +48,7 @@
 		400951B81EB293EB001B856C /* CustomStructsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomStructsManager.swift; sourceTree = "<group>"; };
 		400951BA1EB2D57C001B856C /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		403127271EB95D1700FC0BC7 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
+		403127291EC10D4600FC0BC7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4052A1671E85C1A200805E40 /* DailyHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4052A16A1E85C1A200805E40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4052A16C1E85C1A200805E40 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				400192481E96C257008CC191 /* CustomUIElements */,
 				400192471E96C242008CC191 /* View Controllers */,
 				4052A1741E85C1A200805E40 /* Assets.xcassets */,
+				403127291EC10D4600FC0BC7 /* GoogleService-Info.plist */,
 				4052A1791E85C1A200805E40 /* Info.plist */,
 				4052A1711E85C1A200805E40 /* DailyHub.xcdatamodeld */,
 			);
@@ -197,7 +200,7 @@
 				TargetAttributes = {
 					4052A1661E85C1A200805E40 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = JXML5VQZ23;
+						DevelopmentTeam = XYVTTDU57E;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */,
+				4031272A1EC10D4600FC0BC7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,11 +412,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JXML5VQZ23;
+				DEVELOPMENT_TEAM = XYVTTDU57E;
 				INFOPLIST_FILE = DailyHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lukepetruzzi.DailyHubs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ananyaJoshi.DailyHubs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -426,11 +430,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JXML5VQZ23;
+				DEVELOPMENT_TEAM = XYVTTDU57E;
 				INFOPLIST_FILE = DailyHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lukepetruzzi.DailyHubs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ananyaJoshi.DailyHubs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
