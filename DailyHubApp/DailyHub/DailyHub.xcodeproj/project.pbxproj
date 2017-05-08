@@ -11,6 +11,7 @@
 		325242FE1E93340700C280F3 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FD1E93340700C280F3 /* Database.swift */; };
 		325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F79981EA8371800F523FA /* PreferencesViewController.swift */; };
 		325F799B1EAEC14300F523FA /* PreferencesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F799A1EAEC14300F523FA /* PreferencesCell.swift */; };
+		328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC521EC11BB800883FE9 /* HelpViewController.swift */; };
 		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
@@ -35,6 +36,7 @@
 		325242FD1E93340700C280F3 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		325F79981EA8371800F523FA /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		325F799A1EAEC14300F523FA /* PreferencesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesCell.swift; sourceTree = "<group>"; };
+		328ADC521EC11BB800883FE9 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				400192451E96C234008CC191 /* ProfileViewController.swift */,
 				325F79981EA8371800F523FA /* PreferencesViewController.swift */,
 				400951BA1EB2D57C001B856C /* DiscoverViewController.swift */,
+				328ADC521EC11BB800883FE9 /* HelpViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				400951B71EAEC7F9001B856C /* SiteManager.swift in Sources */,
 				4052A1731E85C1A200805E40 /* DailyHub.xcdatamodeld in Sources */,
 				325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */,
+				328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */,
 				400191B41E93191D008CC191 /* LoginViewController.swift in Sources */,
 				403127281EB95D1700FC0BC7 /* ViewControllerExtension.swift in Sources */,
 				325242FE1E93340700C280F3 /* Database.swift in Sources */,
