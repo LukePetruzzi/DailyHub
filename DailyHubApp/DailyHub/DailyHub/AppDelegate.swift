@@ -52,14 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // array of our view controllers for the tab controller.
         tabController?.viewControllers = [feedNavController!, discoverNavController!, profileNavController!]
-        feedViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "feed"), tag: 0)
-        discoverViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "explore"), tag: 1)
-        profileViewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile"), tag: 2)
+        let item1 = UITabBarItem(title: nil, image: UIImage(named: "feed"), tag: 0)
+        item1.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        feedViewController?.tabBarItem = item1
         
+        let item2 = UITabBarItem(title: nil, image: UIImage(named: "explore"), tag: 1)
+        item2.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        discoverViewController?.tabBarItem = item2
         
+        let item3 = UITabBarItem(title: nil, image: UIImage(named: "profile"), tag: 2)
+        item3.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        profileViewController?.tabBarItem = item3
         
+        tabController?.tabBar.tintColor = UIColor(red:1.00, green:0.40, blue:0.23, alpha:1.0)
         
-
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         
