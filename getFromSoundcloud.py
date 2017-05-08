@@ -39,6 +39,9 @@ def getFromSoundcloud():
 
 		# print URL to thumbnail
 		singleDict['thumbnail'] = result['track']['artwork_url']
+		# make it the 400x400 thumbnail titled "crop"
+		if singleDict['thumbnail'] != None:
+			singleDict['thumbnail'] = singleDict['thumbnail'].replace('large','crop')
 
 		# print the link to the song
 		singleDict['url'] = result['track']['permalink_url']

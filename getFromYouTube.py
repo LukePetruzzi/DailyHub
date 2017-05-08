@@ -35,7 +35,7 @@ def getFromYouTube():
 		singleDict['description'] = result['snippet']['description']
 
 		# get the thumbnail image of the video (this is the lowest res)
-		singleDict['thumbnail'] = result['snippet']['thumbnails']['default']['url']
+		singleDict['thumbnail'] = result['snippet']['thumbnails']['high']['url']
 
 		# get the youtube url
 		singleDict['url'] = 'https://www.youtube.com/watch?v=' + result['id']

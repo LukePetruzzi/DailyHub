@@ -13,6 +13,9 @@ def getFromImgur():
 
 	results = r.json()['data']
 
+	# print(json.dumps(results, indent=4, sort_keys=True))
+
+
 	# create a list for each item that is a dict of data
 	resultList = list()
 	i = 0
@@ -29,9 +32,9 @@ def getFromImgur():
 
 		# get the thumbnail
 		if 'cover' not in result:
-			singleDict['thumbnail'] = 'https://i.imgur.com/' + result['id'] + 'b.jpg'
+			singleDict['thumbnail'] = 'https://i.imgur.com/' + result['id'] + '.jpg'
 		else:
-			singleDict['thumbnail'] = 'https://i.imgur.com/' + result['cover'] + 'b.jpg'
+			singleDict['thumbnail'] = 'https://i.imgur.com/' + result['cover'] + '.jpg'
 
 		# get the imgur url
 		singleDict['url'] = result['link']
@@ -49,7 +52,9 @@ def getFromImgur():
 	outerDict['Imgur'] = resultList
 	return outerDict
 
+
 # getFromImgur()
+
 # print(json.dumps(getFromImgur(), indent=4, sort_keys=True))
 
 
