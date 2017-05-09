@@ -41,11 +41,15 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.isScrollEnabled = true
         
         checkView.backgroundColor = UIColor(red:0.00, green:1.00, blue:0.60, alpha:1.0)
-        checkView.setImage(UIImage(named: "whiteCheck"), for: .normal)
+        checkView.setImage(UIImage(named: "whiteCheck")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        checkView.imageView?.contentMode = .scaleAspectFit
+        checkView.tintColor = UIColor.white
         checkView.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
         closeView.backgroundColor = UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0)
-        closeView.setImage(UIImage(named: "whiteClose"), for: .normal)
+        closeView.setImage(UIImage(named: "close1")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        closeView.imageView?.contentMode = .scaleAspectFit
+        closeView.tintColor = UIColor.white
         closeView.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
 
         numPostView.frame = self.view.frame;
@@ -89,7 +93,9 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         CognitoUserManager.sharedInstance.updateUserSitePrefs(newPrefs: userSitePrefs)
         delegate?.userSitePrefs = userSitePrefs[0]
         delegate?.refreshTable()
-        delegate?.tableView?.setContentOffset(CGPoint.zero, animated: true)
+        if (userSitePrefs[0].count > 0) {
+            delegate?.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     
