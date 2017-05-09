@@ -12,6 +12,9 @@
 		325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F79981EA8371800F523FA /* PreferencesViewController.swift */; };
 		325F799B1EAEC14300F523FA /* PreferencesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F799A1EAEC14300F523FA /* PreferencesCell.swift */; };
 		328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC521EC11BB800883FE9 /* HelpViewController.swift */; };
+		328ADC571EC14E6200883FE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */; };
+		328ADC5A1EC14FBC00883FE9 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC581EC14FBC00883FE9 /* SplashScreen.swift */; };
+		328ADC5B1EC14FBC00883FE9 /* SplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328ADC591EC14FBC00883FE9 /* SplashScreen.xib */; };
 		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
@@ -38,6 +41,9 @@
 		325F79981EA8371800F523FA /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		325F799A1EAEC14300F523FA /* PreferencesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesCell.swift; sourceTree = "<group>"; };
 		328ADC521EC11BB800883FE9 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		328ADC581EC14FBC00883FE9 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		328ADC591EC14FBC00883FE9 /* SplashScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreen.xib; sourceTree = "<group>"; };
 		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +131,9 @@
 		4052A15E1E85C1A200805E40 = {
 			isa = PBXGroup;
 			children = (
+				328ADC581EC14FBC00883FE9 /* SplashScreen.swift */,
+				328ADC591EC14FBC00883FE9 /* SplashScreen.xib */,
+				328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */,
 				4052A1691E85C1A200805E40 /* DailyHub */,
 				4052A1681E85C1A200805E40 /* Products */,
 				6F9DD673B8ACD950EA560A86 /* Pods */,
@@ -200,7 +209,6 @@
 				TargetAttributes = {
 					4052A1661E85C1A200805E40 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = XYVTTDU57E;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -228,7 +236,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				328ADC5B1EC14FBC00883FE9 /* SplashScreen.xib in Resources */,
 				4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */,
+				328ADC571EC14E6200883FE9 /* Launch Screen.storyboard in Resources */,
 				4031272A1EC10D4600FC0BC7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +313,7 @@
 				325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */,
 				328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */,
 				400191B41E93191D008CC191 /* LoginViewController.swift in Sources */,
+				328ADC5A1EC14FBC00883FE9 /* SplashScreen.swift in Sources */,
 				403127281EB95D1700FC0BC7 /* ViewControllerExtension.swift in Sources */,
 				325242FE1E93340700C280F3 /* Database.swift in Sources */,
 				4052A16B1E85C1A200805E40 /* AppDelegate.swift in Sources */,
@@ -412,7 +423,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XYVTTDU57E;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DailyHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -430,7 +441,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XYVTTDU57E;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DailyHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -60,7 +60,7 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         numPostView.addSubview(pickerView)
         
         let closePickerButton = UIButton(frame: CGRect(x: self.view.bounds.width/2 - 25, y: self.view.bounds.height/2 + 100, width: 50, height: 50))
-        closePickerButton.setImage(UIImage(named: "checkCircleWhite"), for: .normal)
+        closePickerButton.setImage(UIImage(named: "checkCircleWhite1"), for: .normal)
         closePickerButton.addTarget(self, action: #selector(closePickerTapped), for: .touchUpInside)
         numPostView.addSubview(closePickerButton)
         

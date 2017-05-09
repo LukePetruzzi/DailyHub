@@ -43,19 +43,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:1.00, green:0.40, blue:0.23, alpha:1.0), NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0), NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
         navigationController?.navigationBar.topItem?.title = "dh"
 
         let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.tableView = UITableView(frame: frame)
         let rankingsButton = UIBarButtonItem(image: UIImage(named: "ranking-3"), style: .plain, target: self, action: #selector(rankingButtonTapped))
-        rankingsButton.tintColor = UIColor(red:1.00, green:0.40, blue:0.23, alpha:1.0)
+        rankingsButton.tintColor = UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0)
         navigationItem.setRightBarButton(rankingsButton, animated: true)
         
         let helpButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: (self.navigationController?.navigationBar.frame.size.height)! - 15))
         helpButton.imageView?.contentMode = .scaleAspectFit
         helpButton.setImage(UIImage(named:"help1")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        helpButton.tintColor = UIColor(red:1.00, green:0.40, blue:0.23, alpha:1.0)
+        helpButton.tintColor = UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0)
         helpButton.addTarget(self, action: #selector(helpButtonTapped), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: helpButton)
         navigationItem.setLeftBarButton(barButton, animated: true)
@@ -370,6 +370,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             else {
                 self.showAlertWithError(nil, stringBeforeMessage: "Couldn't get contentInfo for favorite")
             }
+            
+            self.tableView?.reloadRows(at: [indexPath], with: .right)
+            
             
         }
         favoriteAction.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
