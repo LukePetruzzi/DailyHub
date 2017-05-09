@@ -77,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this should our app launch screen or something like "Attepting to log you in"
 //        let splashScreen = SplashScreen(nibName: "SplashScreen", bundle: nil)
         self.window?.rootViewController = loginViewController
+        loginViewController?.loginButton.isHidden = true
 
         // go to login screen if not logged in
         let waitGroup = DispatchGroup()
@@ -127,6 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func switchToLoginViewController()
     {
+        loginViewController?.loginButton.isHidden = false
         self.window?.rootViewController = self.loginViewController
     }
     
