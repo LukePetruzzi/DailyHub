@@ -26,8 +26,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var user : String = ""
     
-    var masterData: String = ""
-    
     var tableView: UITableView?
     
     var loadingOverlay: UIView!
@@ -43,9 +41,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0), NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
-        navigationController?.navigationBar.topItem?.title = "dh"
-
+        let logoImageTitle = UIButton(frame: CGRect(x: 0, y: 0, width: 45, height: 45))
+        logoImageTitle.imageView?.contentMode = .scaleAspectFit
+        logoImageTitle.setImage(UIImage(named:"logo"), for: .normal)
+        logoImageTitle.addTarget(self, action: #selector(logoButtonTapped), for: .touchUpInside)
+        self.navigationItem.titleView = logoImageTitle
+        
         let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.tableView = UITableView(frame: frame)
         let rankingsButton = UIBarButtonItem(image: UIImage(named: "ranking-3"), style: .plain, target: self, action: #selector(rankingButtonTapped))
@@ -114,6 +115,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func logoButtonTapped() {
+        
+        if (masterContent.count > 0) {
+            tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     func refreshTable() {
