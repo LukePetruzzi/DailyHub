@@ -23,8 +23,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orange,
-                                                                        NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0), NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
         navigationController?.navigationBar.topItem?.title = "Discover"
         
         

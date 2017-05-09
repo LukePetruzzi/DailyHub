@@ -75,9 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         // this should our app launch screen or something like "Attepting to log you in"
-//        let splashScreen = SplashScreen(nibName: "SplashScreen", bundle: nil)
-        self.window?.rootViewController = loginViewController
-        loginViewController?.loginButton.isHidden = true
+        let splashScreen = SplashScreen()
+        self.window?.rootViewController = splashScreen
+//        loginViewController?.loginButton.isHidden = true
 
         // go to login screen if not logged in
         let waitGroup = DispatchGroup()

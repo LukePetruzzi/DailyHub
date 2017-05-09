@@ -25,14 +25,14 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = UIColor(red:0.29, green: 0.29, blue:0.29, alpha: 1.0)
         
         // add header
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orange,
-                                                                        NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
-        navigationController?.navigationBar.topItem?.title = "dh"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0), NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
+        navigationController?.navigationBar.topItem?.title = "Profile"
         
         
         
         // label with name
         profileNameLabel.font = UIFont(name: "Avenir-Black", size: 16)
+        profileNameLabel.textColor = UIColor.white
         
         // logout button
         logoutButton.setTitle("Logout", for: .normal)

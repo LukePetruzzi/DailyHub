@@ -10,10 +10,21 @@ import UIKit
 
 class SplashScreen: UIViewController {
 
+    var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+//        self.view.backgroundColor = UIColor(red:0.16, green:0.16, blue:0.16, alpha:1.0)
+        self.view.backgroundColor = UIColor.white
+        loadingIndicator.frame = self.view.frame
+        loadingIndicator.activityIndicatorViewStyle = .gray
+        loadingIndicator.startAnimating()
+        
+        self.view.addSubview(loadingIndicator)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +32,5 @@ class SplashScreen: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -14,7 +14,6 @@
 		328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC521EC11BB800883FE9 /* HelpViewController.swift */; };
 		328ADC571EC14E6200883FE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */; };
 		328ADC5A1EC14FBC00883FE9 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC581EC14FBC00883FE9 /* SplashScreen.swift */; };
-		328ADC5B1EC14FBC00883FE9 /* SplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328ADC591EC14FBC00883FE9 /* SplashScreen.xib */; };
 		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
@@ -43,7 +42,6 @@
 		328ADC521EC11BB800883FE9 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		328ADC581EC14FBC00883FE9 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		328ADC591EC14FBC00883FE9 /* SplashScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreen.xib; sourceTree = "<group>"; };
 		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				328ADC581EC14FBC00883FE9 /* SplashScreen.swift */,
-				328ADC591EC14FBC00883FE9 /* SplashScreen.xib */,
 				328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */,
 				4052A1691E85C1A200805E40 /* DailyHub */,
 				4052A1681E85C1A200805E40 /* Products */,
@@ -237,7 +234,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				328ADC5B1EC14FBC00883FE9 /* SplashScreen.xib in Resources */,
 				4052A1751E85C1A200805E40 /* Assets.xcassets in Resources */,
 				328ADC571EC14E6200883FE9 /* Launch Screen.storyboard in Resources */,
 				4031272A1EC10D4600FC0BC7 /* GoogleService-Info.plist in Resources */,
