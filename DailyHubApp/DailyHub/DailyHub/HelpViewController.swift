@@ -30,6 +30,7 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.backgroundColor = UIColor.clear
         
         let blurEffect = UIBlurEffect(style: .dark)
+        helpView.frame = CGRect(x: 25, y: 25, width: self.view.frame.size.width - 50, height: self.view.frame.size.height - 50)
         helpView.effect = blurEffect
         helpView.layer.cornerRadius = 15
         helpView.clipsToBounds = true
@@ -58,7 +59,6 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        helpView.frame = CGRect(x: 25, y: 25, width: self.view.frame.size.width - 50, height: self.view.frame.size.height - 50)
     }
     
     func handlePanGesture(sender: UIPanGestureRecognizer) {
@@ -68,9 +68,7 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
         
         switch sender.state {
         case .began:
-            print("Your touch start position is \(location)")
-            print("Start location in image is \(boxLocation)")
-            
+
             animator.removeAllBehaviors()
             
             let centerOffset = UIOffset(horizontal: boxLocation.x - helpView.bounds.midX, vertical: boxLocation.y - helpView.bounds.midY)
@@ -80,17 +78,14 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
             
             
         case .ended:
-            print("Your touch end position is \(location)")
-            print("End location in image is \(boxLocation)")
             
             animator.removeAllBehaviors()
             
-            // 1
             let velocity = sender.velocity(in: self.view)
             let magnitude = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y))
             
             if magnitude > ThrowingThreshold {
-                let pushBehavior = UIPushBehavior(items: [helpView], mode: .instantaneous)
+                let pushBehavior = UIPushBehavior(items: [helpView], mode: .continuous)
                 pushBehavior.pushDirection = CGVector(dx: velocity.x / 10, dy: velocity.y / 10)
                 pushBehavior.magnitude = magnitude / ThrowingVelocityPadding
                 
@@ -101,11 +96,11 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
                 
                 itemBehavior = UIDynamicItemBehavior(items: [helpView])
                 itemBehavior.friction = 0.2
-                itemBehavior.allowsRotation = true
+//                itemBehavior.allowsRotation = true
                 itemBehavior.addAngularVelocity(CGFloat(angle), for: helpView)
                 animator.addBehavior(itemBehavior)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.throwViewAway()
                 }
 
@@ -119,7 +114,7 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func throwViewAway() {
-        self.dismiss(animated: false, completion: nil)
+        
     }
     
     func resetView() {

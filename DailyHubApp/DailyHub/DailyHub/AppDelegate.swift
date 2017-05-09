@@ -69,13 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         item3.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         profileViewController?.tabBarItem = item3
         
-        tabController?.tabBar.tintColor = UIColor(red:1.00, green:0.40, blue:0.23, alpha:1.0)
+        tabController?.tabBar.tintColor = UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         
         // this should our app launch screen or something like "Attepting to log you in"
-        self.window?.rootViewController = self.loginViewController
+//        let splashScreen = SplashScreen(nibName: "SplashScreen", bundle: nil)
+        self.window?.rootViewController = loginViewController
 
         // go to login screen if not logged in
         let waitGroup = DispatchGroup()
