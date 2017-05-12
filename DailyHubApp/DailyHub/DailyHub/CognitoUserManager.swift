@@ -228,33 +228,39 @@ class CognitoUserManager
     // A HASH OF THE CONTENT INFO (CANT USE THE FAVORITED POST JSON CUZ TIME WILL BE DIFFERENT) AS THE KEY. IF THE DATABASE CONTAINS THE KEY, ADD IT, ELSE, DONT
     func addPostToFavorites(siteName: String, contentInfo: ContentInfo)
     {
-        
         let dataset = self.syncClient!.openOrCreateDataset("favorites")
         
-        // get current date and set all parameters to a favoritedPost struct
-        let currentDateTime = Database.getFormattedESTDateAndTime()
-        print("TIME: \(currentDateTime)")
-        // add all contentinfo to the favoritedPost
-        print("CONTENT INFO: \(contentInfo)")
-        let favoritedPost = FavoritedPost(siteName: siteName, title: contentInfo.title, author: contentInfo.author, url: contentInfo.url, thumbnail: contentInfo.thumbnail, description: contentInfo.description)
-        // convert to json string
-        if let json = favoritedPost.toJSON() {
-            print("JSON OF INFO: \(json)")
+        // create a hash key of the ContentInfo by hashing the JSON string associated with it
+        if let key = contentInfo.toJSON()?.hashValue{
             
-            // save the favorite, keyed as the time it was saved
-            dataset.setString(json, forKey: currentDateTime)
-            
-            dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
+            // get current date and set all parameters to a favoritedPost struct
+            let currentDateTime = Database.getFormattedESTDateAndTime()
+            print("TIME: \(currentDateTime)")
+            // add all contentinfo to the favoritedPost
+            print("CONTENT INFO: \(contentInfo)")
+            let favoritedPost = FavoritedPost(dateTimeAdded: currentDateTime, siteName: siteName, title: contentInfo.title, author: contentInfo.author, url: contentInfo.url, thumbnail: contentInfo.thumbnail, description: contentInfo.description)
+            // convert to json string
+            if let json = favoritedPost.toJSON() {
+                print("JSON OF INFO: \(json)")
+                
+                // save the favorite, keyed as the time it was saved
+                dataset.setString(json, forKey: String(key))
+                
+                dataset.synchronize().continueWith(block: { (task) -> AnyObject? in
 
-                if task.isCancelled {
-                    print("TASK CANCELLED WHEN SYNCRONIZING FAVORITE TO DATABASE")
-                } else if task.error != nil {
-                    print("ERROR WHEN ADDING NEW SITE PREFS: \(task.error!.localizedDescription)")
-                } else {
-                    // Task succeeded. The data was saved in the sync store.
-                }
-                return task
-            })
+                    if task.isCancelled {
+                        print("TASK CANCELLED WHEN SYNCRONIZING FAVORITE TO DATABASE")
+                    } else if task.error != nil {
+                        print("ERROR WHEN ADDING NEW SITE PREFS: \(task.error!.localizedDescription)")
+                    } else {
+                        // Task succeeded. The data was saved in the sync store.
+                    }
+                    return task
+                })
+            }
+            else{
+                print("ERROR, POUNDED JSON OF FAVORITE's SAND")
+            }
         }
         else{
             print("ERROR, POUNDED JSON OF CONTENT INFO's SAND")

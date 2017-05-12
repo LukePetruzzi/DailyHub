@@ -14,6 +14,7 @@ struct SitePref: JSONSerializable {
 }
 
 struct FavoritedPost: JSONSerializable {
+    var dateTimeAdded:String
     var siteName:String
     var title:String?
     var author:String?
@@ -22,7 +23,7 @@ struct FavoritedPost: JSONSerializable {
     var description:String?
 }
 
-struct ContentInfo {
+struct ContentInfo: JSONSerializable {
     var title:String?
     var author:String?
     var url:String?
