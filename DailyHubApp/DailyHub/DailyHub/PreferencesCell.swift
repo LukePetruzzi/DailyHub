@@ -22,6 +22,14 @@ class PreferencesCell: UITableViewCell
         
         self.backgroundColor = UIColor(red:0.78, green: 0.78, blue:0.78, alpha: 0.6)
         self.arrangeUI()
+        
+        // get rid of constraints I DIDN'T FRIGGIN MAKE
+        //self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        for sub in self.contentView.subviews{
+            sub.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
