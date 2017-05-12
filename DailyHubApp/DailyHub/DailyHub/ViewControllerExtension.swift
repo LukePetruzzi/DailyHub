@@ -13,7 +13,6 @@ public let LOADING_OVERLAY_VIEW_TAG = 987432
 
 extension UIViewController
 {
-
     func showAlertWithError(_ error:NSError?, stringBeforeMessage:String?)
     {
         var preErrorString = stringBeforeMessage

@@ -20,7 +20,6 @@ private struct Metrics {
     static let bottomCellPadding:CGFloat = 25
 }
 
-
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     
@@ -335,7 +334,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func loadFacebookData(completion: @escaping ((_ error:NSError?) -> Void))
     {
         var userId:String? = nil
-        var userName:String? = nil
         
         // wait to load the image and name
         let waitGroup = DispatchGroup()
@@ -348,7 +346,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             else{
                 let res = result as! [String:AnyObject]
                 userId = res["id"] as! String?
-                userName = res["name"] as! String?
             }
             
             // leave dispatch group when finished
@@ -357,7 +354,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         waitGroup.notify(queue: .main) {
             // set name and ID
             if (userId != nil) {
-                let url =  URL(string: "http://graph.facebook.com/\(userId!)/picture?type=large")
                 self.user = userId!
                 completion(nil)
             }
@@ -388,8 +384,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return [favoriteAction]
     }
     
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        get {
+            return .portrait
+        }
+    }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return [UIInterfaceOrientationMask.portrait]
+    open override var shouldAutorotate: Bool {
+        get {
+            return false
+        }
+    }
+    
+    open override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        get {
+            return .portrait
+        }
     }
 }

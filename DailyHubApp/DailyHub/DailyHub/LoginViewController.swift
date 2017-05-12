@@ -48,9 +48,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         for sub in self.view.subviews{
             sub.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        let centerY = self.view.center.y
-        
+                
         
         self.view.addConstraint(NSLayoutConstraint(item: logoImageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: self.view.bounds.height / 4))
         self.view.addConstraint(NSLayoutConstraint(item: logoImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.view.bounds.width / 2))
