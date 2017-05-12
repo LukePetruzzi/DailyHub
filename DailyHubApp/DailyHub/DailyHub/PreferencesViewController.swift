@@ -299,6 +299,24 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         let str = NSAttributedString(string: String(value), attributes: [NSForegroundColorAttributeName: UIColor.white, NSParagraphStyleAttributeName: style])
         return str
     }
+    
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        get {
+            return .portrait
+        }
+    }
+    
+    open override var shouldAutorotate: Bool {
+        get {
+            return false
+        }
+    }
+    
+    open override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        get {
+            return .portrait
+        }
+    }
 
 }
 
