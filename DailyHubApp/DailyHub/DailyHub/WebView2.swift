@@ -43,12 +43,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         
         super.viewDidLoad()
         
-        webView.navigationDelegate = self
-        webView.scrollView.delegate = self
-        webView.backgroundColor = UIColor.white
-        webView.scrollView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
-        webView.scrollView.layer.masksToBounds = false
-        
         let blurEffect = UIBlurEffect(style: .extraLight)
         headerView.effect = blurEffect
         footerView.effect = blurEffect
@@ -113,12 +107,13 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         loadingIndicator.hidesWhenStopped = true
         headerView.addSubview(loadingIndicator)
         
+        setupWebview()
+        
         configureUpDownButtons()
         
         let url = URL(string: urlStringToLoad)!
         webView.load(URLRequest(url: url))
         
-        self.view.addSubview(self.webView)
         self.view.addSubview(self.headerView)
         self.view.addSubview(self.footerView)
     }
@@ -153,6 +148,17 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         loadingIndicator.frame = CGRect(x: self.view.frame.size.width - 90, y: 0, width: 45, height: 45)
     }
     
+    func setupWebview() {
+        webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 45)
+        webView.navigationDelegate = self
+        webView.scrollView.delegate = self
+        webView.backgroundColor = UIColor.white
+        webView.scrollView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
+        webView.scrollView.layer.masksToBounds = false
+        self.view.addSubview(self.webView)
+        self.view.sendSubview(toBack: webView)
+    }
+    
     func changeTintColorGray(sender: UIButton) {
         sender.tintColor = UIColor.lightGray
     }
@@ -170,18 +176,9 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         webView.reload()
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     func loadFacebookData(completion: @escaping ((_ error:NSError?) -> Void))
     {
         var userId:String? = nil
-        var userName:String? = nil
         
         // wait to load the image and name
         let waitGroup = DispatchGroup()
@@ -194,7 +191,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             else{
                 let res = result as! [String:AnyObject]
                 userId = res["id"] as! String?
-                userName = res["name"] as! String?
             }
             
             // leave dispatch group when finished
@@ -203,7 +199,6 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         waitGroup.notify(queue: .main) {
             // set name and ID
             if (userId != nil) {
-                let url =  URL(string: "http://graph.facebook.com/\(userId!)/picture?type=large")
                 self.user = userId!
                 completion(nil)
             }
@@ -227,6 +222,9 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             }
             newSiteToLoad = (masterContent[logoToShow]?[currPostForSite].url)!
             let url = URL(string: newSiteToLoad)
+            webView.removeFromSuperview()
+            webView = WKWebView()
+            setupWebview()
             webView.load(URLRequest(url: url!))
             logoButton.setImage(UIImage(named: logoToShow), for: .normal)
             
@@ -289,6 +287,9 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
             }
             newSiteToLoad = (masterContent[logoToShow]?[currPostForSite].url)!
             let url = URL(string: newSiteToLoad)
+            webView.removeFromSuperview()
+            webView = WKWebView()
+            setupWebview()
             webView.load(URLRequest(url: url!))
             logoButton.setImage(UIImage(named: logoToShow), for: .normal)
             

@@ -11,6 +11,8 @@
 		325242FE1E93340700C280F3 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325242FD1E93340700C280F3 /* Database.swift */; };
 		325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F79981EA8371800F523FA /* PreferencesViewController.swift */; };
 		325F799B1EAEC14300F523FA /* PreferencesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F799A1EAEC14300F523FA /* PreferencesCell.swift */; };
+		326970491EC64082002ADC70 /* NavControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326970481EC64082002ADC70 /* NavControllerExtension.swift */; };
+		3269704B1EC640A1002ADC70 /* TabControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269704A1EC640A1002ADC70 /* TabControllerExtension.swift */; };
 		328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC521EC11BB800883FE9 /* HelpViewController.swift */; };
 		328ADC571EC14E6200883FE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */; };
 		328ADC5A1EC14FBC00883FE9 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC581EC14FBC00883FE9 /* SplashScreen.swift */; };
@@ -39,6 +41,8 @@
 		325242FD1E93340700C280F3 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		325F79981EA8371800F523FA /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		325F799A1EAEC14300F523FA /* PreferencesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesCell.swift; sourceTree = "<group>"; };
+		326970481EC64082002ADC70 /* NavControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavControllerExtension.swift; sourceTree = "<group>"; };
+		3269704A1EC640A1002ADC70 /* TabControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabControllerExtension.swift; sourceTree = "<group>"; };
 		328ADC521EC11BB800883FE9 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		328ADC581EC14FBC00883FE9 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				403127271EB95D1700FC0BC7 /* ViewControllerExtension.swift */,
+				326970481EC64082002ADC70 /* NavControllerExtension.swift */,
+				3269704A1EC640A1002ADC70 /* TabControllerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */,
+				326970491EC64082002ADC70 /* NavControllerExtension.swift in Sources */,
 				400951B91EB293EB001B856C /* CustomStructsManager.swift in Sources */,
 				4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */,
 				325F799B1EAEC14300F523FA /* PreferencesCell.swift in Sources */,
@@ -310,6 +317,7 @@
 				325F79991EA8371800F523FA /* PreferencesViewController.swift in Sources */,
 				328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */,
 				400191B41E93191D008CC191 /* LoginViewController.swift in Sources */,
+				3269704B1EC640A1002ADC70 /* TabControllerExtension.swift in Sources */,
 				328ADC5A1EC14FBC00883FE9 /* SplashScreen.swift in Sources */,
 				403127281EB95D1700FC0BC7 /* ViewControllerExtension.swift in Sources */,
 				325242FE1E93340700C280F3 /* Database.swift in Sources */,
