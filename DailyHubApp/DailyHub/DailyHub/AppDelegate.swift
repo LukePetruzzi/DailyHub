@@ -123,6 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         feedViewController = FeedViewController()
         discoverViewController = DiscoverViewController()
         
+        self.tabController?.selectedViewController = feedNavController
         self.window?.rootViewController = self.tabController
     }
     
