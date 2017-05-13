@@ -28,8 +28,6 @@ class ProfileViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red:1.00, green:0.32, blue:0.32, alpha:1.0), NSFontAttributeName: UIFont(name: "Avenir", size: 24)!]
         navigationController?.navigationBar.topItem?.title = "Profile"
         
-        
-        
         // label with name
         profileNameLabel.font = UIFont(name: "Avenir-Black", size: 16)
         profileNameLabel.textColor = UIColor.white

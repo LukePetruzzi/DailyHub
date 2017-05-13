@@ -12,7 +12,7 @@ import FirebaseAnalytics
 import FirebaseDatabase
 import FBSDKLoginKit
 
-class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegate {
+class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegate, WKUIDelegate {
     
     var webView: WKWebView = WKWebView()
     var headerView: UIVisualEffectView = UIVisualEffectView()
@@ -152,6 +152,7 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         webView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height - 45)
         webView.navigationDelegate = self
         webView.scrollView.delegate = self
+        webView.uiDelegate = self
         webView.backgroundColor = UIColor.white
         webView.scrollView.contentInset = UIEdgeInsetsMake(45, 0, 0, 0)
         webView.scrollView.layer.masksToBounds = false
@@ -401,4 +402,21 @@ class CustomWebView: UIViewController, WKNavigationDelegate, UIScrollViewDelegat
         loadingIndicator.stopAnimating()
         configureBackForwardButtons()
     }
+    
+    func webView(_ webView: WKWebView,
+                 createWebViewWith configuration: WKWebViewConfiguration,
+                 for navigationAction: WKNavigationAction,
+                 windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
+            //  let url = URL(string: urlStringToLoad)!
+            webView.load(URLRequest(url: url))
+            // if url.description.lowercased().range(of: "http://") != nil ||
+            //   url.description.lowercased().range(of: "https://") != nil ||
+            // url.description.lowercased().range(of: "mailto:") != nil {
+            //UIApplication.shared.openURL(url)
+            //}
+        }
+        return nil
+    }
+
 }

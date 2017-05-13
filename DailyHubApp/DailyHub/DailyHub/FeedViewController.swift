@@ -37,6 +37,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var ref: FIRDatabaseReference! = FIRDatabase.database().reference()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,7 +130,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         {
             self.userSitePrefs = prefs
             
-            if userSitePrefs.count > 0
+            if (userSitePrefs.count > 0)
             {
                 Database.getDatabaseInfo(completionHandler: {(data, error) in
                     if let d = data {
@@ -139,9 +140,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                         do {
                             let content = try JSONSerialization.jsonObject(with: json!, options: []) as! [String: NSArray]
                             for item in self.userSitePrefs {
+                                
                                 // gets the content for the number rank needed
                                 var currentResults: [ContentInfo] = []
-                                for i in 0..<item.numPosts {
+                                var i = 0
+                                //< (content[item.siteName]?.count)!
+                                print(item.siteName)
+                                let maxPost = (Int((content[item.siteName]?.count)!))
+                                while (i < item.numPosts  && i < maxPost) {
                                     
                                     let currentSiteContentDict = content[item.siteName]?[i] as AnyObject
                                     let title = currentSiteContentDict["title"] as? String
@@ -156,6 +162,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                                                                description: description?.trimmingCharacters(in: .whitespacesAndNewlines))
                                     currentResults.append(siteInfo)
                                     // add the site info to the array of content
+                                    i=i+1
                                     
                                 }
                                 self.masterContent[item.siteName] = currentResults
@@ -240,6 +247,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableContentCell", for: indexPath) as! FeedTableContentCell
         let sect = userSitePrefs[indexPath.section].siteName
+        
+        //print (sect)
+        //print(index)
+        //print (masterContent)
+        //print (masterContent[sect]?.count)
+        
+        var maxCells = 0
+        
+        if let maxCellsTry = (masterContent[sect]?.count) {
+            maxCells = maxCellsTry
+        }
+        
+        if (indexPath.row >= maxCells) {
+            return cell
+        }
         
         if let title = masterContent[sect]?[indexPath.row].title {
             cell.titleLabel?.text = title
