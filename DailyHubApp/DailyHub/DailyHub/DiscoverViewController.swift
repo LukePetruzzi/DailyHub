@@ -92,7 +92,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
                             for item in self.userSitePrefs {
                                 // gets the content for the number rank needed
                                 var currentResults: [ContentInfo] = []
-                                for i in 0..<item.numPosts {
+                                for i in 0..<1 {
                                     
                                     let currentSiteContentDict = content[item.siteName]?[i] as AnyObject
                                     let title = currentSiteContentDict["title"] as? String
@@ -170,7 +170,7 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userSitePrefs[section].numPosts
+        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
