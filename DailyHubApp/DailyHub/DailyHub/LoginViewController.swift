@@ -27,7 +27,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(red:1, green: 1, blue:1, alpha: 1.0)
+//        self.view.backgroundColor = UIColor(red:1, green: 1, blue:1, alpha: 1.0)
+        self.view.backgroundColor = UIColor(red:0.16, green:0.16, blue:0.16, alpha:1.0)
         
         logoImageView.image = #imageLiteral(resourceName: "logo")
         logoImageView.center = self.view.center
@@ -37,7 +38,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // create the facebook login button
         loginButton.delegate = self
         loginButton.loginBehavior = .web
-        
         
         self.view.addSubview(logoImageView)
         self.view.addSubview(loginButton)
@@ -74,7 +74,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             waitGroup.enter()
             
             loginButton.isHidden = true
-
             
             CognitoUserManager.sharedInstance.initializeAuthorizedCognito(fbAccessTokenString: FBSDKAccessToken.current().tokenString, completion: {(err) -> Void in
 

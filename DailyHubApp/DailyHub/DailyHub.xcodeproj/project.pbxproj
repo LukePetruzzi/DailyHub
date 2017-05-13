@@ -16,7 +16,7 @@
 		328ADC531EC11BB800883FE9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC521EC11BB800883FE9 /* HelpViewController.swift */; };
 		328ADC571EC14E6200883FE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */; };
 		328ADC5A1EC14FBC00883FE9 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328ADC581EC14FBC00883FE9 /* SplashScreen.swift */; };
-		32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView2.swift */; };
+		32CDB26A1E9ED9950099FF5D /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CDB2691E9ED9950099FF5D /* WebView.swift */; };
 		3551C431BD88EE6840C48D51 /* Pods_DailyHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE660099678C16B47D0125C /* Pods_DailyHub.framework */; };
 		400191B11E92E588008CC191 /* FeedTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B01E92E588008CC191 /* FeedTableTitleCell.swift */; };
 		400191B41E93191D008CC191 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400191B31E93191D008CC191 /* LoginViewController.swift */; };
@@ -46,7 +46,7 @@
 		328ADC521EC11BB800883FE9 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		328ADC561EC14E6200883FE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		328ADC581EC14FBC00883FE9 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		32CDB2691E9ED9950099FF5D /* WebView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView2.swift; sourceTree = "<group>"; };
+		32CDB2691E9ED9950099FF5D /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		400191B01E92E588008CC191 /* FeedTableTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableTitleCell.swift; sourceTree = "<group>"; };
 		400191B31E93191D008CC191 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		400191B51E932662008CC191 /* FacebookCognitoIdentityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookCognitoIdentityProvider.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		400192471E96C242008CC191 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				32CDB2691E9ED9950099FF5D /* WebView2.swift */,
+				32CDB2691E9ED9950099FF5D /* WebView.swift */,
 				4052A16C1E85C1A200805E40 /* FeedViewController.swift */,
 				400191B31E93191D008CC191 /* LoginViewController.swift */,
 				400192451E96C234008CC191 /* ProfileViewController.swift */,
@@ -301,7 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32CDB26A1E9ED9950099FF5D /* WebView2.swift in Sources */,
+				32CDB26A1E9ED9950099FF5D /* WebView.swift in Sources */,
 				326970491EC64082002ADC70 /* NavControllerExtension.swift in Sources */,
 				400951B91EB293EB001B856C /* CustomStructsManager.swift in Sources */,
 				4052A16D1E85C1A200805E40 /* FeedViewController.swift in Sources */,
