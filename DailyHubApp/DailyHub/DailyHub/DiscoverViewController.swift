@@ -29,18 +29,11 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         
         let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
         self.tableView = UITableView(frame: frame)
-//        let rankingsButton = UIBarButtonItem(image: UIImage(named: "ranking-3"), style: .plain, target: self, action: #selector(rankingButtonTappedTapped))
-//        rankingsButton.tintColor = UIColor.orange
-//        navigationItem.setRightBarButton(rankingsButton, animated: true)
-//        let helpButton = UIBarButtonItem(image: UIImage(named: "help"), style: .plain, target: self, action: #selector(helpButtonTappedTapped))
-//        helpButton.tintColor = UIColor.orange
-        //navigationItem.setLeftBarButton(helpButton, animated: true)
-        
+
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.register(FeedTableTitleCell.self, forHeaderFooterViewReuseIdentifier: "FeedTableTitleCell")
         tableView?.register(FeedTableContentCell.self, forCellReuseIdentifier: "FeedTableContentCell")
-        //        tableView?.backgroundColor = UIColor(red:1.00, green:0.75, blue:0.00, alpha:1.0)
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Release to refresh")
@@ -49,7 +42,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = 500.0
-        
         
         self.view.addSubview(tableView!)
         
@@ -61,16 +53,6 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
         indicator.frame = loadingOverlay.frame
         indicator.startAnimating()
         loadingOverlay.addSubview(indicator)
-        
-        // CREATING THE CONSTRAINTS RIGHT HERE IN OUR VIEWDIDLOAD MAY BE CAUSING THE CRASHES?
-        //        let views: [String: UIView] = ["t": tableView!]
-        //        var constraints: [NSLayoutConstraint] = []
-        //
-        //        let tabBarHeight = self.tabBarController?.tabBar.frame.size.height
-        //        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[t]|", options: [], metrics: nil, views: views)
-        //        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[t]|", options: [], metrics: nil, views: views)
-        //
-        //        NSLayoutConstraint.activate(constraints)
         
         // add loading view and refresh the table when it loads
         // add on the loading overlay
@@ -291,7 +273,21 @@ class DiscoverViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return [UIInterfaceOrientationMask.portrait]
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        get {
+            return .portrait
+        }
+    }
+    
+    open override var shouldAutorotate: Bool {
+        get {
+            return false
+        }
+    }
+    
+    open override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        get {
+            return .portrait
+        }
     }
 }

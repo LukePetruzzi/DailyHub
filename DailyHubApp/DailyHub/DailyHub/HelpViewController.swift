@@ -173,4 +173,22 @@ class HelpViewController: UIViewController, UIGestureRecognizerDelegate {
             self.helpView.transform = CGAffineTransform.identity
         }
     }
+    
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        get {
+            return .portrait
+        }
+    }
+    
+    open override var shouldAutorotate: Bool {
+        get {
+            return false
+        }
+    }
+    
+    open override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        get {
+            return .portrait
+        }
+    }
 }
