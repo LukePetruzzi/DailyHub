@@ -93,8 +93,8 @@ class PreferencesViewController: UIViewController, UITableViewDelegate, UITableV
         CognitoUserManager.sharedInstance.updateUserSitePrefs(newPrefs: userSitePrefs)
         delegate?.userSitePrefs = userSitePrefs[0]
         delegate?.refreshTable()
-        if (userSitePrefs[0].count > 0) {
-            delegate?.tableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if (userSitePrefs[0].count > 1) {            
+            delegate?.tableView?.setContentOffset(CGPoint(x: 0, y: 0 - (delegate?.tableView?.contentInset.top)!), animated: true)
         }
         self.dismiss(animated: true, completion: nil)
     }
