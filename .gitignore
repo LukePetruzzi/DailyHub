@@ -4,6 +4,9 @@ gac
 gpul
 gpus
 
+my_config.py
+my_config.pyc
+
 *.pyc
 __pycache__
 .idea
